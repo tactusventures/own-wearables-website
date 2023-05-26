@@ -1,0 +1,1719 @@
+.page-home .hero video{
+    width: 100%; 
+    height: 100%;
+    object-fit: cover;
+}
+
+.page-home .hero {
+    height: 85vh; 
+
+}
+
+
+
+/* -------------- Specifications ----------------------- */
+.page-home .specifications{
+    background-color: var(--black); 
+    padding: 7rem 0 ;
+    margin-top: -10px; 
+    padding-bottom: 15rem;
+}
+
+.page-home .specifications .specification-content h2{
+    font-size: 60px; 
+    text-align: center;
+    font-weight: bold;
+    /* color: var(--primary);  */
+    color: var(--primary); 
+}
+
+.page-home .specifications .specification-content p {
+    /* width: 50%;  */
+    text-align: center;
+    padding: 0 2rem;    
+    font-size: 24px; 
+    margin-top: 1.5rem; 
+    color: var(--sGray); 
+}
+
+.page-home .specifications  .specification{
+    text-align: center;
+    margin-top: 3rem; 
+}
+
+.page-home .specifications  .specification ul {
+    width: 50%;
+    position: relative;
+    left: 50%; 
+    transform: translateX(-50%);
+}
+
+.page-home .specifications .specification li{
+    margin: 3rem 0; 
+    font-weight: bold;
+    font-size: 40px; 
+    color: #000; 
+}
+
+.page-home .specifications .specification .specification-image img{
+    width: 100%;
+}
+
+
+/* ---------------- added  */
+
+.specification-image {
+    margin-top: 5rem; 
+    position: relative; 
+}
+
+.specification-image .shoe-image { 
+    position: absolute; 
+    left: 47%; 
+    top: 90%; 
+    transform: translate(-50%, -50%);
+}
+
+.specification-image .shoe-image img{ 
+    transform: rotate(-60deg);
+    width: 500px; 
+}
+
+.specification-image .left  { 
+    position: relative; 
+}
+
+.specification-image .left .block:first-child{ 
+    width: 30%; 
+    margin-top: 5rem; 
+    left: 0 !important; 
+}
+
+
+.specification-image .left .block:nth-child(2){
+    width: 30%; 
+    bottom: 2rem; 
+    margin-top: 6rem;  
+}
+
+.specification-image .block p {
+    color: var(--sGray) !important; 
+}
+
+.specification-image .block h2 {
+    color: var(--pure) !important; 
+}
+
+.specification-image .left .block h2{
+    margin-bottom: 1rem; 
+    color: var(--sGray);    
+}
+
+.specification-image .left .block button{
+    margin-top: 1rem; 
+}
+
+
+.specification-image .right .block button{
+    margin-top: 1rem; 
+}
+
+.specification-image .left { 
+    position: relative;
+}
+
+.specification-image .left .block:nth-child(2){ 
+    margin-top: 8rem; 
+    position: relative;
+    top: 1rem; 
+    /* left: 20px;  */
+
+}
+
+
+.specification-image .right .block h2{
+    margin-bottom: 1rem;
+    /* margin-top:  */
+}
+
+.specification-image .with-underline { 
+    position: relative;
+}
+
+
+.specification-image .with-underline::before {
+    content: "";   
+    position: absolute;
+    left: 0; 
+    bottom: -5px; 
+    display: flex;
+    width: 30%;
+    background-color: var(--primary);
+    height: 3px; 
+}
+
+
+.specification-image .right { 
+    /* position: relative;  */
+}
+
+.specification-image .right .block:first-child{
+    position: absolute;
+    width: 30%; 
+    right: 0; 
+    top: 0; 
+}
+
+.specification-image .right .block:first-child::before{
+    content: "";
+    position: absolute; 
+    left: -200px; 
+    top: 10px; 
+    width: 0; 
+    height: 2px; 
+    background-color: #000;
+
+}
+
+.specification-image .right .block:nth-child(2){
+    /* margin-top: 4rem; 
+    position: relative;
+    top: 50px; 
+    left: -100px;  */
+    position: absolute; 
+    width: 30%; 
+    /* bottom: 30px; */
+    bottom: -1rem; 
+    right: 0px; 
+}
+
+.specification-image .left .block  p { 
+    color: #000; 
+    /* font-size: 18px;  */
+    line-height: 1.7;
+}
+
+.specification-image .right .block  p { 
+    color: #000; 
+    line-height: 1.7;
+}
+
+
+/* ------------------- reflexology ------------------ */
+
+.page-home .reflexology video{
+    width: 100%; 
+    object-fit: cover;
+}
+
+
+/* ------------------------ Technical Specification ------------------ */
+
+/* --------------- Technical Specification --------------- */
+.tech-specification-wrapper{
+  position: relative;
+}
+
+.technical-specification { 
+    margin: -1rem 0; 
+    background-color: var(--black);
+    padding: 2rem 0; 
+    position: relative;
+}
+
+
+.technical-specification >  h2 { 
+    color: var(--primary); 
+    text-align: center;
+    font-size: 40px;
+    margin-top: 3rem; 
+}
+
+.technical-specification .block h2 { 
+    color: var(--pure) !important; 
+}
+
+
+.technical-specification .block p { 
+    color: var(--sGray); 
+}
+
+.technical-specification .shoe-body{ 
+    position: absolute; ;
+    top: 50%; 
+    left: 55% ; 
+    transform: translate(-50%, -50%);
+}
+
+.technical-specification .specification-wrapper { 
+    display: flex;
+}
+
+.technical-specification .shoe-body img { 
+    width: 80%; 
+    transform: rotate(320deg);
+}
+
+.tech-specification-wrapper .left-block .block{ 
+    /* width: 35%;  */
+    /* position: absolute;
+    left: 14%; */
+}
+
+.tech-specification-wrapper .right-block .block:nth-child(2){
+   top: unset; 
+   bottom: -1rem; 
+}
+
+
+.tech-specification-wrapper .left-block .block h2 { 
+    margin-bottom: 1rem; ;
+}
+
+.tech-specification-wrapper .left-block .block p 
+ { 
+    font-size: 17px; 
+    line-height: 1.6;
+
+ }
+
+ .tech-specification-wrapper { 
+    margin: 8rem  4rem; 
+ }
+
+.tech-specification-wrapper .left-block .block button { 
+    margin-top: 2rem;
+}
+.tech-specification-wrapper .left-block .block:nth-child(2) { 
+    margin-top: 5rem; 
+}
+
+
+.tech-specification-wrapper .right-block .block { 
+    position: absolute; 
+    width: 30%; 
+    right: -30px; 
+    margin-left: 2rem; 
+    /* top: 30%;  */
+}
+
+.tech-specification-wrapper .right-block .block  p { 
+    font-size: 18px; 
+    line-height: 1.6;
+}
+
+.tech-specification-wrapper .right-block .block  button
+ { 
+    margin-top: 2rem;               
+ }
+/* ------------------ Health Reports ---------------------- */
+.page-home .mobile-application {
+    margin: 8rem 0; 
+    padding: 5rem 0; 
+    margin-top: 10rem; 
+    /* background-color: red; */
+   
+}
+
+.page-home .health-reports { 
+    background-color: var(--black);
+
+    padding: 4rem 0; 
+    
+}
+
+.page-home .health-reports .container .right h2 {
+
+    color: var(--pure)
+}
+
+.page-home .health-reports .container .right p { 
+    color: var(--sGray);
+}
+
+.page-home .health-reports .container .flex{
+    margin-top: 5rem; 
+}
+
+.page-home .health-reports .container .title-head{
+    text-align: center;
+    font-size: 72px;
+    margin-bottom: 3rem;
+    color: var(--primary);
+    padding: 0 10rem; 
+}
+ 
+
+.health-reports .right h2{ 
+    padding-right: 0rem;;
+}
+
+.page-home .health-reports .container .right{
+    flex: 0 0 50%;  
+    margin-top: -60px; 
+    padding-left: 60px; 
+}
+
+.page-home .health-reports .container .left img{
+    width: 400px;
+    position: relative;     
+    left: 8%; 
+}
+
+.page-home .health-reports .container .left img { 
+    /* box-shadow: 5px 10px #888888; */
+}
+
+
+.page-home .health-reports .container .left{
+    flex: 0 0 40%;  
+    position: relative;
+}
+
+
+
+
+.page-home .health-reports .container .right  h2{
+    font-size: 40px; 
+    font-weight: bold;
+}
+
+.page-home .health-reports .container .right p {
+    margin: 1rem 0;
+
+    line-height: 1.6;
+    font-size: 18px;
+}
+
+
+.page-home .health-reports .container .right .app-download-buttons{
+    margin-top: 2rem; 
+}
+
+.page-home .health-reports .container .right .app-download-buttons button{
+    padding: 1rem 1rem; 
+    border-radius: 5px; 
+    font-weight: bold;
+}
+
+.page-home .health-reports .container .right .app-download-buttons button:last-child{
+    margin-left: .5rem; 
+}
+
+.page-home .health-reports .container .right ul {
+    margin-left: 3rem; 
+}
+
+
+.page-home .health-reports .container .right ul li{
+    list-style-type: disc;
+    font-size: 20px; 
+    font-weight: bold;
+    margin: 1rem 0; 
+} 
+
+
+
+/* health -reports */
+.reports  { 
+    background-color: var(--black);
+    color: #fff; 
+   padding: 6rem 0; 
+}
+
+
+.reports .section-title {
+    text-align: center;
+    font-size: 55px; 
+    padding:  0 9rem;
+}
+
+.reports .with-underline { 
+    color: #fff; 
+}
+
+.reports .container h2 {
+    position: relative;
+    display: inline-block;
+}
+
+.reports .container .report-image-wrapper{
+   display: grid; 
+   grid-gap: 2rem;
+   flex-wrap: wrap;
+   grid-template-columns: repeat(4, 1fr);
+   justify-content: space-between;
+    padding: 4rem 0; 
+    margin: 5rem  0; 
+}
+
+.reports .container .report-image-wrapper div img {
+    width: 100%; ; 
+    /* height: 450px;  */   
+    -webkit-box-shadow: -1px -1px 40px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: -1px -1px 40px 0px rgba(0,0,0,0.75);
+    box-shadow: -1px -1px 40px 0px rgba(0,0,0,0.75);
+}
+
+.reports .container .report-image-wrapper div  p { 
+    font-size: 17px; 
+    line-height: 1.6;
+    text-align: center;
+    color: #D3D3D3; 
+    margin-top: 2rem; 
+}
+
+
+.more-report-features  { 
+    width: 90%;
+    margin: 10rem auto; 
+    display: flex;
+    margin: 0 auto; 
+    /* padding: 4rem 0;  */
+    color: #fff; 
+
+
+}
+
+.more-report-features .feature  {
+    text-align: center;
+    margin-left: 4rem; 
+}
+
+.more-report-features .feature:first-child { 
+    margin-left: 0;     
+}
+
+.more-report-features .feature img { 
+    width: 50px; 
+    margin-bottom: 1rem;
+}
+
+.more-report-features .feature h3 { 
+    margin-bottom: 1rem;
+}
+
+.more-report-features .feature p  
+{
+    font-size: 18px;
+    color: #D3D3D3; 
+    line-height: 1.6;
+}
+
+
+/* ------------------------ Mesh ------------------------ */
+
+.mesh {
+    padding: 4rem 0; 
+    background-color: var(--black);
+}
+
+.mesh .flex .left { 
+    flex: 0 0 50%; 
+    width: 90%; 
+    /* margin-left: 4rem;  */
+    padding-left: 4rem; 
+    padding-right: 4rem; 
+    z-index: 1;
+}
+
+.mesh .flex .left h2 {
+    font-size: 48px; 
+    color: var(--primary);
+    padding-right: 4rem; 
+    letter-spacing: 1.6px;
+    font-weight: bold;
+    line-height: 1.2em;
+    margin-bottom: 1rem;
+}
+
+
+.mesh .flex .left p{
+    color: var(--sGray); 
+    font-size: 18px; 
+    line-height: 1.6; 
+    /* letter-spacing: 1; */
+    margin-bottom: 35px; ;
+}
+
+
+.mesh .flex .left button{
+    font-weight: 400;
+    padding: 1rem 2rem;
+    font-size: 18px; 
+}
+
+
+.mesh .flex .right{
+    /* background: #F4F5F7;  */
+    width: 100%;
+    flex: 0 0 50%; 
+    padding: 3rem 0; 
+
+    z-index:  99;
+}
+
+.mesh .flex .right div { 
+    width: 90%;
+    background-color: #fff;
+    margin: 0 auto; 
+}
+
+.mesh .flex .right img {
+    width: 600px;
+    height: 90%;
+    display: flex;
+    /* justify-conten5: center; */
+    margin: 0 auto;
+
+}
+
+
+.mesh .flex { 
+    position:  relative;
+}
+.mesh .flex::before{
+    position: absolute;
+    display: inline-block;
+    content: '';
+    bottom: -23.7%;
+    display: none;
+        right: 4%;
+        width: 350px; 
+        height: 350px;
+        -webkit-border-radius: 50%;
+        -moz-border-radius: 50%;
+        border-radius: 50%;
+        border: 89px solid #faeffd;
+}
+
+
+.mesh .flex::after { 
+    position: absolute;
+    content: '';
+    top: 29.5%;
+    left: 30%;
+    width: 255px;
+    height: 63px;
+    background: #eefdfc;
+    transform: rotate(140deg);
+    display: none;
+}
+
+
+
+/* ------------  sole ------------------  */
+
+
+.sole {
+    background-color: var(--black);
+    padding: 8rem 0 ;
+}
+
+.sole .flex .right {
+    flex:  0 0 50%; 
+}
+
+
+.sole .flex .right { 
+    flex: 0 0 55%; 
+    width: 90%; 
+    /* margin-left: 4rem;  */
+    padding-left: 4rem; 
+    padding-right: 4rem; 
+    z-index: 1;
+}
+
+.sole .flex .right h2 {
+    font-size: 48px; 
+    padding-right: 2rem; 
+    letter-spacing: 1.6px;
+    font-weight: bold;
+    line-height: 1.2em;
+    margin-bottom: 1rem;
+    color: var(--primary); 
+}
+
+
+.sole .flex .right p{
+    color: var(--sGray); 
+    font-size: 18px; 
+    line-height: 1.6;
+    margin-bottom: 35px; ;
+}
+
+
+.sole .flex .right button{
+    font-weight: 400;
+    padding: 1rem 2rem;
+    font-size: 18px; 
+}
+
+
+.sole .flex .left { 
+    flex: 0  0 50%; 
+}
+
+.sole .flex .left img  {
+    width: 500px;  
+    /* height: 700px; */
+   border: 20px solid #505E93; ;
+}
+
+
+.sole.gps .flex .left img  
+{
+    height: auto; 
+}
+
+
+/* ---------------------------- Gps ---------------- */
+.gps-tracking-video video{
+    width: 100%; 
+    /* margin-top: 6rem; */
+    
+}
+
+.gps-tracking-video {
+    position: relative;
+}
+
+.gps-tracking-video::after{
+    content: 0; 
+    position: absolute;
+    width: 100%; 
+    height: 100%; 
+    /* background-color: #000; */
+}
+
+/*--------------------- battery ---------------------- */
+
+.battery-info  {
+    padding: 10rem 0; 
+    margin-top: -10px; 
+    background-color: var(--black);
+}
+
+.battery-info .top-block {
+    display: flex;
+    justify-content: space-between;
+    width: 60%;
+    justify-content: center;
+    margin: 0 auto; 
+    align-items: center;
+
+}
+
+.battery-info .top-block p {
+    font-size: 19px; 
+    margin-left: 4rem; 
+    color: var(--sGray);
+    font-weight: bold;
+    line-height: 1.6;
+
+}
+
+.battery-info .top-block P span {
+    color: var(--primary); 
+}
+
+.battery-info .top-block img {
+    align-items: flex-start;
+}
+
+.battery-info .bottom-block {
+    margin: 0 auto; 
+    margin-top: 10rem; 
+    display: flex;   
+    justify-content: center;
+}
+
+.battery-info .bottom-block .right-block{
+    margin-left: 8rem; 
+}
+
+.battery-info .bottom-block p {
+    color: var(--sGray); 
+}
+
+.battery-info .bottom-block  h2{
+    font-size: 75px; 
+    font-weight: bold;
+    color: var(--primary);
+}
+
+.battery-info .bottom-block .left-block{
+    position: relative; 
+}
+
+.battery-info .bottom-block .left-block span { 
+    color: var(--sGray); 
+}
+
+
+.battery-info .bottom-block .right-block span { 
+    color: var(--sGray); 
+}
+
+.battery-info .bottom-block  .left-block::after{ 
+    content: "";
+    position: absolute;
+    width: 1px; 
+    height: 150%; right: -70px; ; 
+    top: 50%; 
+    transform: translateY(-50%);
+    background: #D3D3D3;
+}
+
+/* ------------------------ endurance -------------------- */
+.endurance  {
+    background: linear-gradient(rgba(0,0, 0,.8), rgba(0,0,0, 0.4)),  url('https://www.apple.com/v/apple-watch-ultra/e/images/overview/endurance/endurance_hero__f9xbft167722_large.jpg');
+    background-position: top right;   
+    background-size: cover;
+    height: 120vh;
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+.endurance .container  {
+    position: absolute;
+    left: 10%; 
+    top: 20%; 
+}
+
+.endurance .container h6{
+    color: #fff; 
+    font-weight: bold;
+    font-size: 28px; 
+}
+
+
+.endurance .container h2 { 
+    font-size: 100px; 
+    font-weight: bold;
+    color: #f56900;
+}
+
+/* -------------------------------- ar ------------------------------- */
+
+.ar { 
+    background: var(--black); 
+    /* margin-top: 4rem;  */
+    padding: 5rem 0 ;
+}
+
+.ar .ar-wrapper  {
+    /* background-color: #F4F5F7; */
+    color: var(--pure);     
+    padding: 3rem 2rem; 
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom:  0;
+   padding-top: 2rem; 
+   padding-bottom: 2rem; 
+}
+
+.ar .ar-wrapper .right{
+    flex: 0 0 40%; 
+}
+
+.ar .ar-wrapper .right video {
+    width: 100%; 
+    height: 100%    ;
+}
+
+.ar .ar-wrapper .left  { 
+    flex: 0 0 48%; 
+    margin-left: 3rem; 
+
+}
+
+.ar .ar-wrapper .left video { 
+    width: 40px; 
+    margin-top: 4rem; 
+    margin-bottom: 2rem;;
+}
+
+.ar .ar-wrapper .left h2 {
+    font-size: 50px; 
+    margin-bottom: 2rem;;
+}
+
+.ar .ar-wrapper .left  p { 
+    font-size: 19px; 
+    line-height: 1.6;
+    /* color: #1d1d1f;  */
+}
+
+/* .ar .ar-wrapper .left a {
+    color: #0071e3
+ } */
+
+
+
+
+ /* ---------------- shoe -charghing ----------------- */
+ .shoe-charging { 
+    margin-top: 2rem; 
+
+ }
+
+.shoe-charging .shoe-charging-wrapper  {
+    background-color: #F4F5F7   ;
+    padding: 3rem 2rem; 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom:  0;
+    padding: 5rem 2rem;  ;
+}
+
+.shoe-charging .shoe-charging-wrapper  .shoe-chargning-left  {
+    flex: 0 0 50%; 
+    display: flex;
+    justify-content: center;
+}
+
+
+.shoe-charging .shoe-charging-wrapper  .shoe-chargning-left img { 
+    width: 400px;
+}
+
+
+.shoe-charging   .shoe-chargning-right {
+    flex:  0 0 50%;
+}
+
+
+.shoe-charging    .shoe-charging-wrapper .shoe-chargning-right h2 {
+    font-size: 50px; 
+    margin-bottom: 2rem;;
+}
+
+
+.shoe-charging    .shoe-charging-wrapper .shoe-chargning-right  p { 
+    font-size: 19px; 
+    line-height: 1.6;
+    color: #1d1d1f; 
+}
+
+
+.shoe-charging    .shoe-charging-wrapper .shoe-chargning-right img { 
+    margin-bottom: 1rem;
+}
+
+.shoe-charging-video { 
+    width: 100%;
+}
+
+.shoe-charging-video video { 
+    width: 100%;
+}
+
+/* ------------------ Contact ---------------------- */
+.contact-us { 
+    padding: 4rem 0; 
+    margin: 4rem 0; 
+}
+.contact-us .section-title { 
+    text-align: center;
+    font-size: 40px; 
+    font-weight: bold;
+    color: #f48037; 
+}
+
+.contact-us .form form { 
+    display: flex;
+}
+
+.contact-us .form form .left { 
+    flex:  0 0 50%; 
+}
+
+
+.contact-us .form form .left .form-group {
+    width: 100%;
+} 
+
+.contact-us .form form .left .form-group { 
+    margin-top: 1rem; 
+}
+
+.contact-us .form form .left .form-group label { 
+    display: block;
+    font-size: 16px; 
+    font-weight: bold;
+    margin-bottom: .4rem;
+}
+
+
+.contact-us .form form .left .form-group input { 
+    width: 90%;
+    font-size: 17px; 
+    border: 1px solid #D6D6D6; 
+    padding: .7rem 2rem .7rem .4rem; 
+    border-radius: 5px;
+}
+
+
+.contact-us .form form { 
+    margin-top: 5rem; 
+}
+.contact-us .form form .right label{
+    display: block;
+    font-size: 16px; 
+    font-weight: bold;
+    margin-bottom: .4rem;
+}
+
+
+
+.contact-us .form form .right { 
+    flex: 0 0 50%; 
+}
+
+.contact-us .form form .right .form-group {
+    height: 85%;
+}
+.contact-us .form form .right .form-group textarea{ 
+    border: 1px solid #D6D6D6;
+    margin-top: 1rem; 
+    width: 90%;
+    height: 100%;
+}
+
+.contact-us .form .button{
+    text-align: center;
+    margin-top: 3rem; 
+}
+
+
+.contact-us .form .button button { 
+    padding: 1rem 2rem; 
+    color: #fff; 
+    font-weight: bold; 
+    border: 1px solid #f48037;
+    background-color: #f48037;
+    transition: .4s ease-in-out;
+}
+
+
+.contact-us .form .button button:hover{
+    border: 1px solid #f48037;  
+    background-color: transparent;
+    color: #f48037;
+}
+
+
+
+/*  ------------------ Media Querries ------------------------------ */
+
+@media  (max-width: 1200px){
+    .page-home .specifications .specification-content h2{ 
+        font-size: 55px;
+    }
+
+    .page-home .specifications .specification-content p {
+        padding: 0 4rem; 
+    }
+    
+
+    .specification-image 
+    {
+        grid-template-columns: 25% 50% 25%;
+    }
+
+    .specification-image .shoe-image img { 
+        width: 100%; 
+    }
+
+    
+
+  
+
+    /* Mobile application  */
+    .page-home .health-reports .container .title-head{ 
+        font-size: 65px; 
+        padding: 0 7rem; 
+    }
+    
+
+    .health-reports .container .flex { 
+        justify-content: space-around;
+    }
+
+
+    /* ---------- Mesh ------------------ */
+    .mesh .flex .right img {
+        width: 100%;    
+    }
+}   
+
+
+
+@media (max-width: 1024px){
+    .mesh .flex .left h2{
+        font-size: 30px;
+        padding-right: 1rem;
+    }
+
+    .mesh .flex::after {
+        top: 6.5%;
+        left: 34%;
+        width: 137px;
+        height: 37px;
+        background: #eefdfc;
+        transform: rotate(140deg);
+    }
+
+
+    .mesh .flex::before { 
+        bottom: -19.7%;
+        right: 4%;
+        width: 261px;
+        height: 258px;
+        border: 65px solid #faeffd;
+    }
+
+    .sole .flex .right h2 { 
+        font-size: 34px; 
+    }
+
+    .battery-info .top-block {
+        width: 78%; 
+    }
+
+
+    .sole .flex .left img  {
+        width: 100%; 
+    }
+
+    .sole .flex .right { 
+        padding-right: 1rem; 
+    }
+
+    .page-home .health-reports .container .title-head { 
+        font-size: 45px; 
+    }
+
+    .page-home .health-reports .container .left img 
+    { 
+        width: 350px; 
+    }
+
+    .shoe-charging .shoe-charging-wrapper .shoe-chargning-right h2 {
+        font-size: 38px; 
+    }
+
+    .shoe-charging .shoe-charging-wrapper .shoe-chargning-left img { 
+        width: 80%; 
+    }
+
+    .shoe-charging .shoe-charging-wrapper .shoe-chargning-right p {
+        font-size: 18px; 
+    }
+    
+    .shoe-charging .container { 
+        width: 95%;
+    }
+
+    .ar .ar-wrapper .left h2  { 
+        font-size: 35px; 
+        margin-top: .5rem;  
+    }
+
+    .ar .ar-wrapper { 
+        padding: 3rem 1rem; 
+    }
+
+    .ar .ar-wrapper .left p { 
+        font-size: 18px; ;
+        color: var(--sGray) !important;
+    }
+
+
+    /*  reports images mobile screen  */
+    .reports .container .report-image-wrapper { 
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .reports .container .report-image-wrapper div img { 
+        width: 70%; 
+    }
+
+    .report-image-wrapper div { 
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .report-image-wrapper div p { 
+        padding: 0 2rem; 
+    }
+}            
+
+
+@media (max-width: 1224px) {
+    .specification-image .shoe-image { 
+        transform: none;
+        position: static !important;
+        position: relative; 
+        left: 50%; 
+    }
+
+    .specification-image .shoe-image img 
+    { 
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .specification-image .shoe-image img { 
+        width: 70%; 
+        position: relative; 
+ 
+    }
+
+    .specification-image .right .block:first-child {
+        position: static; 
+        /* margin: 0;  */
+    }
+
+    .specification-image .right .block:nth-child(2) { 
+        position:  static;
+    }
+
+    .specification-image .left .block:first-child{ 
+        width: 100%; 
+        margin: 0; 
+    }
+
+    .specification-image .right .block:nth-child(2) { 
+        width: 100%; 
+    }
+
+    .specification-image .right .block:first-child { 
+        width: 100%; 
+    }
+
+    .specification-image .left .block:nth-child(2) { 
+        width: 100%; 
+        margin: 0; 
+    }
+
+    
+    .specification-image .left  { 
+        display: flex;
+        /* align-items: center; */
+        justify-content: center;
+        text-align: center;
+    }
+
+    .specification-image .right { 
+        display: flex;
+        text-align: center;
+    }
+
+    .specification-image .with-underline::before { 
+        display: none;
+    }
+
+    .specification-image .specificationWrapper { 
+        /* display: flex; */
+        margin-top: 4rem; 
+    }
+
+    .specification-image .left .block:nth-child(2) { 
+        width: 100%; 
+    }
+
+    .specification-image .specificationWrapper .right { 
+        margin-top: 8rem; 
+    }
+
+    .specification-image .specificationWrapper .block{ 
+        padding:  0 2rem; 
+    }
+
+
+    /* --------------- Technical Specification ----------------- */
+    .technical-specification .shoe-body {
+        transform: none;
+        position: static !important;
+        position: relative; 
+        display: flex;
+        justify-content: center;
+        left: 50%; 
+    }
+
+    .technical-specification .shoe-body img { 
+         width: 90%; 
+        transform: rotate(-15deg);
+        left: 50%;
+        width: 50%;
+    }
+
+    .tech-specification-wrapper .left-block .block { 
+        width: 100%; 
+    }
+    
+
+    .tech-specification-wrapper .right-block .block{ 
+        position: static;
+        width: 80%; 
+        text-align: center;
+        padding: 0 2rem; 
+        position: relative; 
+        transform: translateX(-50%);
+        left: 50%; 
+        margin-top: 8rem; 
+    }
+
+
+    .technical-specification .specification-wrapper { 
+        display: block;
+    }
+
+
+    .tech-specification-wrapper .left-block { 
+        margin-top: 5rem;
+        display: flex; 
+        margin-left: 10rem; 
+    }
+
+    .tech-specification-wrapper .left-block .block { 
+        text-align: center;
+        padding:  0 2rem;  
+    }
+
+    .tech-specification-wrapper .left-block .block:nth-child(2) { 
+        margin-top: 0; 
+    }
+
+}
+
+
+
+
+
+@media (max-width: 768px) { 
+    footer .container .top { 
+        padding-left: 3rem; 
+        padding-right: 3rem !important;
+    }
+    .battery-info .bottom-block  .left-block::after{ 
+        display: none;
+    }
+
+
+    .specificationWrapper .left{ 
+        display: block;
+    }
+
+    .specification-image .left .block:nth-child(1) { 
+        padding: 0 6rem; 
+    }
+    .specification-image .left .block:nth-child(2){ 
+        margin-top: 3rem; ;
+        padding:  0 6rem; 
+    }
+
+    .specification-image .specificationWrapper .right { 
+        margin-top: 4rem; 
+        display: block;
+    }
+
+    .specification-image .specificationWrapper .right .block { 
+        margin-top: 4rem; 
+        padding: 0 5rem ;
+    }
+
+    /* technical specification */
+
+    .technical-specification { 
+        width: 100%; 
+    }
+
+    .tech-specification-wrapper .left-block{ 
+        display: block;
+    }   
+    
+    .tech-specification-wrapper .left-block .block:nth-child(2) {
+        margin-top: 4rem; 
+    }
+    .tech-specification-wrapper .right-block .block{ 
+    }
+
+
+    .tech-specification-wrapper .right-block .block{ 
+        margin-left: 0; 
+    }
+
+
+    /*  ---------- Mobile application ---------- */
+    .page-home .health-reports .container .title-head { 
+        padding: 0 4rem; 
+    }
+
+    .reports .section-title { 
+        padding: 0 2rem; 
+    }
+
+    .page-home .health-reports .container .flex {
+        flex-direction: column;
+    }
+
+    .page-home .health-reports .container .flex .right {
+        text-align: center;
+        margin-top: 4rem; 
+    }
+
+    .page-home .health-reports .container .left img { 
+        width: 300px; 
+    }
+
+    .more-report-features { 
+        flex-direction: column          ;
+    }
+
+    .more-report-features .feature { 
+        padding:  0 4rem; 
+        margin-top: 3rem;
+    }
+
+
+    /* sole */
+    .sole { 
+        margin: 0 !important; 
+    }
+    .sole .flex { 
+        flex-direction: column;
+    }
+
+    
+    .sole .flex .right { 
+        margin: 0; 
+        text-align: center;
+        margin-top: 3rem;
+        padding: 0; 
+        /* margin: 1rem 0;  */
+    }
+
+    /* mesh */
+
+    .mesh .flex { 
+        flex-direction: column;
+    }
+
+    .mesh .left { 
+        text-align: center;
+    }
+    .mesh .flex::before { 
+        bottom: -12.7%;
+        right: 15%;
+    }
+
+    .mesh .flex::after {
+        left: 65%; 
+    }
+    
+
+    /* ------------ shoe chargingj ----- */
+    /* --------- shoe charging -------- */
+    .shoe-charging .shoe-charging-wrapper{ 
+        flex-direction: column;
+     }
+
+
+     .shoe-chargning-right{ 
+        text-align: center;
+        margin-top: 4rem;
+     }
+
+     .ar-wrapper { 
+        flex-direction: column;
+     }
+
+     .ar-wrapper .left { 
+        text-align: center;
+        margin-left: 0; 
+     }
+
+     .ar .ar-wrapper .right { 
+        margin-top: 4rem; 
+     }
+
+
+
+      /*-------------- battery info ------------- */
+    .battery-info { 
+        padding: 3rem 0; ; 
+     }
+ 
+     .battery-info .top-block { 
+         display: block;
+         text-align: center;
+         padding: 0; 
+     }
+ 
+     .battery-info .top-block p { 
+         margin-left: 0; 
+         margin-top: 1rem; 
+     }
+ 
+     .battery-info .top-block { 
+         width: 100%; 
+         padding: 0 2rem; 
+     }
+
+     .battery-info .bottom-block { 
+         text-align: center;
+         display: block;
+         width: 80%;
+         margin: 0 auto; 
+         margin-top: 4rem; 
+     }
+ 
+     .battery-info .bottom-block .right-block { 
+         margin-left: 0; 
+         margin-top: 4rem; 
+     }
+ 
+     .endurance .container h2 { 
+         font-size: 50px; 
+     }
+ 
+     .endurance .container h6 {
+         font-size: 20px; 
+         margin-bottom: 1rem; 
+      }
+
+
+      .page-home .specifications .specification-content h2 { 
+        font-size: 44px; 
+      }
+
+      .page-home .specifications .specification-content p{ 
+        font-size: 20px; 
+        padding: 0;
+      }
+}
+
+
+
+@media (max-width: 576px){  
+    .page-home .specifications{ 
+        padding: 2rem 0; 
+    }
+
+    .specification-image .left .block:nth-child(1) {
+        padding: 0 2rem !important; 
+    }
+
+    .page-home .specifications .specification-content p {
+        font-size: 17px; 
+    }
+
+    .specification-image .left .block:nth-child(2){ 
+        padding: 0 1rem; 
+        margin-left: -2rem; 
+        /* margin-left: 0;  */
+    }
+
+    .specification-image .specificationWrapper .right .block{ 
+        padding:  0 2rem; 
+        margin-left: -1rem; 
+    }
+
+    .tech-specification-wrapper .left-block .block { 
+        margin-left: -1rem; 
+        padding: 0; 
+    }
+
+    .tech-specification-wrapper{
+        margin: 8rem 2rem; 
+    }
+
+    .tech-specification-wrapper .right-block .block { 
+        margin-right: 0; 
+        margin: 0;
+        margin-right: 0;
+        position: static;
+        transform: none;
+        padding: 0;
+        position: relative;
+        left: 40%;
+        transform: translate(-60%);
+        margin-top: 3rem; 
+    }
+
+    .page-home .health-reports .container .title-head {
+        padding: 0 1rem; 
+        font-size: 30px;
+    }
+
+    .page-home .health-reports .container .left img{
+        width: 200px; 
+    }
+
+    .page-home .health-reports .container .right h2 { 
+        font-size: 30px; 
+    }
+
+    .page-home .health-reports .container .right p {
+        font-size: 17px; 
+    }
+
+    .page-home .health-reports .container .right  
+    {
+        padding-left: 0; 
+    }
+
+    .reports .section-title { 
+        font-size: 30px; 
+    }
+
+    .reports .container .report-image-wrapper { 
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .reports .container .report-image-wrapper div img {
+        width: 50%;     
+    }
+
+    .more-report-features .feature{
+        padding: 0 1rem;;
+        margin-left: 0; 
+    }
+
+    .popup .popup-form{ 
+        width: 300px;
+        height: 412px;
+    }
+
+    .popup .popup-form .section-title p{ 
+        padding: 0 .5rem; 
+    }
+
+    .tech-specification-wrapper .right-block .block { 
+        position: relative; 
+        left: 50%; 
+    }
+
+
+    .battery-info .bottom-block { 
+        width: 80%; 
+    }
+
+    .battery-info .bottom-block h2 { 
+        font-size: 40px; 
+        /* color: var(--primary);  */
+    }
+
+    .specification-image .left .block:nth-child(1){
+        padding: 0 .5rem;
+    }
+    .specification-image .left .block {
+        padding: 0 .4rem;     
+    }
+
+    .page-home .health-reports .container .title-head {
+        font-size: 26px; 
+    }
+
+    .mesh .flex .left h2{ 
+        font-size: 27px; 
+    }
+
+    .mesh .flex .left { 
+        padding-left: 1rem; 
+        padding-right: 1rem; ;
+    }
+
+    .mesh .flex::before { 
+        display: none;
+    }
+
+    .sole .flex .right h2 { 
+        font-size: 30px; 
+    }
+
+    .endurance { 
+        height: 70vh;
+    }
+
+    .ar .ar-wrapper .left{ 
+        margin-left: 0;
+    }
+
+    .sole .container { 
+        width: 95%; 
+    }
+
+    .sole .flex .right h2 
+    { 
+        font-size: 23px; 
+    }
+
+    .battery-info .top-block{ 
+        padding: 0; 
+    }
+
+    .endurance .container h2 
+    { 
+        font-size: 40px; 
+    }
+
+    .shoe-charging .shoe-charging-wrapper { 
+        padding: 0; 
+    }
+
+    .shoe-charging .container { 
+        width: 100%; 
+    }
+    .ar .container { 
+        width: 100%; 
+    }
+    .ar .ar-wrapper { 
+        margin-left: 0; 
+        margin-right: 0; 
+    }
+
+
+    .mesh .flex .left{ 
+        padding-left: 0; 
+    }
+
+    
+}
+
+
+@media (max-width: 490px){ 
+    .battery-info .bottom-block { 
+        width: 60%;    
+    }
+
+    footer .bottom .bottom-bottom .left ul li { 
+        display: block; 
+    } 
+
+    footer .bottom { 
+        padding: 1rem 0; 
+    }
+
+
+    footer .bottom .bottom-bottom ul{  
+        grid-template-columns: repeat(1, 1fr); 
+    }
+
+
+    
+}
+
+@media (max-width: 486px){ 
+    footer .bottom .bottom-bottom .left ul { 
+        display: block !important;
+        /* grid-template-columns: repeat(2, 1fr) !important;  */
+    }
+}

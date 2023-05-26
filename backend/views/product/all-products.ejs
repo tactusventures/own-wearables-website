@@ -1,0 +1,158 @@
+<div class="main-wrapper main-wrapper-1">
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <section class="section">
+            <div class="section-body">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>All Products</h4>
+                            </div>
+                            <div class="card-body">
+                                <% if(messages && messages.success) { %> 
+                                    <div class="alert alert-success alert-dismissible show fade">
+                                      <div class="alert-body">
+                                        <button class="close" data-dismiss="alert">
+                                          <span>&times;</span>
+                                        </button>
+                                        <%= messages.success %>
+                                      </div>  
+                                    </div>
+                                  <% } %>  
+    
+    
+                                  <% if(messages && messages.error) { %> 
+                                    <div class="alert alert-danger alert-dismissible show fade">
+                                      <div class="alert-body">
+                                        <button class="close" data-dismiss="alert">
+                                          <span>&times;</span>
+                                        </button>
+                                        <%= messages.error %>
+                                      </div>
+                                    </div>
+                                  <% } %>  
+                                <div class="table-responsive">
+                                    <table class="table table-striped" id="table-1">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-center">
+                                                    #
+                                                </th>
+                                                <th>Product Name</th>
+                                                <th>Product Price</th>
+                                                <th>Product Image</th>
+                                                <th>Added On</th>
+                                                <th>Add Color</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            <% products.forEach((product, ind) => { %>
+                                                <tr>
+                                                    <td>
+                                                        <%= ind+1 %>
+                                                    </td>
+                                                    <td><%= product.productName %></td>
+                                                    
+                                                    <td>
+                                                        $<%= product.price %>
+                                                    </td>
+
+                                                    <td>
+                                                        <img src="/<%= product.images[product.colors[0]][0] %>"  class="table-product-image" />
+                                                    </td>   
+                                                    <td><%= product.created_at %></td>
+                                                    
+                                                    <td>
+                                                        <button type="button" class="btn btn-primary add-clor-btn" data-toggle="modal" data-target="#exampleModal" data-prodId=<%= product.id %>><i class="fas fa-plus"></i> &nbsp; 
+                                                            Add Color</button>
+                                                    </td>
+
+                                                    <td>
+                                                        <a href="/products/view-product/<%= product.id %>" class="btn btn-success"><i class="fas fa-eye"></i>&nbsp;</a>
+                                                        &nbsp; 
+                                                        <a href="/products/edit-product/<%= product.id %>" class="btn btn-primary" ><i class="fas fa-edit"></i></a>
+
+                                                        <button data-id=<%= product.id %> class="btn btn-danger product-delete-btn"><i class="fas fa-trash"></i></button>
+                                                    </td>
+                                                </tr>
+                                            <% }) %>                                           
+                                        </tbody>
+                                    </table>
+                            </div>  
+
+                            <div class="card-footer text-right">
+                              <nav class="d-inline-block">
+                                <ul class="pagination mb-0">
+                                 
+                                  <li class="page-item <%= page == 1 ? 'disabled': '' %>">
+                                    <a class="page-link" href="/messages/enquiries?id=<%= page-1 %>" tabindex="-1"><i class="fas fa-chevron-left"></i></a>
+                                  </li>
+                               
+                                  <% for(let i=1; i <= totalPages; i++) { %>
+                                     
+                                      
+                                      <% if(page == i){ %> 
+                                          <li class="page-item active">
+                                              <a class="page-link" href="/products/all-products?page=<%= i %>"><%= i %></a>
+                                          </li>
+                                      <% }else { %> 
+                                          <li class="page-item">
+                                              <a class="page-link" href="/products/all-products?page=<%= i %>"><%= i %></a>
+                                          </li>
+                                      <% } %> 
+                                      
+                                  <% } %>
+    
+                                  <li class="page-item <%= parseInt(page) >= parseInt(totalPages) ? 'disabled': page %>">  
+                                      <a class="page-link " href="/messages/enquiries?id=<%= parseInt(page) + parseInt(1) %>"><i class="fas fa-chevron-right"></i></a>
+                                  </li>
+                                </ul>
+                              </nav>
+                            </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </div>
+
+</div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="formModal"
+aria-hidden="true">
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="formModal">Add Color to the Product</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>  
+    <div class="modal-body">    
+      <form  method="post" action="/products/product/add-product" enctype="multipart/form-data">
+        <div class="form-group">
+          <label>Color</label>
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Colors" name="color" required>
+          </div>
+        </div>
+        <div class="form-group">
+            <label>Drag or Select Images</label>
+            <input type="file" class="form-control" name="images" multiple required>
+          </div>
+          <input type="hidden" class="prod-id" name="id" />
+        <button type="submit" class="btn btn-primary m-t-15 waves-effect">Add Color</button>
+      </form>
+    </div>
+  </div>
+</div>
+</div>

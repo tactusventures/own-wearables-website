@@ -1,0 +1,111 @@
+.form-icon { 
+    position: fixed;
+    bottom: 5%; 
+    background-color: #fff;
+    padding: 1rem 1rem;
+    border-radius: 50%; ;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999; 
+    right: 50px; 
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 3px 18px;
+    cursor: pointer;
+}
+
+.form-icon i { 
+    font-size: 28px; 
+}       
+
+
+
+.popup .popup-form { 
+    background: #fff;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 3px 18px;
+    position: fixed;
+    bottom: 18%; 
+    width: 400px; 
+    height: 500px; 
+    overflow-y: scroll;
+    /* padding: 1rem 1rem;  */
+    right: 20px; 
+    border-radius: 10px; ;
+    z-index: 999; 
+}
+
+
+.popup .popup-form .section-title { 
+    text-align: center;
+    /* background-color: #E2E2E2; */
+}
+
+
+.popup .popup-form form input { 
+    display: block;
+    border-radius: 5px;
+}
+
+/* .popup .popup-form form input.error {
+    border-color: red;
+    border: 2px solid red;
+}
+
+.popup .popup-form form input.error:focus { 
+    border-color: red;
+} */
+
+.popup .popup-form form textarea.error {
+    border: 2px solid red;
+    /* border-color: red; */
+}
+.popup .popup-form .section-title h2 { 
+    font-size: 19px; 
+    text-align: left;
+    background-color: #e2e2e2;
+    padding: 1.5rem 1rem; 
+    padding-bottom: 3rem;
+
+}
+
+.popup .popup-form .section-title p { 
+    background-color: #fff;
+    position: relative;
+    top: -30px; 
+    padding: 1rem 2rem; 
+    margin: 0 2rem; 
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 3px 18px;
+
+}
+
+
+.popup-form form {
+    padding: 0 1rem; 
+}
+
+.popup-form form input { 
+    width: 100%; 
+    padding: 1rem .5rem 1rem .8rem; 
+    margin-bottom: 1rem;
+    border: 1px solid #e2e2e2;
+}
+
+
+.popup-form form textarea { 
+    width: 100%; 
+    border: 1px solid #e2e2e2; ;
+    padding: 1rem .5rem 1rem .8rem; 
+}
+
+.popup-form form  .button { 
+    width: 100%; 
+    text-align: center;
+    margin-top: 2rem;   
+    margin-bottom: 4rem;
+}
+
+@media (max-width: 490px){ 
+    
+    .popup .popup-form { 
+        width: 250px; 
+    }
+}

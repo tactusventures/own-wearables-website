@@ -1,0 +1,137 @@
+<div class="main-wrapper main-wrapper-1">
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <section class="section">
+            <div class="section-body">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>Product Info</h4>
+                                <hr />
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-striped" id="table-1">
+                                        <!-- <thead>
+                                            <tr>
+                                                <th class="text-center">
+                                                    #
+                                                </th>
+                                                <th>Product Name</th>
+                                                 <th>Product Price</th>
+                                                <th>Colors Available</th>
+                                                <th>Sizes Available</th>
+                                                <th>Sizes Available</th>
+                                            </tr>
+                                        </thead> -->
+                                        <tbody>
+
+                                            <tr>
+                                                <td>
+                                                    Product Name
+                                                </td>
+
+                                                <td>
+                                                    <h4><%= product.productName %></h4>
+                                                </td>   
+                                              
+                                            </tr>
+
+
+                                            <tr>
+                                                <td>
+                                                    Product Price
+                                                </td>
+
+                                                <td>
+                                                    <h4>$<%= product.price %></h4>
+                                                </td>   
+                                              
+                                            </tr>
+
+
+
+                                            <tr>
+                                                <td>
+                                                    Colors Available
+                                                </td>
+
+                                                <td>
+                                                    <% product.colors.forEach((color) => { %>
+                                                        <button type="button" class="btn btn-<%= colorArray[getRandomNumber(colorArray.length)] %>">
+                                                            <%= color %>
+                                                          </button>
+                                                    <% })    %>                                               
+                                                </td>   
+                                              
+                                            </tr>
+
+
+                                            <tr>
+                                                <td>
+                                                    Product Sizes
+                                                </td>
+
+                                                <td>
+                                                    <% product.sizes.forEach((size) => { %>
+                                                        <button type="button" class="btn btn-<%= colorArray[getRandomNumber(colorArray.length)] %>">
+                                                            <%= size %> 
+                                                          </button>
+                                                    <% })    %>                                               
+                                                </td>   
+                                              
+                                            </tr>
+
+
+                                            <tr>
+                                                <td>
+                                                    Images
+                                                </td>
+
+                                                <td>
+
+                                                        
+                                                  <% Object.keys(product.images).forEach((color) => { %>
+                                                        <h4><%= color %></h4>
+                                                        <div class="gallery gallery-md">
+                                                            <% product.images[color].forEach((image, ind) => { %> 
+                                                                <div class="gallery-item" data-image="/<%= image %>" data-title="Image <%= ind+1 %>"></div>
+
+                                                                <!-- <img src="/<%= image %>" /> -->
+                                                            <% }) %>
+                                                        </div>    
+                                                   <% }) %>
+                                                </td>   
+                                              
+                                            </tr>
+
+
+                                            <tr>
+                                                <td>
+                                                    Product Description
+                                                </td>
+
+                                                <td>
+                                                    <p><%= product.description %></p>
+                                                </td>   
+                                              
+                                            </tr>
+                                           
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </div>
+
+</div>
+</div>
+

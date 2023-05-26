@@ -1,0 +1,460 @@
+.order-summary-page { 
+    background: #f5f5f5; 
+    padding: 4rem 0; 
+}
+
+.order-summary {
+    display: flex ;     
+    margin-top: 2rem; 
+    padding: 2rem 2rem; 
+}
+
+.order-summary-page .container { 
+    display: flex; 
+    /* padding:  */
+}
+
+.order-summary-page .left { 
+    flex: 0 0 65%; 
+}
+
+.order-summary .content { 
+    flex: 0 0 60%; 
+    margin-left: 2rem; 
+}
+
+.order-summary .colors .color-images { 
+    display: flex;
+}
+
+.order-summary .content .colors div img{ 
+    width: 50px;
+    display: inline-block;
+}
+
+
+.order-summary .content button { 
+    padding: .7rem 1rem; 
+    border-radius: 10px;
+    margin-top: 1rem; ;
+}
+
+.order-summary .content .colors { 
+    margin-top: 2rem; 
+    display: flex;
+}
+
+
+.order-summary .content .colors h4{ 
+    width: 20%; 
+}
+
+.order-summary  .img { 
+    flex:  0 0 30%; 
+}
+
+.order-summary .img img { 
+    width: 100%; 
+}
+
+
+.order-summary .content .colors .color-images h5{ 
+    display: block;
+    text-align: center;
+}
+
+
+.order-summary .content .colors .color-images div { 
+    margin-left: 1rem; 
+}
+
+
+.order-summary .sizes { 
+    margin-top: 2rem; 
+    display: flex;
+}
+
+.order-summary .sizes h4{ 
+    flex: 0 0 20%; 
+}
+
+.order-summary .sizes ul { 
+    display: flex;
+}
+
+.order-summary .sizes ul li { 
+    padding: .5rem 1rem; 
+    border: 1px solid var(--pure); 
+    margin-left: 1rem; 
+}
+
+.order-summary .counter {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem; 
+}
+
+.order-summary .counter h4 { 
+    width: 20%;
+}
+
+
+
+.order-summary .counter div { 
+    display: flex;
+}
+
+
+.order-summary .counter div  h4{ 
+    padding: .5rem 1rem; 
+}
+
+.order-summary .counter div button {
+     padding: .5rem 1rem; 
+     cursor: pointer;
+}
+
+
+/* ------------------ Order Price summary ------------- */
+
+.address-seletor-wrapper .address-expand{ 
+    background: var(--pure); 
+    padding: 2rem 2rem; 
+}
+
+.address-seletor-wrapper .address-expand .top { 
+    display: flex;
+    align-items: center;
+}
+
+.address-seletor-wrapper .address-expand .top h4 { 
+    margin-left: 1rem; 
+}
+
+.address-seletor-wrapper .address-expand .top span { 
+    margin-left: 1rem; 
+}
+
+.address-seletor-wrapper .address-expand .top b { 
+    margin-left: 1rem; 
+}
+
+.address-seletor-wrapper .address-expand .bottom {
+    margin-top: 1rem; 
+}
+.address-seletor-wrapper .address-expand button{ 
+    margin-top: 1rem; 
+    padding: .8rem 2rem; 
+}
+
+.address-seletor-wrapper .address-expand s1pan { 
+    margin: .5rem; 
+}
+
+.order-summary-page .right { 
+    background-color: var(--pure);
+    flex: 0 0 32%; 
+    margin-left: 2rem; 
+    padding: 1rem 2rem; 
+    align-self: flex-start;
+    box-shadow: 0 0 2px rgba(0,0,0,.12);
+    position: sticky; 
+    top: 50px; 
+}   
+
+
+.order-summary-page .right h2 { 
+    font-size: 26px; 
+    margin-bottom: 2rem; 
+}
+
+.order-summary-page .right .price-details div { 
+    display: flex;
+    
+    justify-content: space-between;
+    font-weight: 300;
+    margin-bottom: 1.5rem; 
+}
+
+.order-summary-page .right .price-details .total-amount { 
+    font-size: 25px; 
+    margin-top: 2rem;
+}
+
+.order-summary-page .right  button { 
+    padding: .5rem 1rem; 
+    border-radius: 20px;
+    outline: none;
+    text-align: center;
+    
+}
+
+
+.address-details { 
+    margin-top: 1rem; 
+}
+
+
+/* ================ order-summary-page ============================= */
+.order-summary-page .section-title{ 
+    background-color: #fff;
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 1rem 1rem 2rem; 
+    box-shadow: 0 0 2px rgba(0,0,0,.12);
+    align-items: center;
+    margin: 2rem 0;
+    border-radius: 10px; 
+}
+
+.order-summary-page .section-title:nth-child(1){ 
+    margin: 0;
+}
+
+/* .order-summary-page  */
+.order-summary-page .login-wrapper { 
+    margin: 1rem 0; 
+}
+
+.order-summary-page .login-wrapper .section-title div.left { 
+    display: flex;
+    align-items: center;
+}
+
+
+.order-summary-page .address-seletor-wrapper { 
+    margin: 1rem 0;     
+}
+.order-summary-page .section-title.active{ 
+    background-color: var(--black);
+    color: var(--pure); 
+
+}
+
+.order-summary-page .section-title.inactive{ 
+    background-color: var(--pure);
+    color: var(--sGray); 
+}
+
+.order-summary-page .section-title.inactive .section-number { 
+    background-color: var(--sGray) !important;
+}
+
+.login-title.section-title .left { 
+     color: var(--dark); 
+    display: flex; 
+}
+
+.section-number { 
+    padding: .3rem .5rem; 
+    margin-right: 1rem;
+    font-weight: 400;
+    background-color: var(--black);
+    color: var(--pure);
+}
+
+
+.section-number.bg-white { 
+    background-color: var(--pure) !important;
+    color: var(--black) !important; 
+    font-weight: bold;
+}
+
+
+
+.login-wrapper .login-expand  {
+    display: flex;
+    justify-content: space-between;
+    padding: 2rem 2rem; 
+    background-color: var(--primary);
+}
+
+.login-wrapper .login-expand .expand-left  input{
+    width: 100%;
+    border: none;
+    font-size: 17px; 
+    padding: 1rem 1rem 1rem 1rem; 
+    margin-bottom: 1rem;
+    border-bottom: 1px solid var(--sGray);
+}
+
+.login-wrapper .login-expand .expand-left button { 
+    width: 100%; 
+    margin-top: 1rem; 
+    padding: .7rem 0; 
+    font-size: 15px; 
+    border-radius: 5px;
+}
+
+
+.login-wrapper .login-expand .expand-right .title{ 
+    margin-bottom: 1rem; 
+    font-weight: bold;
+}
+
+.login-wrapper .login-expand .expand-right ul  p { 
+    margin: .5rem 0; 
+}
+
+.address-seletor-wrapper .section-title{ 
+    /* background-color: var(--black); */
+    /* color: var(--pure);  */
+}
+
+.address-seletor-wrapper .section-title .left {
+    display: flex;
+    align-items: center;
+}
+
+.address-seletor-wrapper .section-title .left .address { 
+    /* color: var(--sGray);  */
+    margin-top: .5rem;  
+}
+
+
+
+/* order-summary-wrapper */
+.order-summary-wrapper { 
+    background-color: var(--pure); ;
+}
+
+
+.order-summary-wrapper  .section-title .left { 
+    display: flex;
+    align-items: center;
+}
+
+
+
+.payment-wrapper { 
+    margin-top: 1rem; 
+}
+
+.payment-wrapper .section-title .left { 
+    display: flex;
+    align-content: center;
+}
+
+.payment-wrapper  .section-title .left .section-number { 
+    background-color: var(--black);
+    color: var(--pure); 
+}
+
+
+.payment-wrapper .payment-expand { 
+    background-color: #fff; 
+    padding: 2rem 1rem; 
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.payment-wrapper .payment-expand button { 
+    padding: 1rem 1rem;     
+    background-color: #3b7bbf;
+    border: none;
+    color: var(--pure); 
+    font-size: 20px; 
+    display: flex;
+    align-items: center;
+}
+
+.payment-wrapper .payment-expand button img { 
+    width: 30px; 
+    margin-right: 1rem; 
+}
+
+
+/* add- address wrappper
+ */
+
+ .add-address-wrapper { 
+    background-color: var(--pure); 
+    margin-bottom: 1.5rem;
+ }
+.add-address { 
+    background-color: var(--pure);
+    box-shadow: 0 0 2px rgba(0,0,0,.12);
+    margin-top: 1rem;
+    padding: 1rem 1.4rem; 
+}
+
+.add-address-wrapper .address-expand {
+    padding: 2rem 2rem; 
+}
+
+.address-expand .btn { 
+    text-align: center;
+}
+
+.address-expand .btn button { 
+    padding: 1rem 1.2rem; 
+    margin-top: 2rem; 
+}
+
+
+.add-address-wrapper .address-expand .row { 
+    display: flex;
+    justify-content: flex-start;
+}   
+
+.add-address-wrapper .address-expand .row .form-group { 
+    flex: 0 0 50%; 
+}
+
+
+.add-address-wrapper .address-expand .row .form-group label { 
+    display: block;
+    font-weight: bold;
+    color: var(--black); 
+    margin-bottom: .5rem;
+}   
+
+
+.add-address-wrapper .address-expand .row .form-group input { 
+    padding: .7rem 1.4rem; 
+    width: 90%;
+    border: 1px solid var(--sGray); 
+    font-size: 17px; 
+}
+
+
+.add-address-wrapper .address-expand .row .form-group input:focus  {
+    outline: none;
+}
+
+.add-address-wrapper .address-expand .row .form-group:nth-child(2){
+    margin-left: 2rem; 
+}
+
+
+
+.add-address-wrapper .address-expand .row { 
+    margin-top: 1rem; 
+
+}
+
+
+.order-summary .counter button { 
+
+    border: 1px solid var(--sGray); 
+    border-radius: 50%;
+    background-color: transparent;
+    width: 50px; 
+    height: 50px; 
+    font-size: 20px; ;
+    font-weight: bold;
+}
+
+.order-summary .counter h4{
+    font-size: 20px; ;border: 1px solid var(--sGray);
+    margin: 0 1rem;
+    border-radius: 10px; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 2rem; 
+    width: 100px; 
+} 
+
+

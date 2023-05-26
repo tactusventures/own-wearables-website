@@ -1,0 +1,169 @@
+<div class="main-wrapper main-wrapper-1">
+
+    <div class="main-content">
+        <section class="section">
+            <div class="section-body">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                              <h4>Edit Product</h4>
+                            </div>
+                            <div class="card-body">
+                               <% if(messages && messages.success) { %> 
+                                <div class="alert alert-success alert-dismissible show fade">
+                                  <div class="alert-body">
+                                    <button class="close" data-dismiss="alert">
+                                      <span>&times;</span>
+                                    </button>
+                                    <%= messages.success %>
+                                  </div>  
+                                </div>
+                              <% } %>  
+
+
+                              <% if(messages && messages.error) { %> 
+                                <div class="alert alert-danger alert-dismissible show fade">
+                                  <div class="alert-body">
+                                    <button class="close" data-dismiss="alert">
+                                      <span>&times;</span>
+                                    </button>
+                                    <%= messages.error %>
+                                  </div>
+                                </div>
+                              <% } %>  
+
+                              <form action="/products/edit-product" method="post">
+                                <div class="form-group">
+                                    <label>Product Name</label>
+                                    <input type="text" name="productName" class="form-control" value="<%= product.productName %>"  required >
+                                  </div>    
+                                  
+                                  <div class="form-group">
+                                    <label>Price</label>
+                                    <div class="input-group">
+                                      <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                          $
+                                        </div>
+                                      </div>
+                                      <input type="text" class="form-control currency" value="<%= product.price %>" name="price" required>
+                                    </div>
+                                  </div>
+                                  
+                                  <div class="row">
+                                    <% product?.colors.forEach((clr, ind) => { %> 
+                                      <div class="col col-md-4">
+                                          <div class="form-group">
+                                            <label>Color <%= ind+1 %> </label>
+                                            <input type="text" class="form-control" value="<%= clr %>" name="colors" required>
+                                          </div>
+                                      </div>
+                                    <% }) %> 
+                                  </div>
+    
+
+                                  <!-- ---------------  Images ----------------------- -->
+                                  <div>
+                                    <h2>Images</h2>
+                                    <% for(let x of Object.keys(product.images)) { %> 
+                                        <div class="d-flex align-center mb-4">
+                                          <h4><%= x %> </h4>
+                                          
+                                          <button data-id="<%= product.id %>" data-color="<%= x %>" type="button" class="btn btn-primary ml-4 add-image-to-color" data-toggle="modal" data-target="#exampleModal">
+                                            <i class="fas fa-plus"></i> Add <%= x %> Image
+                                          </button>
+
+                                        </div>
+                                        <div class="row">
+                                           <% product.images[x].forEach((image, ind) => { %>
+                                            <div class="col-12 col-md-6 col-lg-3"> 
+                                                <div class="card card-primary">
+                                                  <div class="card-header flex" style="justify-content: space-between;">
+                                                    <h4>Image - <%= ind+1 %> </h4>
+    
+                                                    <button type="button" class="btn btn-danger delete-image-btn"
+                                                    data-id="<%= product.id %>" data-image="<%= image %>" data-color="<%= x %>"><i class="fas fa-trash"></i></button>
+                                                  
+                                                  </div>
+                                                  <div class="card-body">
+                                                    <img src="/<%= image %>"  width="100%" />
+                                                  </div>
+                                                </div>
+                                              </div>
+                                              <% }) %>
+                                            </div>
+                                        <% } %> 
+                                  </div>
+
+                                  <!-- ---------------- Images ----------------------- -->
+                                  <div class="form-group">
+                                    <label>Sizes</label>
+                                    <select class="form-control select2" name="sizes" multiple="">
+                                        <% for(let i=5; i<=10; i++) { %>
+                                          <% if(product.sizes.includes(i)) { %>
+                                            <option selected><%= i %></option>
+                                          <% } else { %> 
+                                            <option><%= i %></option>
+                                          <% } %> 
+                                        <% } %> 
+                                      </select>
+                                      
+                                       
+                                    </select>
+                                  </div>
+    
+                                  <div class="form-group">
+                                    <label>Textarea</label>
+                                    <textarea name="description" value="Hello world" class="form-control" required><%= product.description %> </textarea>
+                                  </div> 
+                                  
+                                  <input type="hidden" value="<%= product._id %>"  name="id" />
+    
+                                  <div class="card-footer text-center">
+                                    <button type="submit" class="btn btn-primary mr-1" type="submit">Update</button>
+                                  
+                                  </div>
+                              </form>                              
+                            </div>
+                          </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </div>
+
+</div>
+
+
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="formModal"
+aria-hidden="true">
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="formModal">Add Image</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>  
+    <div class="modal-body">
+      <form  method="post" action="/products/add-color-image" enctype="multipart/form-data">
+       
+        <div class="form-group">
+            <label>Drag or Select Images</label>
+            <input type="file" class="form-control" name="images" multiple required>
+          </div>
+
+          <input type="hidden" value="" name="id" class="modal-product-id" />
+          <input type="hidden" value="" name="color"  class="modal-color-name" />
+          <!-- <input type="hidden" class="prod-id" name="id" /> -->
+        <button type="submit" class="btn btn-primary m-t-15 waves-effect">Add Image</button>
+      </form>
+    </div>
+  </div>
+</div>
+</div>

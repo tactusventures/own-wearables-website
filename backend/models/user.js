@@ -1,0 +1,27 @@
+import mongoose from "mongoose";
+
+const addressSchema = new mongoose.Schema({
+    firstName: {type: String, required: true}, 
+    lastName: {type: String, required: true}, 
+    houseNoOrRoomNo: { type: String, required: false}, 
+    buildingNoOrArea: { type: String, required: false}, 
+    landmark: { type: String, required: false}, 
+    cityOrVillage: { type: String, required: false}, 
+    state: { type: String, required: false}, 
+    pincode: { type: String, required: false}, 
+    country: { type: String, required: false},
+    phoneNo: {type: String, required: true}, 
+});
+
+const userSchema   = new mongoose.Schema({
+    firstName: { type: String, required: true}, 
+    lastName: { type: String, required: true}, 
+    email: { type: String,unique: true,  required: true},
+    phoneNo: { type: String, required: true},
+    gender: { type: String, required: false},
+    password: { type: String, required: true},    
+    addresses: [addressSchema] 
+}, {timestamps: true}); 
+
+
+export default mongoose.model('User', userSchema);
