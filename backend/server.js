@@ -79,7 +79,6 @@ server.listen(PORT, () => {
 });
 
 
-io.on('connection', (socket) => { 
-    console.log(socket.id);
+io.on('connection', (socket) => { ;
     socket.emit('display-message', "Hello world"); 
 }); 

@@ -251,9 +251,8 @@ const paymentController = {
         let updatedPayment = await Payment.updateOne({paymentId: resp.data.id}, {paymentStatus: resp.data.status}); 
 
         try { 
-          console.log(orderId);
           let result = await Order.updateOne({_id: orderId}, {status: "COMPLETED", isPaid: true}); 
-          console.log(result); 
+
         }catch(e) { 
             return next(e); 
         }

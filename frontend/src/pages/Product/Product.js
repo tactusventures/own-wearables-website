@@ -7,7 +7,7 @@ import { addOrderData } from '../../store/orderSlice';
 import { useNavigate } from 'react-router-dom';
 import { changeStep } from '../../store/paymentStepSlice';
 import Spinner from '../../components/Spinner/Spinner';
-import { loadAllProducts } from '../../http';
+import { loadAllProducts, loadProduct } from '../../http';
 
 
 const Product = () => {
@@ -74,15 +74,15 @@ const Product = () => {
     // proceedOrder 
 
 
-    function proceedOrder() { 
+    async function proceedOrder() { 
         setIsLoading(true); 
 
-        axios.post('/order/place-order', {customerId: "6464a4bdee73f0c3f33d5722", item: product._id, color: productColor, size: shoeSize, quantity: 1, paymentMode: "online", totalPrice: product.price}).then((res) => { 
+        axios.post('/order/place-order', {customerId: "6464a4bdee73f0c3f33d5722", item: product._id, color: productColor, size: shoeSize, quantity: 1, paymentMode: "online", totalPrice: product.price}).then((res) => {
             const  {_id, customerId}  =  res.data; 
             navigate(`/order/order-summary/${_id}`);
         }).catch((e) => {
 
-        });  
+        });
     }
 
 

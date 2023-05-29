@@ -47,7 +47,7 @@ export const registerSchema = Joi.object({
         .regex(/^[1-9]\d{9}$/)
         .required()
         .messages({
-            'string.pattern.base': 'Please enter a valid phone number (use international format starting with "+")',
+            'string.pattern.base': 'Please enter a valid phone number',
             'string.empty': 'Phone number is required',
             'any.required': 'Phone number is required'
         }), 
@@ -78,7 +78,7 @@ export const registerSchema = Joi.object({
         }), 
     
 
-    buildingNoOrArea:   
+    buildingNoOrArea:
         Joi.string().trim().messages({
             'string.base': 'Area or building name must be a string',
             'string.empty': 'Area or building name is required',

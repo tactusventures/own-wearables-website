@@ -20,6 +20,7 @@ function(req, res) {
   res.redirect('/');
 }); 
   
+
 // product
 router.post('/create-product', productController.storeProduct);
 router.post('/product/add-color', productController.addColor);
@@ -37,11 +38,14 @@ router.get('/order/all-cancelled-orders', orderController.cancelledOrders);
 router.get('/order/get-order/:orderId', orderController.getSingleOrder); 
 router.post('/order/increment-quantity', orderController.incrementQuantity); 
 
+
 // payment paypal
 router.post('/generate-credentials', paymentController.createCredentials);
 router.post('/create-order', paymentController.createOrder);
 router.post('/capture-payment', paymentController.capturePayment);
 router.get('/get-payment-details', paymentController.getPaymentDetails); 
+
+
 
 // submit contact form 
 router.post("/send-message", contactController.sendMessage);

@@ -67,7 +67,7 @@ const Home = () => {
 
 
                             <div className='block'>
-                                <h2 className='with-underline'> Premium materials</h2>
+                                <h2 className='with-underline'>Waterproof and dust-free</h2>
                                 {/* <p>The right combination of smart technology and premium materials, these shoes provide the best of both worlds, making them a must-have for fashion-conscious tech enthusiasts.
 
                                 </p> */}
@@ -120,15 +120,17 @@ const Home = () => {
 
                     
                 <div className='shoe-body'>
-                        <img src='/images/shoes/red-teal-shoe.png'></img>
+                        {/* <img src='/images/shoes/red-teal-shoe.png'></img> */}
+                        <img src='/images/own-shoe-specification.png' alt='specification' />
+
                 </div>
 
                     <div className='specification-wrapper'>
                         <div className='left-block'>
                             <div className='block'>
                                 <h2 className='with-underline'> Powerful Sensors</h2>
-                                {/* <p>sensors can measure metrics such as heart rate, blood pressure, and oxygen saturation, providing wearers with a complete picture of their physical health. Some smart shoes can even detect early warning signs of certain medical conditions. 
-                                </p> */}
+                                <p>Enhanced sensing capabilities for optimized performance.
+                                </p>
 
                                 {/* <button className='btn btn-white-outline'>Learn More</button> */}
                             </div>
@@ -136,10 +138,7 @@ const Home = () => {
 
                             <div className='block'>
                                 <h2 className='with-underline'> GAIT Analysis</h2>
-                                {/* <p>These shoes often feature built-in sensors that can detect factors such as stride length, foot strike, and pronation. The data collected by these sensors is then analyzed by the shoe's accompanying app, 
-
-
-                                </p> */}
+                                <p>Precise assessment of your walking and running patterns</p>
 
                                 {/* <button className='btn btn-white-outline'>Learn More</button> */}
 
@@ -149,7 +148,7 @@ const Home = () => {
                         <div className='right-block'>
                             <div className='block'>
                                 <h2 className='with-underline'>Reflexology</h2>
-                                {/* <p>These shoes are equipped with specially designed insoles that feature small bumps and ridges that apply pressure to specific points on the feet. This can help to stimulate blood flow, reduce pain and inflammation, and promote overall wellness. </p> */}
+                                <p>Stimulates pressure points in your feet to improve your health and well-being.</p>
 
                                 {/* <button className='btn btn-white-outline'>Learn More</button> */}
 
@@ -168,7 +167,7 @@ const Home = () => {
 
                             <div className='block'>
                                 <h2 className='with-underline'>Wireless Charging</h2>
-                                {/* <p>These shoes are equipped with specially designed insoles that feature small bumps and ridges that apply pressure to specific points on the feet. This can help to stimulate blood flow, reduce pain and inflammation, and promote overall wellness. </p> */}
+                                <p>Go cord-free with wireless charging</p>
 
                                 {/* <button className='btn btn-white-outline'>Learn More</button> */}
 
@@ -343,7 +342,9 @@ const Home = () => {
                         <h2>Tracking Your Steps with Smart Heels</h2>
                         {/* <p>
                             Own shoe has advance features like an advanced smart heel with GPS tracking technology to monitor speed and distance during outdoor activities. The durable and supportive design includes impact absorption technology, making it perfect for tackling any terrain. Whether hiking or running, our shoes offer the perfect blend of comfort and performance for every adventure.
-                        </p> */}
+                        </p> */} 
+
+                        <p>Track and locate with precision using GPS-enabled shoes with built-in chip.</p>
 
                         {/* <button className='btn btn-primary'>Learn More</button> */}
 
@@ -426,8 +427,8 @@ const Home = () => {
             <div className='endurance'>
                 <div className='container'>
                     <h6>Endurance</h6>
-                    <h2>Push Farther.</h2>
-                    <h2>Run Wilder.</h2>
+                    <h2>Path To.</h2>
+                    <h2>Greatness.</h2>
                 </div>
             </div>
 
@@ -471,6 +472,7 @@ const Home = () => {
                             <h2>Use AR to see Own Shoe.</h2>
                             {/* <p>Our website features an exciting AR (augmented reality) component that lets you get up close and personal with our products like never before. By simply scanning the product with our app, you can view it in 3D, rotate it, and even see how it would look on your own feet! This innovative feature is perfect for those who want to experience our products in a whole new way and make more informed purchase decisions. Give it a try and step into the future of shopping with us.
                             </p> */}
+                            <p>Immerse in virtual shoe try-ons with AR</p>
                         </div>
 
                         <div className='right'>

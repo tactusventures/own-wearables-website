@@ -13,6 +13,7 @@ const Register = ({active, setActive}) => {
     const popUpRef = useRef(); 
     const [validationErrors, setValidationErrors] = useState({}); 
     const navigate = useNavigate();
+    const [showError, setShowError] = useState(false); 
     const [formData, setFormData] = useState({
         firstName: "", 
         lastName: "", 
@@ -56,8 +57,11 @@ const Register = ({active, setActive}) => {
         }).catch((e) => {
             if(e.response?.status === 422) { 
                 setValidationErrors(e.response.data); 
-                console.log('working'); 
+            }else { 
+                setShowError(true); 
             }
+
+            
             setLoading(false); 
         });     
     }   
@@ -68,7 +72,17 @@ const Register = ({active, setActive}) => {
        <div className='overlay' ref={popUpRef}></div>
             <div className='register-form'>
                     <form>
+                        {
+                            showError? 
+                                <div className='error alert-danger'>
+                                    <p>Something Went Wrong! Try Again</p>
+                                </div> : ""
+                        }
                     <div className='row'>
+
+                           
+
+
                             <div className='form-group'>
                                 <label>First Name</label>
                                 <input name='firstName' 

@@ -97,3 +97,14 @@
     background-color: transparent;
     color: var(--black);
 }
+
+
+.error.alert-danger{ 
+    background-color: red;
+    padding: 1rem; 
+}
+
+
+.error.alert-danger { 
+    color: var(--pure);
+}

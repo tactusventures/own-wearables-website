@@ -3,7 +3,6 @@ import JwtService from "../services/JwtService";
 
 
 const auth = async (req, res, next) => { 
-    console.log("cookies", req.cookies);
 
     try {
 

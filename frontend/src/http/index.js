@@ -10,7 +10,12 @@ const api = axios.create({
     }
 });
 
+
+
 export const loadAllProducts = () => api.get("/prdocuts/all"); 
+export const createOrder = (data) => api.post('/create-order', data);
+export const getOrder = (id) => api.get(`/order/get-order/${id}`);
+export const loadItem = (item) => api.get(`/product/get/${item}`); 
 
 
 api.interceptors.response.use(

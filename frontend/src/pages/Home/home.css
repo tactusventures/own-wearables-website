@@ -75,8 +75,8 @@
 }
 
 .specification-image .shoe-image img{ 
-    transform: rotate(-60deg);
-    width: 500px; 
+    /* transform: rotate(-60deg); */
+    width: 800px; 
 }
 
 .specification-image .left  { 
@@ -212,6 +212,7 @@
 /* --------------- Technical Specification --------------- */
 .tech-specification-wrapper{
   position: relative;
+  margin-top: 4rem; 
 }
 
 .technical-specification { 
@@ -241,7 +242,7 @@
 .technical-specification .shoe-body{ 
     position: absolute; ;
     top: 50%; 
-    left: 55% ; 
+    left: 50% ; 
     transform: translate(-50%, -50%);
 }
 
@@ -250,14 +251,16 @@
 }
 
 .technical-specification .shoe-body img { 
-    width: 80%; 
-    transform: rotate(320deg);
+    width: 800px; 
+    transform: rotate(-20deg);
 }
 
 .tech-specification-wrapper .left-block .block{ 
     /* width: 35%;  */
     /* position: absolute;
     left: 14%; */
+    width: 70%; 
+    margin-left: 40px; 
 }
 
 .tech-specification-wrapper .right-block .block:nth-child(2){
@@ -286,6 +289,7 @@
 }
 .tech-specification-wrapper .left-block .block:nth-child(2) { 
     margin-top: 5rem; 
+    width: 60%; 
 }
 
 
@@ -449,10 +453,6 @@
 
 .reports .container .report-image-wrapper div img {
     width: 100%; ; 
-    /* height: 450px;  */   
-    -webkit-box-shadow: -1px -1px 40px 0px rgba(0,0,0,0.75);
-    -moz-box-shadow: -1px -1px 40px 0px rgba(0,0,0,0.75);
-    box-shadow: -1px -1px 40px 0px rgba(0,0,0,0.75);
 }
 
 .reports .container .report-image-wrapper div  p { 
@@ -799,7 +799,7 @@
 .ar { 
     background: var(--black); 
     /* margin-top: 4rem;  */
-    padding: 5rem 0 ;
+    padding: 5rem 0;
 }
 
 .ar .ar-wrapper  {
@@ -1248,7 +1248,7 @@
     }
 
     .technical-specification .shoe-body img { 
-         width: 90%; 
+         width: 70%; 
         transform: rotate(-15deg);
         left: 50%;
         width: 50%;
@@ -1256,6 +1256,7 @@
 
     .tech-specification-wrapper .left-block .block { 
         width: 100%; 
+        /* margin-left: 50px;  */
     }
     
 

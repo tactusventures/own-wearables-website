@@ -9,6 +9,7 @@ import LoginStep from "../../components/OrderSteps/LoginStep";
 import AddressStep from "../../components/OrderSteps/AddressStep";
 import SummaryStep from "../../components/OrderSteps/SummaryStep";
 import PaymentStep from "../../components/OrderSteps/PaymentStep";
+import { createOrder, getOrder, loadItem } from "../../http";
 
  
 
@@ -45,18 +46,30 @@ const OrderSummary = () => {
         const proceedToOrder = ()  => { 
 
             if(btnRef.current){ 
-                btnRef.current.addEventListener('click', (e) => { 
+                btnRef.current.addEventListener('click',async (e) => { 
                     //place an order
                     setLoader(true); 
  
                     // create order 
-                    axios.post('/create-order', {orderId: order._id, customId: product._id}).then((res) => {
+                    // axios.post('/create-order', {orderId: order._id, customId: product._id}).then((res) => {
+                    //     let orderId = res.data.id;
+                    //     setLoader(false);
+                    //     window.location = res.data.links[1].href; 
+                    // }).catch((e) => { 
+                    // }); 
+
+                    try { 
+                        setLoader(true); 
+                        let res = await createOrder({orderId: order._id, customId: product._id}); 
+                        setLoader(false);
                         let orderId = res.data.id;
                         setLoader(false);
+
                         window.location = res.data.links[1].href; 
-                    }).catch((e) => { 
-                    }); 
-                }); 
+                    }catch(e){ 
+                        setLoader(false); 
+                    }
+                });
             }
         }
 
@@ -65,20 +78,20 @@ const OrderSummary = () => {
 
 
     useEffect(() => { 
-        function loadProduct() { 
+        async function loadProduct() { 
          
-           axios.get(`/order/get-order/${id}`).then((res) => {
+            try{
+                let res = await getOrder(id); 
                 setOrder(res.data); 
                 let {item} = res.data; 
                 setPrice(res.data.totalPrice); 
-                axios.get(`/product/get/${item}`).then((res) => {
-                    setProduct(res.data); 
-                    setLoading(false); 
-                })
-            }).catch((e) => { 
+
+                let product = await loadItem(item);
+                setProduct(product.data); 
+                setLoading(false);
+            }catch(e){ 
                 setProduct({}); 
-            }); 
-                
+            } 
         }
 
         loadProduct(); 

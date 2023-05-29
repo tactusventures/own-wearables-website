@@ -83,7 +83,7 @@ const Header = () => {
                     </>
                   }
                 </div>
-
+ 
                   
             </div>  
         </div>
@@ -115,7 +115,7 @@ const Header = () => {
 
     <Register active={active} setActive={setActive} />
 
-    </>
+    </> 
   )
 }
 

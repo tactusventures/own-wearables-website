@@ -12,24 +12,30 @@ const registerController = {
     async register(req, res, next){
         const {firstName, lastName, email, phoneNo, gender, password, confirmPassword, houseNoOrRoomNo, buildingNoOrArea, landmark, cityOrVillage, state, pincode, country} = req.body; 
 
-        const {error} = registerSchema.validate(req.body, {abortEarly: false}); 
+        const {error} = registerSchema.validate(req.body, {abortEarly: false});
             
         if(error){
-
             const validationErrors = {};
             error.details.forEach((err) => {
               validationErrors[err.context.key] = err.message;
             });
-          return res.status(422).json(validationErrors);
+
+            return res.status(422).json(validationErrors);
         }
 
         try{
-            const exists =await User.exists({email: email}); 
-            
-            if(exists){
-                return res.status(422).json({email: "This Email has already Taken"});
-                // return next(CustomErrorHandler.alreadyExists("This email is already registered")); 
+
+            const user = await User.findOne({$or: [{email}, {phoneNo}]}); 
+          
+            if(user && user.email === email) { 
+                return res.status(422).json({email: "This Email has already Taken"}); 
             }
+
+
+            if(user && user.phoneNo === phoneNo) { 
+                return res.status(422).json({phoneNo: "Phone No has already been taken"}); 
+            }
+
         }catch(e){
             return next(e); 
         }
@@ -50,7 +56,7 @@ const registerController = {
             gender, 
             password: hashedPassword,
             addresses: addressObj
-        }); 
+        });
 
         let access_token; 
         let refresh_token; 
@@ -91,7 +97,6 @@ const registerController = {
         
         try {
             let user = await  User.findOne({_id: id}); 
-            console.log(user); 
             if(!user) { 
                 return next(CustomErrorHandler.invalidId("Invalid user"))
             }
@@ -150,15 +155,14 @@ const registerController = {
 
         // store the token in cookie
         res.cookie("refreshTtoken", newRefreshToken, {
-            maxAge: 60*60*24*30,
-            httpOnly: true, 
+            maxAge: 1000 * 60 * 60 * 24 * 30,
+            httpOnly: true,
         }); 
 
         res.cookie("accessToken", newAccessToken, { 
-            maxAge: 60*60*24*30,
-            httpOnly: true, 
+            maxAge: 1000 * 60 * 60 * 24 * 30,
+            httpOnly: true,
         });
-
 
         // response
         return res.status(200).json({user: user, auth: true}); 
