@@ -51,7 +51,7 @@ const Home = () => {
                     {/* ----------- specification image ------------- */}
                     <div className='specification-image'>
                         <div className='shoe-image'>
-                            <img src='/images/own-shoe-specification.png' alt='specification' />
+                            <img src='/images/own-shoe-specification.jpg' alt='specification' />
                         </div>
 
                        <div className='specificationWrapper'> 
@@ -121,7 +121,7 @@ const Home = () => {
                     
                 <div className='shoe-body'>
                         {/* <img src='/images/shoes/red-teal-shoe.png'></img> */}
-                        <img src='/images/own-shoe-specification.png' alt='specification' />
+                        <img src='/images/own-shoe-specification.jpg' alt='specification' />
 
                 </div>
 

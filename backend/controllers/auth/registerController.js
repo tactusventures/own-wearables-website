@@ -12,8 +12,10 @@ const registerController = {
     async register(req, res, next){
         const {firstName, lastName, email, phoneNo, gender, password, confirmPassword, houseNoOrRoomNo, buildingNoOrArea, landmark, cityOrVillage, state, pincode, country} = req.body; 
 
+        // validate Request
         const {error} = registerSchema.validate(req.body, {abortEarly: false});
-            
+        
+        // if error while validating, catche it and respond to it
         if(error){
             const validationErrors = {};
             error.details.forEach((err) => {
@@ -23,31 +25,33 @@ const registerController = {
             return res.status(422).json(validationErrors);
         }
 
+
+        // check weather user already exists or not
         try{
 
             const user = await User.findOne({$or: [{email}, {phoneNo}]}); 
-          
+            // return error if email already exists
             if(user && user.email === email) { 
                 return res.status(422).json({email: "This Email has already Taken"}); 
             }
-
-
+            // catch error if phone Number already exists
             if(user && user.phoneNo === phoneNo) { 
                 return res.status(422).json({phoneNo: "Phone No has already been taken"}); 
             }
-
         }catch(e){
             return next(e); 
         }
 
-
+        // hash the password
         const hashedPassword = await bcrypt.hash(password, 10); 
 
+        // create address object
         let addressObj = { 
             firstName, lastName, phoneNo, 
             houseNoOrRoomNo, buildingNoOrArea, landmark, cityOrVillage, state, pincode, country
         }; 
 
+        // create new user
         const user = new User({
             firstName, 
             lastName, 
@@ -58,6 +62,8 @@ const registerController = {
             addresses: addressObj
         });
 
+
+        // store user in db and return auth tokens
         let access_token; 
         let refresh_token; 
 
@@ -67,22 +73,25 @@ const registerController = {
             access_token = JwtService.sign({_id: result._id});
             refresh_token = JwtService.sign({_id: result._id}, '1y', REFRESH_SECRET); 
 
-            
-            
+
+            // store refresh token in db
             await Refresh.create({
                 userId: user._id, 
                 token: refresh_token
             });
 
+
+            // set tokens in cookie 
             res.cookie("refreshToken", refresh_token, {
-                maxAge: 60*60*24*30,
+                maxAge: 1000 * 60*60*24*30,
                 httpOnly: true, 
             }); 
 
             res.cookie("accessToken", access_token, { 
-                maxAge: 60*60*24*30,
-                httpOnly: true, 
-            }); 
+                maxAge: 1000 * 60*60*24*30,
+                httpOnly: true,
+            });
+
 
             return res.status(200).json(result); 
 

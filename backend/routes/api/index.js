@@ -4,15 +4,15 @@ import passport from 'passport';
 import auth from '../../middlewares/api-auth-middleware';
 
 
-const router  = express.Router(); 
+const router  = express.Router();
 
 // authentication
 router.post('/register', registerController.register);
 router.post('/login', loginController.login); 
-router.get('/get-user/:id', registerController.getUser);
-router.get('/refresh', registerController.refresh);
+router.get('/get-user/:id', auth,  registerController.getUser);
+router.get('/refresh', auth, registerController.refresh);
 
-
+// oAuth2
 router.get('/auth/google', passport.authenticate('google', {scope: ['email', 'profile']})); 
 router.get('/redirect/google',  passport.authenticate('google', { failureRedirect: '/login' }),
 function(req, res) {
@@ -29,8 +29,8 @@ router.get('/product/get/:id', auth,   productController.getSingleProduct);
 
 
 // order
-router.post('/order/place-order',orderController.placeOrder);  
-router.get('/orders/all', orderController.allOrders); 
+router.post('/order/place-order',orderController.placeOrder);
+router.get('/orders/all', orderController.allOrders);
 router.get('/orders/delivered/all', orderController.allDeliveredOrders); 
 router.get('/orders/un-delivered/all', orderController.allUnDeliveredOrders); 
 router.post('/orders/cancel-order', orderController.cancelOrder); 

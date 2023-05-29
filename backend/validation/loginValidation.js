@@ -6,7 +6,7 @@ const loginSchema = Joi.object({
         .email({ tlds: { allow: false } })
         .normalize()
         .required()
-        .messages({
+    .messages({
             'string.email': 'Please enter a valid email address',
             'string.empty': 'Email address is required',
             'any.required': 'Email address is required'

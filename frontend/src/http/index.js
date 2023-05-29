@@ -16,12 +16,11 @@ export const loadAllProducts = () => api.get("/prdocuts/all");
 export const createOrder = (data) => api.post('/create-order', data);
 export const getOrder = (id) => api.get(`/order/get-order/${id}`);
 export const loadItem = (item) => api.get(`/product/get/${item}`); 
+export const login = (data) => api.post(`/login`, data);
 
 
 api.interceptors.response.use(
     config => {
-    //   config.baseURL = 'http://localhost:5000/api';
-    //   config.withCredentials = true; // Add this line to include withCredentials
       return config;
     },
     async (error) => {

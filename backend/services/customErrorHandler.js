@@ -13,7 +13,7 @@ class CustomErrorHandler extends Error {
         return new CustomErrorHandler(409, message);
     }
 
-    static wrongCredentials(message = "Invalid Credentials"){
+static wrongCredentials(message = "Invalid Credentials"){
         return new CustomErrorHandler(401, message); 
     }
 

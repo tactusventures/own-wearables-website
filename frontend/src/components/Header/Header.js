@@ -4,6 +4,7 @@ import Register from '../Auth/Register/Register';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearUser } from '../../store/authSlice';
 import { useNavigate } from 'react-router-dom';
+import Login from '../Auth/Login/Login';
 
 const Header = () => {
   
@@ -12,6 +13,7 @@ const Header = () => {
 
     const [activeNav, setActiveNav] = useState(false); 
     const [active, setActive] = useState(false); 
+    const [isLoginActive, setIsLoginActive] = useState(false); 
 
     const barRef = useRef(null); 
     const navigate = useNavigate(); 
@@ -78,8 +80,8 @@ const Header = () => {
                     <button onClick={e => logOut(e) }>Log Out</button>
                     : 
                     <>
-                      <button onClick={e => setActive(true)}>Login</button>
-                      <button>Sign Up</button>
+                      <button onClick={e => setActive(true)}>Sign Up</button>
+                      <button onClick={e => setIsLoginActive(true)}>Login</button>
                     </>
                   }
                 </div>
@@ -114,6 +116,7 @@ const Header = () => {
 
 
     <Register active={active} setActive={setActive} />
+    <Login active = {isLoginActive} setActive = {setIsLoginActive} />
 
     </> 
   )
