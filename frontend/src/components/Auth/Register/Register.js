@@ -5,6 +5,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setUser } from '../../../store/authSlice';
+import { register } from '../../../http';
 
 
 
@@ -21,7 +22,7 @@ const Register = ({active, setActive}) => {
         phoneNo: "", 
         password: "", 
         confirmPassword: ""
-    }); 
+    });
 
     const [loading, setLoading] = useState(false); 
     const dispatch = useDispatch(); 
@@ -45,25 +46,28 @@ const Register = ({active, setActive}) => {
 
     // registerUser
 
-    function registerUser(e, formData) { 
+   async function registerUser(e, formData) { 
         e.preventDefault();
-        setLoading(true); 
-        axios.post("/register", formData).then((res) => { 
-            
+        setLoading(true);  
+        
+        
+        try{ 
+            const res = await register(formData); 
             dispatch(setUser(res.data));    
-            setActive(false); 
+            setActive(false);
             setLoading(false);
             navigate('/product');
-        }).catch((e) => {
+
+        }catch(e)  
+        { 
             if(e.response?.status === 422) { 
                 setValidationErrors(e.response.data); 
             }else { 
                 setShowError(true); 
             }
-
             
             setLoading(false); 
-        });     
+        }
     }   
 
   return (

@@ -34,7 +34,7 @@ const SummaryStep = ({product, order, setStep, setPrice}) => {
                         </div>
                     </div>
 
-                    <button className="btn btn-primary">LOGIN</button>
+                    <button className="btn btn-primary" onClick={e => setStep(1)}>Change</button>
                 </div>
 
                 </div>

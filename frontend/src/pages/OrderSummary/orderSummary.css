@@ -365,8 +365,7 @@
 }
 
 
-/* add- address wrappper
- */
+/* add- address wrappper  */
 
  .add-address-wrapper { 
     background-color: var(--pure); 
@@ -377,6 +376,8 @@
     box-shadow: 0 0 2px rgba(0,0,0,.12);
     margin-top: 1rem;
     padding: 1rem 1.4rem; 
+    display: flex;
+    justify-content: space-between;
 }
 
 .add-address-wrapper .address-expand {
@@ -458,3 +459,14 @@
 } 
 
 
+.login-expand .note{ 
+    margin-top: 1rem; 
+}
+
+.login-expand .btns { 
+    display: flex;
+}
+
+.login-expand .btns button:nth-child(2){ 
+    margin-left: 1rem; 
+}

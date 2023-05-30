@@ -74,11 +74,7 @@ const Login = ({active, setActive}) => {
                 setValidationErrors(e.response.data); 
             }else { 
                 setShowError(true); 
-            }
-
-            console.log(e); 
-
-            
+            }            
             setLoading(false); 
         }
     }

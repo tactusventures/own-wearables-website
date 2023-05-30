@@ -10,7 +10,9 @@ import Refresh from '../../models/refresh';
 
 const registerController = {
     async register(req, res, next){
+        
         const {firstName, lastName, email, phoneNo, gender, password, confirmPassword, houseNoOrRoomNo, buildingNoOrArea, landmark, cityOrVillage, state, pincode, country} = req.body; 
+
 
         // validate Request
         const {error} = registerSchema.validate(req.body, {abortEarly: false});
@@ -45,6 +47,8 @@ const registerController = {
         // hash the password
         const hashedPassword = await bcrypt.hash(password, 10); 
 
+        console.log(houseNoOrRoomNo, buildingNoOrArea, landmark, cityOrVillage); 
+
         // create address object
         let addressObj = { 
             firstName, lastName, phoneNo, 
@@ -59,8 +63,9 @@ const registerController = {
             phoneNo,
             gender, 
             password: hashedPassword,
-            addresses: addressObj
+            addresses: []
         });
+
 
 
         // store user in db and return auth tokens
@@ -85,11 +90,13 @@ const registerController = {
             res.cookie("refreshToken", refresh_token, {
                 maxAge: 1000 * 60*60*24*30,
                 httpOnly: true, 
+                secure: false
             }); 
 
             res.cookie("accessToken", access_token, { 
                 maxAge: 1000 * 60*60*24*30,
                 httpOnly: true,
+                secure: false
             });
 
 
@@ -118,15 +125,17 @@ const registerController = {
 
 
     async refresh(req, res, next){ 
+        
         // get refresh token from cookie
         const {refreshToken} = req.cookies;
+        console.log(refreshToken); 
 
         if(!refreshToken){
             return res.status(401).json({message: "Token not Available"});
         }
 
         // check if token is valid or not 
-        let data; 
+        let data;
         try { 
             data = await JwtService.verify(refreshToken, REFRESH_SECRET); 
             
@@ -175,7 +184,10 @@ const registerController = {
 
         // response
         return res.status(200).json({user: user, auth: true}); 
-    }
+    },
+
+
+    
 }
 
 export default registerController;

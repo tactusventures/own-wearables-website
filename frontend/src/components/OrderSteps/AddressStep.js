@@ -1,5 +1,9 @@
 import React, {useEffect, useState} from 'react'; 
 import axios from 'axios';
+import { getUser } from '../../http';
+import { useSelector } from 'react-redux';
+
+
 
 
 const AddressStep = ({product, order, setStep}) => {
@@ -7,14 +11,23 @@ const AddressStep = ({product, order, setStep}) => {
     const [user, setUser] = useState({}); 
     const [loading, setLoading] = useState(true); 
     const [showAddres, setShowAddress] = useState(false); 
+    const auth = useSelector(state => state.auth); 
+   const {_id} = auth.user; 
+   const {addresses} = auth.user; 
+    // let {id} = auth.user; 
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/api/get-user/${'6464a4bdee73f0c3f33d5722'}`).then((res) => {
-            setUser(res.data); 
-            setLoading(false);  
-        }).catch((e) => { 
-            setUser({}); 
-        }); 
+        async function loadUser() { 
+            try{ 
+                let res  = await getUser(_id); 
+                setUser(res.data); 
+                setLoading(false); 
+            }catch(e){
+             setUser({}); 
+            }
+        }
+
+        loadUser(); 
     }, []); 
 
 
@@ -31,7 +44,7 @@ const AddressStep = ({product, order, setStep}) => {
                         </div>
                     </div>
 
-                    <button className="btn btn-primary">LOGIN</button>
+                    <button className="btn btn-primary" onClick={e => setStep(1)}>Change</button>
                 </div>
 
             </div>
@@ -46,43 +59,50 @@ const AddressStep = ({product, order, setStep}) => {
                         </div>
                     </div>
                 </div>
-
-                <div className='address-expand'>
+                 
+                 {
+                    addresses.length !== 0?
+                    <div className='address-expand'>
                     
                     {
                         loading? <h2>loding....</h2>: 
 
                         <>
                             {
-                                user.addresses.map((address) => (
+                                
+                                addresses.map((address) => (
                                     <>
                                         <div className='top'> 
                                             <input type='radio'  checked /> <h4>{user.firstName} {user.lastName}</h4>
                                             <span>Home</span>
                                             <b>{user.phoneNo}</b>
                                          </div>
-
+ 
                                         <div className='bottom'>
                                             {`${address.houseNoOrRoomNo} , ${address.buildingNoOrArea}, ${address.landmark}, ${address.cityOrVillage}, ${address.state} , ${address.pincode}`}
                                         </div>
 
                                     </>
                                 ))
+
                             }
 
-                            <button className='btn btn-primary' onClick={e => setStep((prev) => prev+1)}>Delivery Here</button>
-                        
+                            <button className='btn btn-primary' onClick={e => setStep((prev) => prev+1)}>Delivery Here</button>                        
                         </>
 
                     }
                     
                     
-                </div>
+                </div>:''
+                 }
+                
             </div>
 
             <div className='add-address-wrapper'>
-                <div className='add-address' onClick={e  => { setShowAddress((add) => !add)}} > 
-                     {showAddres?     <h3>Add Address</h3>: <h3><i className='fas fa-plus'></i> {'  '}  Add Address</h3>}
+                <div className='add-address'> 
+                     {showAddres?     <h3>Add Address</h3>: <h3><i className='fas fa-plus'></i> &nbsp;   Add Address</h3>}
+
+                     <button className='btn btn-primary' onClick={e  => { setShowAddress((add) => !add)}}>Add Address</button>
 
                 </div>
 

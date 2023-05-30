@@ -10,7 +10,8 @@ const router  = express.Router();
 router.post('/register', registerController.register);
 router.post('/login', loginController.login); 
 router.get('/get-user/:id', auth,  registerController.getUser);
-router.get('/refresh', auth, registerController.refresh);
+router.get('/refresh', registerController.refresh);
+router.post('/logout', auth,  loginController.logout); 
 
 // oAuth2
 router.get('/auth/google', passport.authenticate('google', {scope: ['email', 'profile']})); 
@@ -35,7 +36,7 @@ router.get('/orders/delivered/all', orderController.allDeliveredOrders);
 router.get('/orders/un-delivered/all', orderController.allUnDeliveredOrders); 
 router.post('/orders/cancel-order', orderController.cancelOrder); 
 router.get('/order/all-cancelled-orders', orderController.cancelledOrders); 
-router.get('/order/get-order/:orderId', orderController.getSingleOrder); 
+router.get('/order/get-order/:orderId', auth, orderController.getSingleOrder); 
 router.post('/order/increment-quantity', orderController.incrementQuantity); 
 
 

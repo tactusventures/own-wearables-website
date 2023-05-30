@@ -15,10 +15,9 @@ const loginSchema = Joi.object({
 
     
     password: Joi.string()
-        .pattern(/^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-zA-Z]).{6,}$/)
         .required()
         .messages({
-            'string.pattern.base': 'Password must contain at least one number, one special character, and one letter, and be at least 6 characters long',
+            'string.base': 'Password must contain at least one number, one special character, and one letter, and be at least 6 characters long',
             'string.empty': 'Password is required',
             'any.required': 'Password is required'
         }), 

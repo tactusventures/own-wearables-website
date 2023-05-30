@@ -1,6 +1,26 @@
-import React from 'react'
+import React from 'react'; 
+import { useDispatch, useSelector } from 'react-redux';
+import { clearUser } from '../../store/authSlice';
+import { logout as logOut } from '../../http';
+import {useNavigate} from 'react-router-dom'; 
 
-const LoginStep = ({product, order}) => {
+const LoginStep = ({product, order, setStep}) => {
+    const dispatch = useDispatch(); 
+    const auth = useSelector(state => state.auth); 
+    const navigate = useNavigate(); 
+    let isAuthenticated = auth.isLoggedIn; 
+
+
+    async function logout(){ 
+        try {
+            let res = await logOut();
+            dispatch(clearUser());
+            navigate('/'); 
+        }catch(e){ 
+            console.log(e); 
+        }
+    }
+
     return (
         <div className="left">
             {/* ---------------- Login -------------------- */}
@@ -13,26 +33,49 @@ const LoginStep = ({product, order}) => {
                             <p>+91 8830194017</p>
                         </div>
                     </div>  
-
-                    {/* <button className="btn btn-primary">LOGIN</button> */}
                 </div>
 
-                <div className="login-expand">
-                    <div className="expand-left">
-                        <input placeholder="Enter Mobile Number" required />
-                        <p>by continuing you agree to terms and conditions of</p>
-                        <button className="btn btn-primary">Login</button>
+                {
+                    !isAuthenticated?
+                    <div className="login-expand">
+                        <div className="expand-left">
+                            <input placeholder="Enter Mobile Number" required />
+                            <p>by continuing you agree to terms and conditions of</p>
+                            <button className="btn btn-primary">Login </button>
+                        </div>
+
+                        <div className="expand-right">
+                            <p className="title">Advantages of Secure Login</p>
+
+                            <ul>
+                                <p>Easily Track Orders & hassle free return</p>
+                                <p>Get Relevent Alerts & Recommendation</p>
+                            </ul>
+                        </div>
+                    </div>:
+
+                    <div className="login-expand">
+                        <div className="expand-left">
+                           <p>
+                             <i className='fas fa-user'></i>  &nbsp; {auth.user.email}
+                             &nbsp; &nbsp; <i className='fas fa-mobile-phone'></i>  &nbsp; {auth.user.phoneNo}
+                           
+                           </p>
+                           <div className='btns'>
+                             <button className='btn btn-primary' onClick={ logout} >Logout</button>
+                             <button className='btn btn-primary' onClick={e => setStep((prev) => prev+1)}>Continue</button>
+                           </div>
+
+                           <p className='note'>By Logging out you may loose changed made to your order</p>
+                        </div>
+
+                        <div className="expand-right">
+
+                        </div>
                     </div>
 
-                    <div className="expand-right">
-                        <p className="title">Advantages of Secure Login</p>
-
-                        <ul>
-                            <p>Easily Track Orders & hassle free return</p>
-                            <p>Get Relevent Alerts & Recommendation</p>
-                        </ul>
-                    </div>
-                </div>
+                }
+                
             </div>
 
             {/* ---------------- Adress select ----------- */}

@@ -20,7 +20,7 @@ const loginController  = {
             error.details.forEach((err) => {
               validationErrors[err.context.key] = err.message;
             });
-
+            console.log(validationErrors); 
             return res.status(422).json(validationErrors);
         }
 
@@ -32,7 +32,7 @@ const loginController  = {
             
             // return error if no user 
             if(!user){
-                return next(CustomErrorHandler.wrongCredentials()); 
+                return next(CustomErrorHandler.wrongCredentials("Invalid Credentials")); 
             }
             
 
@@ -41,7 +41,7 @@ const loginController  = {
 
 
             if(!match){
-                return next(CustomErrorHandler.wrongCredentials()); 
+                return next(CustomErrorHandler.wrongCredentials("Invalid Credentials")); 
             }
 
             const access_token = JwtService.sign({_id: user._id}); 
@@ -69,6 +69,35 @@ const loginController  = {
         }catch(e) {
             console.log(e); 
         }
+    }, 
+
+
+    // logout   
+    async logout(req, res) {
+        // get token 
+        const {refreshToken} = req.cookies; 
+        try {
+            await Refresh.deleteOne({token: refreshToken}); 
+
+            res.cookie('refreshToken', '', {
+                expires: new Date(0), 
+                httpOnly: true, 
+                secure: false,
+            });
+
+            res.cookie('accessToken', '', {
+                expires: new Date(0), 
+                httpOnly: true, 
+                secure: false,
+            });
+
+            
+            return res.status(200).json({success: true}); 
+        }catch(e) { 
+            return new next(new Error('something went wrong in database')); 
+        }
+ 
+         
     }
 }
 

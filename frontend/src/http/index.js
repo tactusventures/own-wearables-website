@@ -17,7 +17,9 @@ export const createOrder = (data) => api.post('/create-order', data);
 export const getOrder = (id) => api.get(`/order/get-order/${id}`);
 export const loadItem = (item) => api.get(`/product/get/${item}`); 
 export const login = (data) => api.post(`/login`, data);
-
+export const register = (data) => api.post('/register', data); 
+export const getUser = (id) => api.get(`/get-user/${id}`); 
+export const logout = () => api.post(`/logout`); 
 
 api.interceptors.response.use(
     config => {

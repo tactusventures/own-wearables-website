@@ -97,19 +97,20 @@ const OrderSummary = () => {
         loadProduct(); 
     }, []); 
 
+
     
-    
-    
-    useEffect(() =>{ 
+    useEffect(() =>{     
         function getStep () { 
-            if(!selector.auth.isLoggedIn){
+            if(!    selector.auth.isLoggedIn){
                 setStep(1); 
                 Component = proceedStep[1];
                 return; 
             }
 
-           
-            if(!true) {
+            // check for address 
+            let address = selector.auth.user.addressess; 
+            
+            if(!address) {
                 setStep(2); 
                 Component = proceedStep[2]; 
                 return; 
