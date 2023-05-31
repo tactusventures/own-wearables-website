@@ -12,6 +12,8 @@ router.post('/login', loginController.login);
 router.get('/get-user/:id', auth,  registerController.getUser);
 router.get('/refresh', registerController.refresh);
 router.post('/logout', auth,  loginController.logout); 
+router.post('/user/add-address', auth , registerController.addAddress)
+
 
 // oAuth2
 router.get('/auth/google', passport.authenticate('google', {scope: ['email', 'profile']})); 
@@ -38,7 +40,6 @@ router.post('/orders/cancel-order', orderController.cancelOrder);
 router.get('/order/all-cancelled-orders', orderController.cancelledOrders); 
 router.get('/order/get-order/:orderId', auth, orderController.getSingleOrder); 
 router.post('/order/increment-quantity', orderController.incrementQuantity); 
-
 
 // payment paypal
 router.post('/generate-credentials', paymentController.createCredentials);

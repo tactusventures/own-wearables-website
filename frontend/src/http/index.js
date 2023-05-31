@@ -19,7 +19,8 @@ export const loadItem = (item) => api.get(`/product/get/${item}`);
 export const login = (data) => api.post(`/login`, data);
 export const register = (data) => api.post('/register', data); 
 export const getUser = (id) => api.get(`/get-user/${id}`); 
-export const logout = () => api.post(`/logout`); 
+export const logout = () => api.post(`/logout`);
+export const addAddress = (data) => api.post('/user/add-address', data); 
 
 api.interceptors.response.use(
     config => {

@@ -36,6 +36,10 @@ static wrongCredentials(message = "Invalid Credentials"){
     static recordNotFound(message){
         return new CustomErrorHandler(400, message); 
     }
+
+    static userNotFound(message) {
+        return new CustomErrorHandler(404, message); 
+    }
 }
 
 export default CustomErrorHandler; 

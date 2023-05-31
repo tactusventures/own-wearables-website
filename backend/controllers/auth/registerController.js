@@ -6,6 +6,7 @@ import User from '../../models/user';
 import JwtService from '../../services/JwtService';
 import { REFRESH_SECRET } from '../../config';
 import Refresh from '../../models/refresh';
+import addressSchema from '../../validation/addressValidation';
 
 
 const registerController = {
@@ -186,7 +187,51 @@ const registerController = {
         return res.status(200).json({user: user, auth: true}); 
     },
 
+    async addAddress(req, res,next) { 
+        console.log(req.body); 
+        const {error} = addressSchema.validate(req.body, {abortEarly: false}); 
+        
+        // validating the request
+        if(error) { 
+            const validationErrors = {};
+            
+            error.details.forEach((err) => {
+              validationErrors[err.context.key] = err.message;
+            });
 
+            return res.status(422).json(validationErrors);
+        }
+        
+
+        // check weather user exists or not first
+        const {_id} = req.user;
+        let user; 
+        try {
+            user = await User.findOne({_id: _id}); 
+
+            if(!user){ 
+                return next(CustomErrorHandler.userNotFound("Invaid User"))
+            }
+
+        }catch(e) {
+            return next(e); 
+        }
+
+        /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  
+        *  if user exists check is there any address already added
+        *  if added add one more to it
+        *  if not added store it as a first address in db's user collection
+        * 
+        * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  */
+    
+        const totalAddresses = user.addresses.length; 
+
+        console.log(totalAddresses); 
+    
+        
+
+
+    }
     
 }
 

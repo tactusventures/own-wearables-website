@@ -5,7 +5,7 @@ import JwtService from "../services/JwtService";
 const auth = async (req, res, next) => { 
 
     try {
-
+        
         const {accessToken} = req.cookies;  
                  
         if(!accessToken){ 
