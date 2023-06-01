@@ -75,7 +75,7 @@ const Header = () => {
 
                 <div className='auth-section'>
 
-                  {
+                  {/* {
                     selector.isLoggedIn? 
                     <button onClick={e => logOut(e) }>Log Out</button>
                     : 
@@ -83,7 +83,7 @@ const Header = () => {
                       <button onClick={e => setActive(true)}>Sign Up</button>
                       <button onClick={e => setIsLoginActive(true)}>Login</button>
                     </>
-                  }
+                  } */}
                 </div>
  
                   

@@ -31,9 +31,15 @@ const Home = () => {
 
     return (
         <div className='page-home'>
-            <div className='hero'>
-                <video src="/images/vid1.mp4" autoPlay muted loop>
-                </video>
+            <div className='hero' >
+                
+
+                <div className='head-content'>
+                    <h2>World's First AI Enabled Shoe</h2>
+                     <img src='/images/shoe-image.jpg' />
+                </div>
+                {/* <video src="/images/vid1.mp4" autoPlay muted loop>
+                </video> */}
             </div>
 
             {/* ---------------- sepcification ---------------------------- */}
@@ -303,7 +309,8 @@ const Home = () => {
 
                     <div className='right'>
                         <div>
-                            <img src='/images/shoes/blue-tone-shoe.png' />
+                            {/* <img src='/images/shoes/blue-tone-shoe.png' /> */}
+                            <img src='/images/shoe-image.jpg' />
                         </div>
                     </div>
                 </div>
@@ -316,7 +323,7 @@ const Home = () => {
                 <div className='container flex align-center'>
 
                     <div className='left'>
-                        <img src='/images/shoes/shoes-sole-image.png' />
+                        <img src='/images/shoe-image.jpg' />
                     </div>
 
                     <div className='right'>
@@ -353,7 +360,7 @@ const Home = () => {
 
                     <div className='right'>
                         <div>
-                            <img src='/images/shoes/red-teal-shoe.png' alt='shoe-heel' />
+                            <img src='/images/own-shoe-specification.jpg' alt='shoe-heel' />
 
                         </div>
                     </div>
@@ -369,7 +376,7 @@ const Home = () => {
                 <div className='container flex align-center'>
 
                     <div className='left'>
-                        <img src='/images/shoes/pastel-tone-shoe.png' />
+                        <img src='/images/shoe-image-2.webp' />
                     </div>
 
                     <div className='right'>
@@ -389,8 +396,8 @@ const Home = () => {
             {/* ----------------- Gps tracking video ---------------- */}
             <div className='gps-tracking-video'>
                 <div className=''>
-                    <video src="/images/gps-tracking.mp4" autoPlay muted loop>
-                    </video>
+                    {/* <video src="/images/gps-tracking.mp4" autoPlay muted loop> */}
+                    {/* </video> */}
                 </div>
             </div>
 
@@ -476,8 +483,11 @@ const Home = () => {
                         </div>
 
                         <div className='right'>
-                            <video src="/images/shoe-360-ar.mp4" autoPlay muted loop>
-                            </video>
+                            {/* <video src="/images/shoe-360-ar.mp4" autoPlay muted loop>
+                            </video> */}
+                            <img src='images/own-shoe-specification.jpg' />
+
+                            
                         </div>
 
                     </div>

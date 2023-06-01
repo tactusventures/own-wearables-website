@@ -197,7 +197,7 @@ const registerController = {
             
             error.details.forEach((err) => {
               validationErrors[err.context.key] = err.message;
-            });
+            }); 
 
             return res.status(422).json(validationErrors);
         }

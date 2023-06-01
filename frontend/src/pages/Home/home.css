@@ -4,18 +4,49 @@
     object-fit: cover;
 }
 
-.page-home .hero {
-    height: 85vh; 
-
+.page-home { 
+    overflow-x: hidden;
 }
 
+.page-home .hero {
+    /* padding-top: 60rem; */
+    /* height: 100vh;
+    background-size: cover;
+    background-repeat: no-repeat !important;
+    background-position: center center !important; */
+    background-color: var(--black);
+    /* height: 85vh; */
+}
+
+
+.page-home .hero .head-content h2{ 
+    /* margin-top: 2rem */
+}
+
+
+
+
+
+.page-home .hero .head-content { 
+    font-size: 30px;
+    text-align: center;
+    color: var(--pure); 
+    overflow: hidden;
+}
+
+.head-content img { 
+    width: 100%; 
+    scale: .8;
+    margin-top: -50px;
+    /* margin-top:; */
+}
 
 
 /* -------------- Specifications ----------------------- */
 .page-home .specifications{
     background-color: var(--black); 
-    padding: 7rem 0 ;
-    margin-top: -10px; 
+    padding: 7rem 0 ;   
+    padding-top: 3rem; 
     padding-bottom: 15rem;
 }
 
@@ -204,7 +235,15 @@
 .page-home .reflexology video{
     width: 100%; 
     object-fit: cover;
+
 }
+
+
+.page-home .reflexology { 
+    box-shadow:  0 10px 10px #000;
+
+}
+
 
 
 /* ------------------------ Technical Specification ------------------ */
@@ -289,7 +328,7 @@
 }
 .tech-specification-wrapper .left-block .block:nth-child(2) { 
     margin-top: 5rem; 
-    width: 60%; 
+    width: 100%; 
 }
 
 
@@ -517,6 +556,10 @@
     z-index: 1;
 }
 
+.mesh .flex .right img { 
+    scale: 1.7;
+}
+
 .mesh .flex .left h2 {
     font-size: 48px; 
     color: var(--primary);
@@ -555,7 +598,6 @@
 
 .mesh .flex .right div { 
     width: 90%;
-    background-color: #fff;
     margin: 0 auto; 
 }
 
@@ -614,6 +656,11 @@
     flex:  0 0 50%; 
 }
 
+.sole .flex .left img { 
+    scale: 2;
+    transform: rotate(-51deg); 
+}
+
 
 .sole .flex .right { 
     flex: 0 0 55%; 
@@ -652,12 +699,13 @@
 
 .sole .flex .left { 
     flex: 0  0 50%; 
+    /* overflow: hidden; */
 }
 
-.sole .flex .left img  {
-    width: 500px;  
+.sole .flex .left img  {    
+    width: 450px;  
     /* height: 700px; */
-   border: 20px solid #505E93; ;
+   /* border: 20px solid #505E93; ; */
 }
 
 
@@ -666,6 +714,10 @@
     height: auto; 
 }
 
+
+.sole.gps .flex .left img { 
+    transform: rotate(0deg) ;
+}
 
 /* ---------------------------- Gps ---------------- */
 .gps-tracking-video video{
@@ -817,9 +869,10 @@
     flex: 0 0 40%; 
 }
 
-.ar .ar-wrapper .right video {
+.ar .ar-wrapper .right img {
     width: 100%; 
     height: 100%    ;
+    scale: 1.5;
 }
 
 .ar .ar-wrapper .left  { 
@@ -1255,8 +1308,16 @@
     }
 
     .tech-specification-wrapper .left-block .block { 
-        width: 100%; 
+
+        /* margin-left: -40px;  */
         /* margin-left: 50px;  */
+    }
+
+
+    .tech-specification-wrapper .left-block .block:first-child{ 
+        /* margin-left: -30px;  */
+        left: 40%; 
+        /* margin: 0;  */
     }
     
 
@@ -1267,25 +1328,30 @@
         padding: 0 2rem; 
         position: relative; 
         transform: translateX(-50%);
-        left: 50%; 
+        left: 43%; 
         margin-top: 8rem; 
     }
 
 
     .technical-specification .specification-wrapper { 
         display: block;
+        margin-left: 2rem; 
     }
 
 
     .tech-specification-wrapper .left-block { 
         margin-top: 5rem;
         display: flex; 
-        margin-left: 10rem; 
     }
 
     .tech-specification-wrapper .left-block .block { 
         text-align: center;
         padding:  0 2rem;  
+    }
+
+
+    .tech-specification-wrapper .left-block .block { 
+        /* margin-left: -20px;  */
     }
 
     .tech-specification-wrapper .left-block .block:nth-child(2) { 
@@ -1299,6 +1365,13 @@
 
 
 @media (max-width: 768px) { 
+
+    .page-home .hero .head-content img{ 
+        margin-top: 1rem;
+    }
+    .page-home .hero .head-content h2{ 
+        font-size: 24px; 
+    }
     footer .container .top { 
         padding-left: 3rem; 
         padding-right: 3rem !important;
@@ -1307,6 +1380,10 @@
         display: none;
     }
 
+
+    .sole .flex .left img{ 
+        scale: 1 ; 
+    }
 
     .specificationWrapper .left{ 
         display: block;
@@ -1341,7 +1418,10 @@
     }   
     
     .tech-specification-wrapper .left-block .block:nth-child(2) {
+        margin: 0;
         margin-top: 4rem; 
+        position: relative; 
+        left: -2rem; 
     }
     .tech-specification-wrapper .right-block .block{ 
     }
@@ -1518,7 +1598,7 @@
 
     .specification-image .left .block:nth-child(2){ 
         padding: 0 1rem; 
-        margin-left: -2rem; 
+        /* margin-left: -2rem;  */
         /* margin-left: 0;  */
     }
 
@@ -1528,7 +1608,7 @@
     }
 
     .tech-specification-wrapper .left-block .block { 
-        margin-left: -1rem; 
+        margin-left: 1rem; 
         padding: 0; 
     }
 
