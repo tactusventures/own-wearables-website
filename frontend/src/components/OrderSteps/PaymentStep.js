@@ -1,18 +1,20 @@
-import React, {useEffect, useRef} from 'react'; 
+import React, {useEffect, useState,useRef} from 'react'; 
 import axios from 'axios';
-
-const PaymentStep = ({product, order, loading, setStep}) => {
+import Loader from '../../components/Spinner/Spinner'; 
+const PaymentStep = ({product, orderId, loading, setStep}) => {
     let btnRef = useRef();
+    const [isLoading, setIsLoading] = useState(false); 
 
     useEffect(() => {
         const proceedToOrder = ()  => { 
-
+            
             if(btnRef.current){ 
                 btnRef.current.addEventListener('click', (e) => {
+                    setIsLoading(true); 
                     // create order
-                    axios.post('/create-order', {orderId: order._id, customId: product._id, price: product.price}).then((res) => {
+                    axios.post('/create-order', {orderId: orderId, customId: product._id, price: product.price}).then((res) => {
                         let orderId = res.data.id;  
-                        // setLoader(false); 
+                        setIsLoading(false); 
                         window.location = res.data.links[1].href; 
                     }).catch((e) => { 
                     }); 
@@ -91,11 +93,19 @@ const PaymentStep = ({product, order, loading, setStep}) => {
                 </div>
 
                 <div className='payment-expand'>
-                    <span>Pay With Paypal</span>
-                    <button style={{cursor: "pointer"}} ref={btnRef}>
-                        <img src='https://cdn-icons-png.flaticon.com/512/174/174861.png' />                        
-                        Checkout with Paypal
-                    </button>
+                    
+                    { 
+                        isLoading?<Loader />: 
+                        <>
+                            <span>Pay With Paypal</span>
+
+                            <button style={{cursor: "pointer"}} ref={btnRef}>
+                                <img src='https://cdn-icons-png.flaticon.com/512/174/174861.png' />                        
+                                Checkout with Paypal
+                            </button>
+                        </>
+
+                    }                        
                 </div>  
             </div>
         </div>

@@ -1,0 +1,83 @@
+.order-success {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2rem;
+}
+.order-success img {
+    width: 15rem;
+}
+
+.order-success h2 {
+    font-size: 2.5rem;
+}
+
+.order-success p {
+    font-size: 1.5rem;
+    padding: 1rem 25rem;
+    text-align: center;
+}
+
+.order-success button {
+    border: none;
+    background-color: #fc6a03;
+    color: white;
+    border-radius: 20px;
+    padding: 1rem 2rem;
+    font-size: 1.5rem;
+    margin-top: 2rem;
+    margin-bottom: 7.2rem;
+}
+
+.order-success button i {
+    margin-left: 1rem;
+    color: black;
+}
+
+
+/* ------------- animation css-------------------- */
+
+@import url("https://fonts.googleapis.com/css?family=Raleway:900&display=swap");
+
+
+#animated-own-logo-text{
+    height: 100%;
+    width: 100%; 
+    position: relative;
+    margin: 5rem 0; 
+
+}
+
+#container {
+    /* position: absolute; */
+    margin: auto;
+    width: 100%;
+    height: 100%;
+    top: 50%;
+    bottom: 0;
+    padding: 15rem 0; 
+
+    filter: url(#threshold) blur(0.6px);
+}
+
+#text1,
+#text2 {
+    position: absolute;
+    width: 100%;
+    display: inline-block;
+
+    font-family: "Raleway", sans-serif;
+    font-size: 80pt;
+
+    text-align: center;
+
+    user-select: none;
+}
+
+
+/* -----------------order-failed----------------------- */
+
+.go-back-btn {
+    background-color: red !important;
+}

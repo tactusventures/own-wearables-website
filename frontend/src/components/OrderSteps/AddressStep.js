@@ -1,16 +1,57 @@
 import React, {useEffect, useState} from 'react'; 
 import axios from 'axios';
-import { addAddress, getUser } from '../../http';
+import { addAddress, getAddresses, getOrder, getUser, updateDeliveryAddress } from '../../http';
 import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
 
 
 
-const AddressStep = ({product, order, setStep}) => {
 
+const AddressStep = ({product, orderId, setStep}) => {
+    const [order, setOrder] = useState({}); 
     const [user, setUser] = useState({}); 
     const [loading, setLoading] = useState(true); 
     const [showAddres, setShowAddress] = useState(false); 
+    const [addresses, setAddresses] = useState([]); 
+
+    const [addressId, setAddressId] = useState(order.deliveryAddress?order.deliveryAddress.addresId:0); 
+
+
+    const [selectedAddress, setSelectedAddress] = useState(0); 
+
+    const id = order._id; 
+
+    // load the order
+    useEffect(() => { 
+        async function fetchOrder() { 
+            let orderData = await getOrder(orderId); 
+            setOrder(orderData.data); 
+        }
+
+        fetchOrder(); 
+
+    }, []); 
+
+
+    
+
+    useState(() => { 
+
+        loadUserAddresses(); 
+    }, []); 
+
+
+    // load all the addresses of  the user
+    async function loadUserAddresses() { 
+        try { 
+            const address = await getAddresses(); 
+            setAddresses(address.data.addresses); 
+            setSelectedAddress(order.deliveryAddress.addressId); 
+        }catch(e) { 
+            console.log(e); 
+        }
+    }
 
     const [validationErrors, setValidationErrors] = useState({});
     const [addressParams, setAddressParams] = useState({
@@ -40,15 +81,12 @@ const AddressStep = ({product, order, setStep}) => {
     } = addressParams; 
 
 
-    function onInputChange() { 
-
-    }
+  
 
     
-    const auth = useSelector(state => state.auth); 
+   const auth = useSelector(state => state.auth); 
    const {_id} = auth.user; 
-   const {addresses} = auth.user; 
-    // let {id} = auth.user; 
+
 
 
 
@@ -71,13 +109,27 @@ const AddressStep = ({product, order, setStep}) => {
     async function submitAddress(e) { 
         e.preventDefault();     
         try {
+            
             let res = await addAddress(addressParams); 
-
+            setShowAddress(false); 
+            loadUserAddresses();
         }catch(e){ 
             setValidationErrors(e.response.data);
             console.log(e); 
         }
 
+    }
+
+
+    // update Address 
+    async function updateAddress (e, selectedAddress) { 
+        try { 
+            await updateDeliveryAddress({addressId: selectedAddress, orderId: id}); 
+            setStep((prev) => prev+1);
+        }catch(e) {
+            alert(e); 
+            console.log(e);
+        }
     }
 
 
@@ -94,7 +146,7 @@ const AddressStep = ({product, order, setStep}) => {
                         </div>
                     </div>
 
-                    <button className="btn btn-primary" onClick={e => setStep(1)}>Change</button>
+                    <button className="btn btn-primary" onClick={e => setStep(1)}   disabled=""  >Change</button>
                 </div>
 
             </div>
@@ -120,24 +172,30 @@ const AddressStep = ({product, order, setStep}) => {
                         <>
                             {
                                 
-                                addresses.map((address) => (
-                                    <>
+                                addresses.map((address, ind) => (
+                                    <div className='address-wrapper' key={ind}>
                                         <div className='top'> 
-                                            <input type='radio'  checked /> <h4>{user.firstName} {user.lastName}</h4>
-                                            <span>Home</span>
-                                            <b>{user.phoneNo}</b>
+                                            <input type='radio' name='addressId' value={ind} 
+                                            onChange={e => setAddressId(ind)}
+                                            onClick={e => setSelectedAddress(ind, selectedAddress)}
+                                            checked={ind === selectedAddress}
+                                            />
+                                            
+                                             <h4>{address.firstName} {address.lastName}</h4>
+                                            <span>{address.markAs}</span>
+                                            <b>{address.phoneNo}</b>
                                          </div>
+
  
                                         <div className='bottom'>
-                                            {`${address.houseNoOrRoomNo} , ${address.buildingOrArea}, ${address.landmark}, ${address.cityOrVillage}, ${address.state} , ${address.pincode}`}
+                                            {`${address.houseOrRoomNo} , ${address.buildingOrArea}, ${address.landmark}, ${address.cityOrVillage}, ${address.state} , ${address.pincode}`}
                                         </div>
 
-                                    </>
+                                    </div>
                                 ))
-
                             }
 
-                            <button className='btn btn-primary' onClick={e => setStep((prev) => prev+1)}>Delivery Here</button>                        
+                            <button className='btn btn-primary' onClick={e => updateAddress(e, selectedAddress)}>Deliver Here</button>                        
                         </>
 
                     }
@@ -290,19 +348,37 @@ const AddressStep = ({product, order, setStep}) => {
                             <label>Mark Address As *</label>
                             <div className='radio-wrapper'>
                                 <div>
+                                    <input type='radio'  
+                                    value={markAs}
+                                    onChange={e  => setAddressParams({...addressParams, [e.target.name]: "home"})}
+                                    name='markAs' required/>
                                     <label>Home</label>
-                                    <input type='radio'  value="home" required/>
                                 </div>
 
                                 <div>
-                                    <label>Home</label>
-                                    <input type='radio'  value="home" required/>
+                                    <input type='radio'  name='markAs'
+                                     value={markAs}
+                                     onChange={e  => setAddressParams({...addressParams, [e.target.name]: "office"})}
+                                    required/>
+                                    <label>Office</label    >
                                 </div>
 
                                 <div>
-                                    <label>Home</label>
-                                    <input type='radio'  value="home" required/>
+                                    <input type='radio' name='markAs'
+                                     value={markAs}
+                                     onChange={e  => setAddressParams({...addressParams, [e.target.name]: "friend"})}
+                                    required/>
+                                    <label>Friend</label>
                                 </div>
+
+
+                                <div>
+                                    <input type='radio' name='markAs' 
+                                    onChange={e  => setAddressParams({...addressParams, [e.target.name]: "other"})}
+
+                                    required/>
+                                    <label>Other</label>
+                                </div>  
                             </div>
                         </div>
                     </div>

@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import { changeStep } from '../../store/paymentStepSlice';
 import Spinner from '../../components/Spinner/Spinner';
 import { loadAllProducts, loadProduct } from '../../http';
+import Loader from '../../components/Loader/Loader';
 
 
 const Product = () => {
@@ -99,98 +100,110 @@ const Product = () => {
                     </div>
                     :<> 
                     <div className='product-wrapper'>
-                    <div className='left'>
-                        <div className='product'>
-                            <img src={`${productImage}`} />
-                        </div>
-
-                        <div className='product-other-images'>
-                            {
-                                images.map((image) => (
-                                    <div className='product-image' onClick={e => setImage(e)}>
-                                        <img src={`${process.env.REACT_APP_BACKEND_URL}/${image}`} />
-                                    </div>
-                                ))
-                            }                            
-                        </div>
                         
-                        <div className='button'>
-                            {
-                                isLoading?
-                                <button style={{padding: ".8rem 4rem"}} className='btn btn-primary'><Spinner /></button>: 
-                                <button onClick={e => proceedOrder(e)} className='btn btn-primary'>Buy Now 
-                                </button>
 
-                            }
-                        </div>
-                    </div>
-
-                    <div className='right'>
-                        <h2>{product.productName}</h2>
-                        <div className='product-stats'>
-                            <ul>
-                                <li><a href='#'> 
-                                
-                                <i className='fas fa-star'></i>
-                                <i className='fas fa-star'></i>
-                                <i className='fas fa-star'></i>
-                                <i className='fas fa-star'></i>
-                                <i className='fas fa-star'></i>
-                                <span style={{marginLeft: "2rem"}}>Ratings </span></a></li>
-                                <li><a href='#'>1 Review</a></li>
-                                <li><a href='#'>1 Have a Question</a></li>
-
-                            </ul>
+                        <div className='product-other-images-section'>
+                                {
+                                    images.map((image) => (
+                                        <div className='product-small-image' onClick={e => setImage(e)}>
+                                            <img src={`${process.env.REACT_APP_BACKEND_URL}/${image}`} />
+                                        </div>
+                                    ))
+                                }                            
                         </div>
 
-                        <div className='product-specification'>
-
-                            <div className='price'>
-                                <p>MRP <span>RS. 1,999 </span>  &nbsp;   (Inclusive of all taxes)</p>
-                                <h2>  ${product.price}</h2>
+                        <div className='left'>
+                            <div className='product'>
+                                <img src={`${productImage}`} />
                             </div>
 
-                           <div className='specification'>
-                                <h3>Produt Specification</h3>
-                                    <p style={{margintop: "2rem"}}>
-                                        {product.description}
+                            {/* <div className='product-other-images'>
+                                {
+                                    images.map((image) => (
+                                        <div className='product-image' onClick={e => setImage(e)}>
+                                            <img src={`${process.env.REACT_APP_BACKEND_URL}/${image}`} />
+                                        </div>
+                                    ))
+                                }                            
+                            </div> */}
+                            
+                            <div className='button'>
+                                {
+                                    isLoading?
+                                    <button style={{padding: ".8rem 4rem"}} className='btn btn-primary'><Spinner /></button>: 
+                                    <button onClick={e => proceedOrder(e)} className='btn btn-primary'>Buy Now 
+                                    </button>
 
-                                    </p>
-                           </div>
+                                }
+                            </div>
+                        </div>
 
-                           <div className='colors'>
-                                <h3>Colors: </h3>   
+                        <div className='right'>
+                            <h2>{product.productName}  Canon EOS M200 Mirrorless Camera Body with Single </h2>
+                            {/* <div className='product-stats'>
+                                <ul>
+                                    <li><a href='#'>    
+                                    <i className='fas fa-star'></i>
+                                    <i className='fas fa-star'></i>
+                                    <i className='fas fa-star'></i>
+                                    <i className='fas fa-star'></i>
+                                    <i className='fas fa-star'></i>
+                                    <span style={{marginLeft: "2rem"}}>Ratings </span></a></li>
+                                    <li><a href='#'>1 Review</a></li>
+                                    <li><a href='#'>1 Have a Question</a></li>
 
-                                <div className='product-colors'>
-                                     { 
-                                        colors.map((color, ind) => (
-                                            <div className={color === productColor ?"active": ""} onClick={e => changeColor(ind)}>
-                                                <img src='https://rukminim1.flixcart.com/image/832/832/xif0q/shoe/j/f/o/-original-imaggcb5hs3wfbrv.jpeg?q=70' />
-                                                <h6>{color}</h6>
-                                            </div>
-                                        ))
-                                     }
+                                </ul>
+                            </div> */}
 
-                                </div>
-                           </div>
+                            <div className='product-specification'>
 
-                            <div className='sizes'>
-                                <h3>Sizes:</h3>
-                                
-                                <div className='product-sizes'>
-                                    <ul>
+                                <div className='price'>
+                                    <p>MRP <span>$ 1000 </span>  &nbsp;   (Inclusive of all taxes)</p>
+                                    <h2>  ${product.price}</h2>
+                            </div>
+
+                            
+                            <div className='colors'>
+                                    <h3>Colors: </h3>   
+
+                                    <div className='product-colors'>
                                         { 
-                                            sizes.map((size, ind) => (
-                                                <li className={size === shoeSize?"active": ""} onClick={e => setShoeSize(size)} key={ind}><a>{size}</a></li>
+                                            colors.map((color, ind) => (
+                                                <div className={color === productColor ?"active": ""} onClick={e => changeColor(ind)}>
+                                                    <img src='https://rukminim1.flixcart.com/image/832/832/xif0q/shoe/j/f/o/-original-imaggcb5hs3wfbrv.jpeg?q=70' />
+                                                    <h6>{color}</h6>
+                                                </div>
                                             ))
                                         }
-                                    </ul>
+
+                                    </div>
+                            </div>
+
+                            <div className='specification'>
+                                    <h3>Produt Specification</h3>
+                                        <p style={{margintop: "2rem"}}>
+                                            {product.description}
+                                        </p>
+                            </div>
+
+
+                                <div className='sizes'>
+                                    <h3>Sizes:</h3>
+                                    
+                                    <div className='product-sizes'>
+                                        <ul>
+                                            { 
+                                                sizes.map((size, ind) => (
+                                                    <li className={size === shoeSize?"active": ""} onClick={e => setShoeSize(size)} key={ind}><a>{size}</a></li>
+                                                ))
+                                            }
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                       
-                    </div>
+                        
+                        </div>
                 </div>
 
                 <div className='product-specification'>

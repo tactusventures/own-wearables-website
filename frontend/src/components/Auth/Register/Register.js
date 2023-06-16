@@ -74,7 +74,7 @@ const Register = ({active, setActive}) => {
     <div className={`register`} style={activeStyle} >
 
        <div className='overlay' ref={popUpRef}></div>
-            <div className='register-form'>
+            {/* <div className='register-form'>
                     <form>
                         {
                             showError? 
@@ -172,7 +172,48 @@ const Register = ({active, setActive}) => {
                             >Register</button>
                         </div>
                     </form>
-            </div>
+            </div> */}
+
+
+        <div class="register-form">
+            <h2>Register yourself</h2>
+            <form>
+                <div>
+                    <input type="text" placeholder="First Name" name='firstName'
+                    value={firstName}
+                    onChange={e => setFormData({...formData, [e.target.name]: e.target.value})}
+                    required />
+
+
+                    <input type="text" placeholder="Last Name" name='lastName'
+                    value={lastName}
+                    onChange={e => setFormData({...formData, [e.target.name]: e.target.value})}
+                    
+                    required />
+                </div>
+                <input type="text" placeholder="Email" name='email'
+                value={email}
+                onChange={e => setFormData({...formData, [e.target.name]: e.target.value})}
+                required />
+                <input type="number" placeholder="Phone no." name='phoneNo'
+                 value={phoneNo}
+                 onChange={e => setFormData({...formData, [e.target.name]: e.target.value})}
+                
+                required />
+                <input type='password' placeholder="Password" name='password'
+                 value={password}
+                 onChange={e => setFormData({...formData, [e.target.name]: e.target.value})}
+                
+                required />
+                <input type='password' placeholder="Confirm password" name='confirmPassword'
+                value={confirmPassword}
+                onChange={e => setFormData({...formData, [e.target.name]: e.target.value})}
+                required />
+         
+                <button type="submit" onClick={e => registerUser(e, formData)} >Register</button>
+                <p>Already have an account? <a href='#'>Click here to Login</a></p>
+            </form>
+        </div>
 
             <span><i className='fas fa-times'></i></span>
     </div>

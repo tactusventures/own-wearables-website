@@ -14,8 +14,8 @@ import expressEjsLayouts from 'express-ejs-layouts';
 import flash from 'express-flash'; 
 import http from 'http'; 
 
-const MongoDbStore = require('connect-mongo'); 
-
+// const MongoDbStore = require('connect-mongo'); 
+import MongoDbStore from 'connect-mongo'; 
 
 mongoose.connect(MONGO_URL).then(() => {
     console.log('connected'); 

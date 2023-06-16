@@ -1,108 +1,13 @@
-/* ----------- Top header ------------ */
-
-header .top{
-    background-color: var(--darkBlack);
-    color: var(--pure); 
-    padding: .5rem  0;  
-    position: static;
-
-}
-    
-header .top .left {
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    position: relative;
-    left: 50%; 
-    transform: translateX(-50%);
-}
-
-
-
-
-
-header .top .left .logo{
-    margin-left: auto;  
-    text-align: center;        
-    /* margin-left: 2rem;  */
-    position: relative; 
-    left: 10%; 
-}
-
-header .top .left .logo span {
-    font-size: 19px; 
-    font-weight:  bold;
-    margin-left: 1rem; 
-}
-
-header .top .left .logo img{
-    width: 80px;   
-    margin-left: auto;  
-}
-
-
-.profile-icon  {
-    position: relative;
-}
-
-.profile-icon img { 
-      border-radius: 50%;
-    width: 40px;
-    height: 40px; 
-  }
-  
-.profile-icon ul { 
-    width: 150px; 
-    background-color: black;
-    text-align: center;
-    padding: 1rem 1rem; 
-
-    border-radius: 5px; 
-}
-
-.profile-icon ul li { 
-    margin-top: 1rem; 
-}
-
-.profile-icon ul li a { 
-    color: var(--pure);
-}
-
-
-
-.profile-icon ul li:first-child { 
-    margin-top: 0; 
-}
-
-
-  .dropdown-menu {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    display: none;
-  }
-  
-  .profile-icon:hover .dropdown-menu {
-    display: block; 
-  }
-
-
 /* --------------  Primary Menu ------------------ */
 header { 
     position: relative;
 }
-.sticky { 
-    position: fixed !important; 
-    top: 0; 
-    z-index: 999;
-    background-color: #000;
-    transition: top 0.5s ease-in-out;
-}
+
 
 
 .primary{
     width: 100%;
-    padding: .4rem 0 ; 
+    padding: .8rem 0 ; 
     background-color: var(--black) !important;    
     transition: all .2s ease-in-out;
 }   
@@ -112,13 +17,24 @@ header {
 }
 
 .primary .left {
-    flex: 0  0 60%; 
+    flex: 0  0 40% !important; 
 }
 
 .primary .right {
-    flex: 0 0 30%; 
+    flex: 0 0 60% !important; 
+    /* background-color: red; */
     display: flex;
-    justify-content: center;
+    justify-content: flex-end !important;
+}
+
+.primary .right .nav-links { 
+    display: flex;
+    margin-right: 3rem; 
+}
+
+.primary .right .nav-links li a{ 
+    color: var(--primary); 
+    margin-left: 2rem; 
 }
 
 
@@ -139,17 +55,35 @@ header {
 .primary .app-btn button {
     padding-left: 2rem ;
     padding-right: 2rem;
+    /* background-color: #01CD9D !important; */
+    background-color: #FC6A03 !important;
+    color: white;
+    /* font-weight: 300; */
+    padding-top: .6rem;
+    padding-bottom: .6rem;
 }
+
+.primary .app-btn button:first-child {
+    padding: .6rem 3rem;
+    margin-right: 1rem;
+    background-color: white !important;
+    color: black;
+}
+
 .primary .buy-btn button{
     margin-left: 1rem ;
     padding: .5rem 1.5rem; ;
     background: gray;
+
 }   
 
 
 /*  */
 .primary .container { 
-    position: relative; 
+ margin: 0 auto !important; 
+padding: .7rem 0 ; 
+ justify-content: space-between;
+
 }   
 
 .primary i.bars-icon {
@@ -162,9 +96,9 @@ header {
     cursor: pointer;
 }
 
-/* .primary .container{ 
-    position: relative;
-} */
+.primary .container{ 
+    margin: 0 auto; 
+}
 
 .primary .container .right.active { 
     display: block;
@@ -181,9 +115,54 @@ header {
     align-items: center;
 }
 
-.primary .container .right.active .buy-btn  { 
-    margin-top: 2rem; 
-    margin-left: 0; ;
+.primary .container .right .avatar { 
+    color: #fff;
+    cursor: pointer;
+}
+    
+/* ------------------------login-dropdown-menu--------------------- */
+.right  { 
+    position: relative !important;
+}
+
+.right .avatar i:hover{ 
+    color:#FC6A03; 
+}
+
+.avatar ul { 
+    background-color: var(--pure);
+    color: black;
+    text-align: left;
+    position: absolute;
+    top: 56px;
+    z-index: 99;
+    width: 150px;
+    padding: .5rem .5rem .5rem 1rem;;
+    right: -48px;
+    /* padding: .5rem; */
+    border-radius: 4px;
+    display: none;
+}
+
+.avatar ul h4 {
+    font-size: 14px;
+    margin-bottom: .3rem;;
+}
+
+.avatar ul.active { 
+    display: block;
+}
+
+.avatar ul button {
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    font-size: 18px;
+    margin-top: .4rem;
+}
+
+.avatar ul li:first-child {
+    border-bottom: 1px solid black;
 }
 
 /* ----------------------------- Media Querries -------------------------- */

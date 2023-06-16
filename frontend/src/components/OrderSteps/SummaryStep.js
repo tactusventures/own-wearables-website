@@ -1,24 +1,43 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'; 
+import React, { useEffect, useState, useSyncExternalStore } from 'react'; 
+import { getOrder, updateSizeAndColor } from '../../http';
 
-const SummaryStep = ({product, order, setStep, setPrice}) => {
+const SummaryStep = ({product, orderId, setStep, setPrice}) => {
+
     // user 
+    const [order, setOrder] = useState({}); 
     const [user, setUser] = useState(); 
-    const [count, setCount] = useState(order.quantity); 
-    
+    const [orderLoading, setOrderLoading] = useState(true); 
+    const [size, setSize] = useState(null); 
+    const [activeColor, setActiveColor] = useState(null); 
+
+    useEffect(()  => {
+        async function fetchOrder(){
+            try{ 
+                let orderData = await getOrder(orderId); 
+                setOrderLoading(false);
+               setOrder(orderData.data); 
+               setSize(orderData.data.size); 
+                setActiveColor(orderData.data.color); 
+                
+            }catch(e) 
+            {   
+                setOrderLoading(false); 
+            }
+        }
+
+        fetchOrder(); 
+    }, []); 
 
 
-    function inc() { 
-        axios.post('/order/increment-quantity', {orderId: order._id}).then((res) => { 
-            setCount((cnt) => cnt +1);   
-            setPrice(product.price * (count + 1));          
-        }).catch((e) => { 
-            
-        });
-    }
-
-    function dec() { 
-        setCount((dec) => dec - 1); 
+    // update the color and the size 
+    async function updateColorAndSize (e, color, size, orderId){ 
+        try{
+            await updateSizeAndColor({color: activeColor, size, orderId: orderId}); 
+            setStep((step) => step+1); 
+        }catch(e) {
+            console.log(e); 
+        }
     }
 
     return (    
@@ -70,18 +89,17 @@ const SummaryStep = ({product, order, setStep, setPrice}) => {
                         {/* <button className="btn btn-primary">Change</button> */}
                     </div>
                 </div>
-                <div className="order-summary">
-                    <div>
-                        <div className="img">
-                            <img src={`${product?.images[order.color][0]}`} />
-                        </div>
 
-                        <div className="counter">
+                
+                <div className="order-summary">
+                    {
+                        orderLoading?<h2>Loading...</h2>
+                        :
+
+                        <>
                             <div>
-                                <button onClick={e => dec(e)}   disabled={count == 1}> - </button>
-                                <h4>{count}</h4>
-                                <button onClick={e => inc(e)}> +  </button>
-                            </div>
+                        <div className="img">
+                           <img src={`${product?.images[order.color][0]}`} />
                         </div>
                     </div>
 
@@ -89,36 +107,48 @@ const SummaryStep = ({product, order, setStep, setPrice}) => {
                         <h2>Own shoe</h2>
                         <div className="colors">
                             <h4>Colors</h4>
-                            <div className="color-images">
+                            <div className='color__wrapper'>
                                 {
                                     product?.colors.map((clr) => (
-                                        <div>
-                                            <img src={`${product?.images[clr][0]}`} />
+                                        <div className='color_box'>
+                                            <div className={`color__img ${clr === activeColor?'active': ''}`}
+                                                onClick={e => setActiveColor(clr)}
+                                            >
+                                              <img src={`${product?.images[clr][0]}`} />
+                                            </div>
                                             <h5>{clr}</h5>
-                                        </div>                                        
+                                        </div>
                                     ))
-                                }
+                                }   
                             </div>
+                            
                         </div>
 
                         <div className="sizes">
                             <h4>Sizes</h4>
-                            <div className="product-sizes">
-                                <ul>
+
+                            <div className='size-box-wrapper'>
                                     {
-                                        product.sizes.map((s) => (
-                                            <li>{s}</li>
+                                        product.sizes.map((s, ind) => (
+                                            <div key={ind} className={`size-box ${s == size?'active':''}`}
+                                             onClick={e => setSize(s)}
+                                            >
+                                                {s}
+                                            </div>
                                         ))
                                     }
-                                </ul>
                             </div>
+                            
                         </div>
 
                         <div>
-                            <button className='btn btn-primary' onClick={e => setStep((step) => step+1)}
+                            <button className='btn btn-primary' onClick={e => updateColorAndSize(e, activeColor, size, orderId)}
                             >Continue To Checkout</button>
                         </div>
                     </div>
+                        
+                        </>
+                    }
                 </div>
             </div>
 

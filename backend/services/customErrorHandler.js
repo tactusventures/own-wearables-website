@@ -13,6 +13,10 @@ class CustomErrorHandler extends Error {
         return new CustomErrorHandler(409, message);
     }
 
+    static resourceNotFound(message){ 
+        return new CustomErrorHandler(404, message); 
+    }
+
 static wrongCredentials(message = "Invalid Credentials"){
         return new CustomErrorHandler(422, message); 
     }

@@ -324,7 +324,32 @@
     align-items: center;
 }
 
+.size-box-wrapper {
+    display: flex;
+    align-items: center;
+}
 
+.size-box-wrapper .size-box:first-child {
+    margin-left: 0; 
+}
+
+.size-box-wrapper .size-box {
+    margin-left: 1rem; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #9ba1a7;
+    border-radius: 10px;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+}
+
+.size-box-wrapper .size-box.active {
+    border:3px solid #FC6A03;
+}
+
+/*----------------------  product wraper --------------------- */
 
 .payment-wrapper { 
     margin-top: 1rem; 
@@ -475,9 +500,91 @@
 .radio-wrapper { 
     display: flex;
     align-items: center;
+    margin-top: 2rem; 
 }
 
 .radio-wrapper  div {
     display: flex;
     align-items: center;
+}
+
+
+.radio-wrapper div { 
+    margin-left: 2rem; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+.radio-wrapper div:first-child { 
+    margin-left: 0rem; 
+}
+
+.add-address-wrapper .address-expand .row .form-group label { 
+    margin-bottom: 0;
+    margin-left: .5rem; 
+}
+
+.address-wrapper { 
+    margin-top: 2rem; 
+}
+
+.address-wrapper:first-child{ 
+    margin-top: 0; 
+    margin-bottom: 2rem; ;
+}
+
+.address-wrappepr:last-child{ 
+    margin-bottom: 0; ;
+}
+
+
+/* ------------------ Color SUmmary ---------------- */
+.color__wrapper { 
+    display: flex;
+}
+
+.color__wrapper .color_box {
+    /* width: 100px; */
+    margin-left: 2rem; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.color__wrapper .color_box .color__img.active {
+    border: 3px solid #FC6A03;
+}
+
+
+.color__wrapper .color_box:first-child{ 
+    margin-left: 0; 
+}
+
+.color__wrapper .color_box .color__img img { 
+    width: 60px; 
+    height: 60px; 
+    mix-blend-mode: multiply;
+    filter: contrast(1);
+}
+
+.color__wrapper .color_box .color__img { 
+    border-radius: 10px;
+    background-color: #F2F2F2;
+    cursor: pointer;
+    padding: .1rem .3rem;    
+}
+
+.product2__section-title {
+    margin-bottom: 1rem;;
+    font-size: 25px; 
+}
+
+.color__wrapper .color_box h6 {
+    margin-top: 10px;
+    font-size: .8rem;
 }

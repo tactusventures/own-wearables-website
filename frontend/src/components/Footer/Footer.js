@@ -1,37 +1,41 @@
-import React from 'react'
-import './footer.css';
+import "./footer.css";
 
 const Footer = () => {
     return (
         <footer>
-            <div className='container'>
-                <div className='top'>
-                    <div className="feature">
-                        <i className='fas fa-truck'></i>
-                        <h3>Free Delivery</h3>
-                        <p>Get free delivery direct to your door.</p>
-                        {/* <a href='#'>Learn more > </a> */}
-                    </div>
+            <div className="container">
+                <div className="top">
+                    {/* ----------footer column 1------------ */}
+
                 </div>
 
 
-                
                 <div className='bottom'>
-                    <div className='bottom-bottom'>
-                        <div className='left'>
-                            <p>Copyright © 2023 tactus ventures pvt Ltd. All rights reserved.</p>
 
-                            <ul>
-                                <li>Privacy Policy</li>
-                                <li>Terms of Use</li>
-                                <li>Sales Policy</li>
-                                <li>Legal</li>
-                                <li>Site Map</li>
+                    <div className='social_media'>
+                        <p>Let's  <span>get Social</span></p> <br />
+                        <div className='social_icons'><div><i class="fa-brands fa-facebook"></i></div>
 
+                            {/*  */}
 
-                            </ul>
+                            <div> <i class="fa-brands fa-instagram"></i></div>
+                            <div><i class="fa-brands fa-linkedin"></i></div>
+                            <div> <i class="fa-brands fa-twitter"></i></div>
+                            <div> <i class="fa-brands fa-discord"></i></div>
+
                         </div>
+                    </div>
 
+                    <div className='copyright'>
+                        <a href='#'>Privacy Policy</a>
+                        {/* &dot; */}
+                        <i class="fa-solid fa-circle" ></i>
+                        <a href='#'>Terms & Condition</a>
+                    </div>
+                    <div className='copyright_text'>
+                        <p>© 2023 Imagine Marketing Limited. All Rights Reserved.</p>
+                        <p>For queries contact us: Manager, Imagine Marketing Limited Unit no. 204 & 205, 2nd floor, D-wing & E-wing,
+                            Corporate Avenue, Andheri Ghatkopar Link Road, Mumbai, Maharashtra-400093, India</p>
                     </div>
                 </div>
             </div>
@@ -39,4 +43,4 @@ const Footer = () => {
     )
 }
 
-export default Footer
+export default Footer;

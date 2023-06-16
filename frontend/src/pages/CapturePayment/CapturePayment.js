@@ -1,36 +1,170 @@
 import axios from 'axios';
-import React,{useEffect, useState} from 'react'; 
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-
+import './capture.css';
 
 const CapturePayment = () => {
-    const [loading, setLoading] = useState(); 
-    const selector  = useSelector(state  => state.order); 
+  const [loading, setLoading] = useState();
+  const selector = useSelector(state => state.order);
 
-    useEffect(() => { 
-        const capture  = () => {
-            const query = new URLSearchParams(window.location.search);
-            const token = query.get('token');
+  useEffect(() => {
+    const capture = () => {
+      const query = new URLSearchParams(window.location.search);
+      const token = query.get('token');
 
-            setLoading(true); 
-            axios.post('/capture-payment', {orderId: token} ).then((res) => { 
-                    setLoading(false);
-                    console.log(res.data);
-            }).catch((e) =>  {
-                setLoading(false); 
-            }); 
-        }
-        
-        capture();
-    }, []); 
+      setLoading(true);
+      axios.post('/capture-payment', { orderId: token }).then((res) => {
+
+        setTimeout(() => {
+          setLoading(false);          
+        }, 2000); 
+      }).catch((e) => {
+        setTimeout(() => { 
+          setLoading(false);
+        }, 2000); 
+        console.log(e); 
+      });
+    }
+
+    capture();
+  }, []);
 
   return (
     <div>  {
-                loading? <h2>Loading....</h2>: <h2>Order Placed Successfully</h2> 
-            }   
-        
+      loading ? (
+          <OwnLoadingAnimation />
+      )
+       :
+
+        <>
+          
+
+          <div className='order-success'>
+            <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLBww6BsMA5hfUkVoo4ugfOEwywiKtiY3CrAkH9__jUJfsAE7f0CVIUTmWb9p7hwdwMV4&usqp=CAU'></img>
+            <h2>Order Failed</h2>
+            <p>It seems your order has been failed due to some error. If any money has been deducted from your bank, it will be refunded in the next 24 hours. Please try again.</p>
+            <button className='go-ba-btn'>Go Back</button>
+          </div>
+
+        </>
+    }
+
     </div>
   )
 }
 
 export default CapturePayment
+
+
+
+
+function OwnLoadingAnimation() {
+
+  useEffect(() => {
+    function animation() {
+      const elts = {
+        text1: document.getElementById("text1"),
+        text2: document.getElementById("text2")
+      };
+
+      const texts = [
+        'OWN',
+        'Wearables'
+      ];
+
+      const morphTime = 1;
+      const cooldownTime = 0.25;
+
+      let textIndex = texts.length - 1;
+      let time = new Date();
+      let morph = 0;
+      let cooldown = cooldownTime;
+
+      elts.text1.textContent = texts[textIndex % texts.length];
+      elts.text2.textContent = texts[(textIndex + 1) % texts.length];
+
+      function doMorph() {
+        morph -= cooldown;
+        cooldown = 0;
+
+        let fraction = morph / morphTime;
+
+        if (fraction > 1) {
+          cooldown = cooldownTime;
+          fraction = 1;
+        }
+
+        setMorph(fraction);
+      }
+
+      function setMorph(fraction) {
+        elts.text2.style.filter = `blur(${Math.min(8 / fraction - 8, 100)}px)`;
+        elts.text2.style.opacity = `${Math.pow(fraction, 0.4) * 100}%`;
+
+        fraction = 1 - fraction;
+        elts.text1.style.filter = `blur(${Math.min(8 / fraction - 8, 100)}px)`;
+        elts.text1.style.opacity = `${Math.pow(fraction, 0.4) * 100}%`;
+
+        elts.text1.textContent = texts[textIndex % texts.length];
+        elts.text2.textContent = texts[(textIndex + 1) % texts.length];
+      }
+
+      function doCooldown() {
+        morph = 0;
+
+        elts.text2.style.filter = "";
+        elts.text2.style.opacity = "100%";
+
+        elts.text1.style.filter = "";
+        elts.text1.style.opacity = "0%";
+      }
+
+      function animate() {
+        requestAnimationFrame(animate);
+
+        let newTime = new Date();
+        let shouldIncrementIndex = cooldown > 0;
+        let dt = (newTime - time) / 1000;
+        time = newTime;
+
+        cooldown -= dt;
+
+        if (cooldown <= 0) {
+          if (shouldIncrementIndex) {
+            textIndex++;
+          }
+
+          doMorph();
+        } else {
+          doCooldown();
+        }
+      }
+
+      animate();
+
+    }
+
+    animation(); 
+  }, []);
+  return (
+    <div id='animated-own-logo-text'>
+      <div id="container">
+        <span id="text1"></span>
+        <span id="text2"></span>
+      </div>
+
+      <svg id="filters">
+        <defs>
+          <filter id="threshold">
+            <feColorMatrix in="SourceGraphic" type="matrix" values="1 0 0 0 0
+									0 1 0 0 0
+									0 0 1 0 0
+									0 0 0 255 -140" />
+          </filter>
+        </defs>
+      </svg>
+
+    </div>
+
+  )
+}

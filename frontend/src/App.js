@@ -15,6 +15,8 @@ import CapturePayment from './pages/CapturePayment/CapturePayment';
 import Protected from './components/AuthRoutes/Protected';
 
 import { PersistGate } from 'redux-persist/integration/react';
+import Product2 from './pages/Product2/Product2';
+import Home2 from './pages/Home2/Home2';
  
 
 
@@ -39,12 +41,22 @@ function App() {
               <Header />
               <Routes>  
                   <Route path='/' element={<Home />} />
+                  <Route path='/home'  element={<Home2 />} />
 
                   <Route path='/product' element={
-                    <Protected>
-                      <Product />
+                    <Protected> 
+                      <Product /> 
                     </Protected>                  
                   } />
+
+                  
+                  <Route path='/buy-now' element={
+                    <Protected>
+                      <Product2 /> 
+                    </Protected>               
+                  } />
+
+                  <Route path='/product2' element={<Product2 />} />
 
                   <Route path='/order/order-summary/:id' element={<OrderSummary />} />
                   <Route path='/order/payment-details' element={<PaymentDetails  />} />

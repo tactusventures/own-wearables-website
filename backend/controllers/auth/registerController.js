@@ -129,7 +129,7 @@ const registerController = {
         
         // get refresh token from cookie
         const {refreshToken} = req.cookies;
-        console.log(refreshToken); 
+        
 
         if(!refreshToken){
             return res.status(401).json({message: "Token not Available"});
@@ -188,7 +188,7 @@ const registerController = {
     },
 
     async addAddress(req, res,next) { 
-        console.log(req.body); 
+        
         const {error} = addressSchema.validate(req.body, {abortEarly: false}); 
         
         // validating the request
@@ -201,14 +201,14 @@ const registerController = {
 
             return res.status(422).json(validationErrors);
         }
-        
+
 
         // check weather user exists or not first
         const {_id} = req.user;
         let user; 
         try {
             user = await User.findOne({_id: _id}); 
-
+            
             if(!user){ 
                 return next(CustomErrorHandler.userNotFound("Invaid User"))
             }
@@ -221,18 +221,46 @@ const registerController = {
         *  if user exists check is there any address already added
         *  if added add one more to it
         *  if not added store it as a first address in db's user collection
-        * 
+        *  
         * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  */
     
-        const totalAddresses = user.addresses.length; 
+        let addresses = user.addresses; 
 
-        console.log(totalAddresses); 
+        addresses.push(req.body); 
+        const {firstName, lastName, houseOrRoomNo, buildingOrArea, landMark, cityOrVillage, state, pincode, country, phoneNo, markAs} = req.body; 
+
+        try{ 
+           let result = await User.updateOne({_id: _id}, {addresses: addresses}); 
+            
+            return res.status(200).json({result}); 
+        }catch(e) { 
+            return next(e); 
+        }
+    }, 
     
-        
+
+    // get addresses 
+    async getAddresses(req, res, next){ 
+        const {_id} = req.user; 
+       
+        try{ 
+            const user = await User.findOne({_id: _id}); 
+
+            if(!user){ 
+                return next(CustomErrorHandler.userNotFound("User doesn't exists")); 
+            }
 
 
+
+            let addresses = user.addresses; 
+            
+
+            return res.status(200).json({addresses: addresses}); 
+
+        }catch(e){   
+            return next(e); 
+        }
     }
-    
 }
 
 export default registerController;

@@ -30,9 +30,6 @@ const orderController = {
 
             phoneNo = user.phoneNo; 
 
-
-            const addresses = user.addresses[0]; 
-            address = `${addresses.houseNoOrRoomNo} ${addresses.buildingNoOrArea}, ${addresses.landmark}, ${addresses.cityOrVillage}, ${addresses.pincode}, ${addresses.state} ${addresses.country}`; 
         }catch(e){
             return next(e); 
         }
@@ -160,6 +157,86 @@ const orderController = {
             return res.status(200).json({success: true}); 
         }catch(e) { 
 
+        }
+    }, 
+
+    async updateOrderAddress(req, res, next) { 
+        
+        
+        const schema = Joi.object({
+            addressId: Joi.required(), 
+            orderId: Joi.required()
+        }); 
+
+        const {addressId} = req.body; 
+
+        const {_id} = req.user; 
+        const {error} = schema.validate(req.body);
+        
+        if(error) { 
+            return next(error); 
+        }
+
+        let user; 
+        let deliveryAddress;
+
+        try {
+            user = await User.findOne({_id: _id}); 
+
+            let address = user.addresses[addressId]; 
+            deliveryAddress = `${address.houseOrRoomNo} ${address.buildingOrArea}, ${address.landmark}, ${address.cityOrVillage}, ${address.pincode}, ${address.state} ${address.country}`; 
+
+        }catch(e) { 
+            return next(e); 
+        }
+
+        let order; 
+
+        try{ 
+            order = await Order.findOneAndUpdate({_id: req.body.orderId}, {deliveryAddress: {
+                addressId: addressId, 
+                address: deliveryAddress
+            }});
+
+            
+            let userAddresses; 
+            try{ 
+                userAddresses = await User.findOne({_id: _id}); 
+
+            }catch(e) { 
+                return next(e); 
+            }
+
+            return res.status(200).json(userAddresses.addresses); 
+
+        }catch(e){
+            return next(e);
+        }
+    }, 
+
+
+   async updateSizeAndColor(req, res, next){ 
+        const inputSchema  = Joi.object({
+            orderId: Joi.required(), 
+            color: Joi.required(), 
+            size: Joi.required()
+        }); 
+
+        console.log(req.body); 
+
+        const {error} = inputSchema.validate(req.body); 
+
+        if(error){
+            return next(error); 
+        }
+
+
+        try {   
+            const order = await Order.findOneAndUpdate({_id: req.body.orderId}, {size: req.body.size, color: req.body.color}); 
+
+            return res.status(200).json({success: true}); 
+        }catch(e){
+            return next(e); 
         }
     }
 }

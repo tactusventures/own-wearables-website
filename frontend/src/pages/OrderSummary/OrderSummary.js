@@ -100,7 +100,7 @@ const OrderSummary = () => {
 
     
     useEffect(() =>{     
-        function getStep () { 
+        function getStep () {
             if(!    selector.auth.isLoggedIn){
                 setStep(1); 
                 Component = proceedStep[1];
@@ -136,7 +136,7 @@ const OrderSummary = () => {
                         loader?<img style={{position: 'relative', left: '50%', width: "200px", transform: 'translate(-50%, -50%)'}}  src={`https://miro.medium.com/v2/resize:fit:1400/1*CsJ05WEGfunYMLGfsT2sXA.gif`} />: 
                         <>
                         
-                       <Component product= {product} order= {order} step={step} setStep = {setStep} loading={loading}  setPrice = {setPrice}/>
+                       <Component product={product} orderId= {order._id} step={step} setStep = {setStep} loading={loading}  setPrice = {setPrice}/>
 
                       <div className="right">
                         <h2>Price Details </h2>

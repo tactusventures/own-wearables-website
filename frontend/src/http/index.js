@@ -2,14 +2,13 @@ import axios from 'axios';
 
 
 const api = axios.create({ 
-    baseURL: "http://localhost:5000/api", 
+    baseURL: process.env.REACT_APP_BACKEND_URL, 
     withCredentials: true, 
     headers: { 
         "Content-Type": 'application/json', 
         Accept: "application/json"
     }
 });
-
 
 
 export const loadAllProducts = () => api.get("/prdocuts/all"); 
@@ -21,6 +20,11 @@ export const register = (data) => api.post('/register', data);
 export const getUser = (id) => api.get(`/get-user/${id}`); 
 export const logout = () => api.post(`/logout`);
 export const addAddress = (data) => api.post('/user/add-address', data); 
+export const getAddresses = ()  => api.get('/user/get-addresses'); 
+export const updateDeliveryAddress = (data) => api.post('/order/update-address', data); 
+export const orderPlace = (data) => api.post('/order/place-order', data); 
+export const getUsersAddresses = () => api.get('user/get-addresses'); 
+export const updateSizeAndColor = (data) => api.post('/order/update-color-and-size', data); 
 
 api.interceptors.response.use(
     config => {
