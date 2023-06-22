@@ -4,13 +4,14 @@ import { getOrder, updateSizeAndColor } from '../../http';
 
 const SummaryStep = ({product, orderId, setStep, setPrice}) => {
 
-    // user 
+    // user     
     const [order, setOrder] = useState({}); 
     const [user, setUser] = useState(); 
     const [orderLoading, setOrderLoading] = useState(true); 
     const [size, setSize] = useState(null); 
     const [activeColor, setActiveColor] = useState(null); 
-
+    console.log(product); 
+    
     useEffect(()  => {
         async function fetchOrder(){
             try{ 
@@ -26,8 +27,8 @@ const SummaryStep = ({product, orderId, setStep, setPrice}) => {
             }
         }
 
-        fetchOrder(); 
-    }, []); 
+        fetchOrder();
+    }, []);
 
 
     // update the color and the size 
@@ -141,7 +142,7 @@ const SummaryStep = ({product, orderId, setStep, setPrice}) => {
                             
                         </div>
 
-                        <div>
+                        <div className='buy-button'>
                             <button className='btn btn-primary' onClick={e => updateColorAndSize(e, activeColor, size, orderId)}
                             >Continue To Checkout</button>
                         </div>

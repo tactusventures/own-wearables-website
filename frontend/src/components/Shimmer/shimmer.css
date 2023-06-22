@@ -162,3 +162,25 @@
     margin-left: 1rem;;
 }
 /*  -------------------sizes------------------------  */
+
+
+@media (max-width: 768px) { 
+    .shimmer{ 
+        flex-direction: column;
+    }
+
+    .product2__product_images_wrapper{ 
+        display: none;
+    }
+
+    .shimmer .product2__product_images_wrapper .thumbnil .img { 
+        width: 100%; 
+        height: 300px !important;
+        background-color: rebeccapurple;
+    }   
+
+    .shimmer .left .thumbnil .img {
+        height: 200px;
+        width: 300px; 
+    }
+}

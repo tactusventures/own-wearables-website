@@ -1,6 +1,7 @@
 import React, {useEffect, useState,useRef} from 'react'; 
 import axios from 'axios';
 import Loader from '../../components/Spinner/Spinner'; 
+import { createOrder } from '../../http';
 const PaymentStep = ({product, orderId, loading, setStep}) => {
     let btnRef = useRef();
     const [isLoading, setIsLoading] = useState(false); 
@@ -9,21 +10,30 @@ const PaymentStep = ({product, orderId, loading, setStep}) => {
         const proceedToOrder = ()  => { 
             
             if(btnRef.current){ 
-                btnRef.current.addEventListener('click', (e) => {
+                btnRef.current.addEventListener('click', async (e) => {
                     setIsLoading(true); 
-                    // create order
-                    axios.post('/create-order', {orderId: orderId, customId: product._id, price: product.price}).then((res) => {
-                        let orderId = res.data.id;  
+                   
+
+                    try {
+                        let res =  await createOrder({orderId, customId: product._id, price: product.price});
+                        console.log(res); 
+                        // let orderId = res.data.id; 
                         setIsLoading(false); 
                         window.location = res.data.links[1].href; 
-                    }).catch((e) => { 
-                    }); 
+
+                    }catch(e){ 
+
+                        console.log(e); 
+                    }
+
                 }); 
             }
         }
 
         proceedToOrder(); 
     }, [loading]); 
+
+    
 
 
 

@@ -38,48 +38,13 @@ const OrderSummary = () => {
     const {id} = useParams();   
     const btnRef = useRef(null); 
 
+    
 
-   
 
-
-    useEffect(() => {
-        const proceedToOrder = ()  => { 
-
-            if(btnRef.current){ 
-                btnRef.current.addEventListener('click',async (e) => { 
-                    //place an order
-                    setLoader(true); 
- 
-                    // create order 
-                    // axios.post('/create-order', {orderId: order._id, customId: product._id}).then((res) => {
-                    //     let orderId = res.data.id;
-                    //     setLoader(false);
-                    //     window.location = res.data.links[1].href; 
-                    // }).catch((e) => { 
-                    // }); 
-
-                    try { 
-                        setLoader(true); 
-                        let res = await createOrder({orderId: order._id, customId: product._id}); 
-                        setLoader(false);
-                        let orderId = res.data.id;
-                        setLoader(false);
-
-                        window.location = res.data.links[1].href; 
-                    }catch(e){ 
-                        setLoader(false); 
-                    }
-                });
-            }
-        }
-
-        proceedToOrder(); 
-    }, [loading]); 
 
 
     useEffect(() => { 
         async function loadProduct() { 
-         
             try{
                 let res = await getOrder(id); 
                 setOrder(res.data); 
@@ -128,15 +93,13 @@ const OrderSummary = () => {
 
         <div className="order-summary-page">
             {
-                loading? <h2>Loading....</h2>
-                : 
 
                 <div className="container">
                     {
                         loader?<img style={{position: 'relative', left: '50%', width: "200px", transform: 'translate(-50%, -50%)'}}  src={`https://miro.medium.com/v2/resize:fit:1400/1*CsJ05WEGfunYMLGfsT2sXA.gif`} />: 
-                        <>
+                        <div className="summary_wrapper">
                         
-                       <Component product={product} orderId= {order._id} step={step} setStep = {setStep} loading={loading}  setPrice = {setPrice}/>
+                       <Component product={product} orderId= {id} step={step} setStep = {setStep} loading={loading}  setPrice = {setPrice}/>
 
                       <div className="right">
                         <h2>Price Details </h2>
@@ -163,7 +126,7 @@ const OrderSummary = () => {
                         </div>
                        
                          </div>
-                        </>
+                    </div>
                     }
                 </div>
             }

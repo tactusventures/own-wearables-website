@@ -407,14 +407,14 @@ const Home = () => {
                 <div className='container'>
                     <div className='top-block'>
                         <img src='https://www.apple.com/v/apple-watch-ultra/e/images/overview/design/design_icon_battery__blxp7wcr5jqu_large.png' />
+                        <h2>Powerful Battery</h2>
 
                         {/* <p>
                             <span> Battery life for days.</span> Our smart shoe battery is a game-changer for those who value uninterrupted tracking and convenience. It is designed to last for hours on a single charge and features advanced energy-saving capabilities to maximize its lifespan. Moreover, the easily replaceable battery provides users with the freedom to extend the life of their shoes, making it a smart investment for those looking to stay connected and monitor their activity without worrying about running out of power
-
                         </p> */}
                     </div>
 
-                    <div className='bottom-block'>
+                    {/* <div className='bottom-block'>
                         <div className='left-block'>
                             <span>Up to</span>
                             <h2>36 hours</h2>
@@ -426,7 +426,7 @@ const Home = () => {
                             <h2>60 hours</h2>
                             <span>on low power settings .</span>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             </div>
 

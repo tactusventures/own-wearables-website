@@ -58,6 +58,8 @@ const paymentController = {
         return next(error); 
       }
 
+      let {_id: customerId} = req.user; 
+
 
       let access_info = req.session.access_info; 
 
@@ -156,14 +158,14 @@ const paymentController = {
 
 
         // getting customer Id
-        let customerId = ""; 
+    
         try{  
           let order = await Order.findOne({id: req.body.orderId}); 
           if(!order){
             return next(CustomErrorHandler.recordNotFound("Order not found")); 
           }
 
-          customerId = order.customerId;  
+          customerId = customerId;  
         }catch(e){
           return next(e); 
         }
@@ -244,11 +246,16 @@ const paymentController = {
       let data = {
         name: "Raj"
       };
-
+      console.log(data);
       axios.post(`${url}`,data, {headers}).then(async (resp) => { 
+        let updatedPayment;
+        try{ 
+          updatedPayment = await Payment.findOneAndUpdate({paymentId: resp.data.id}, {paymentStatus: resp.data.status});
 
-        
-        let updatedPayment = await Payment.updateOne({paymentId: resp.data.id}, {paymentStatus: resp.data.status}); 
+        }catch(e){
+          console.log(e); 
+        }
+ 
 
         try { 
           let result = await Order.updateOne({_id: orderId}, {status: "COMPLETED", isPaid: true}); 
@@ -258,9 +265,10 @@ const paymentController = {
         }
         return res.status(200).json(resp.data);
       }).catch((e) => {
+        console.log(e); 
         return next(e); 
       }); 
-    }, 
+    },
 
     getPaymentDetails(req, res, next){
 

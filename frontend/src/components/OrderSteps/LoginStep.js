@@ -1,16 +1,29 @@
-import React from 'react'; 
+import React, { useState } from 'react'; 
 import { useDispatch, useSelector } from 'react-redux';
-import { clearUser } from '../../store/authSlice';
-import { logout as logOut } from '../../http';
+import { clearUser, setUser } from '../../store/authSlice';
+import { logout as logOut, login } from '../../http';
 import {useNavigate} from 'react-router-dom'; 
+
 
 const LoginStep = ({product, order, setStep}) => {
     const dispatch = useDispatch(); 
+    
     const auth = useSelector(state => state.auth); 
     const navigate = useNavigate(); 
+    
+    // form data
+    const [validationErrors, setValidationErrors] = useState({}); 
+    const [formData, setFormData] = useState({
+        email: "", 
+        password: ""
+    });
+
+    const {email, password} = formData; 
     let isAuthenticated = auth.isLoggedIn; 
 
 
+
+    // logout the user
     async function logout(){ 
         try {
             let res = await logOut();
@@ -18,6 +31,25 @@ const LoginStep = ({product, order, setStep}) => {
             navigate('/'); 
         }catch(e){ 
             console.log(e); 
+        }
+    } 
+
+    // login the user 
+    async function loginUser(e, formData){ 
+       try{ 
+            let res = await login(formData);
+            dispatch(setUser(res.data));
+            setStep((step) => step + 1); 
+       }catch(err){
+
+            if (err.response?.status === 422) {
+             
+                console.log("this is the line", err.response.data);
+                setValidationErrors(err.response.data);
+            } else {
+                // setShowError(true);
+                console.log(err.response.data); 
+            }
         }
     }
 
@@ -39,10 +71,34 @@ const LoginStep = ({product, order, setStep}) => {
                     !isAuthenticated?
                     <div className="login-expand">
                         <div className="expand-left">
-                            <input placeholder="Enter Mobile Number" required />
+
+                            <div>
+                                <input placeholder="Enter Email Address"
+                                
+                                name='email'
+                                value={email}
+                                onChange={e => setFormData({...formData, [e.target.name]: e.target.value})}
+                                required />
+                                {validationErrors.email ? <p>{validationErrors.email}</p> : ""}     
+                            </div>
+
+                            <div>
+                                <input type='password' placeholder="Enter Password" name='password' 
+                                value={password}
+                                onChange={e => setFormData({...formData, [e.target.name]: e.target.value})}
+                                required />
+
+                               {validationErrors.password ? <p>{validationErrors.password}</p> : ""}
+
+
+                            </div>
                             <p>by continuing you agree to terms and conditions of</p>
-                            <button className="btn btn-primary">Login </button>
+                            <button className="btn btn-primary"
+                            onClick={e => loginUser(e, formData)}
+                            >Login </button>
                         </div>
+
+                        
 
                         <div className="expand-right">
                             <p className="title">Advantages of Secure Login</p>

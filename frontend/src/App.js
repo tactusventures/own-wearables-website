@@ -51,9 +51,9 @@ function App() {
 
                   
                   <Route path='/buy-now' element={
-                    <Protected>
+                    // <Protected>
                       <Product2 /> 
-                    </Protected>               
+                    // </Protected>               
                   } />
 
                   <Route path='/product2' element={<Product2 />} />

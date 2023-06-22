@@ -5,7 +5,6 @@ const orderSchema = new mongoose.Schema({
     customerId: {
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'User', 
-        required: true
     }, 
     status: {
         type: String, 
@@ -53,7 +52,7 @@ const orderSchema = new mongoose.Schema({
 
     phoneNo : {
         type: String, 
-        required: true
+        required: false
     }, 
 
     isDelivered: {

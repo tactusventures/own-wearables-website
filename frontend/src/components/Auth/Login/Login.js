@@ -55,6 +55,7 @@ const Login = ({ active, setActive }) => {
             navigate('/product');
         } catch (e) {
             if (e.response?.status === 422) {
+                console.log(e.response); 
                 setValidationErrors(e.response.data);
             } else {
                 setShowError(true);
@@ -115,6 +116,9 @@ const Login = ({ active, setActive }) => {
                 {/* <img src="./assets/icons/cancel.png" id="cancel-button" /> <br /> */}
                 <p id="greet">Welcome Back</p>
                 <h2>Log into your account</h2>
+                <div className='validation-errors'>
+                    <p>{validationErrors.message}</p>
+                </div>
                 <form>
                     <input name='email' placeholder='Email'
                         value={email}
@@ -130,7 +134,7 @@ const Login = ({ active, setActive }) => {
                         onChange={e => setFormData({ ...formData, [e.target.name]: e.target.value })}
                         required
                     />
-                    {validationErrors.email ? <p>{validationErrors.email}</p> : ""}
+                    {validationErrors.password ? <p>{validationErrors.password}</p> : ""}
                     <a href="#" id="forgot-password">Forgot Password?</a>
 
                     <div className='buttons' style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>

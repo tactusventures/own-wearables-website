@@ -588,3 +588,80 @@
     margin-top: 10px;
     font-size: .8rem;
 }
+
+
+@media (max-width: 768px) { 
+    .order-summary-page .container{ 
+        flex-direction: column;
+    }
+
+    .order-summary-page .right { 
+        margin-left: 0; 
+        width: 100%;
+    }
+
+    .order-summary-page { 
+        padding: 2rem 0; 
+        margin-bottom: 4rem;
+        padding-bottom: 5rem;
+    }
+    
+    .order-summary-wrapper .section-title .left h2 {
+        font-size: 17px;
+    }
+    .order-summary {
+        margin-top: 0; 
+       flex-direction: column;
+       padding: 1rem 1rem; 
+    }
+
+    .order-summary .img { 
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .order-summary .img img { 
+        width: 200px; 
+    }
+    .order-summary  .colors  { 
+        flex-direction: column;
+    }
+
+    .order-summary .colors h4 { 
+        margin-bottom: 2rem;
+        font-weight: bold;
+        font-size: 20px;    
+    }
+
+    .order-summary .content{ 
+        text-align: center;
+        margin-top: 1rem; 
+    }
+
+    .order-summary .sizes{ 
+        flex-direction: column;
+    }
+
+    .order-summary .buy-button { 
+        margin-top: 1rem; 
+        text-align: left;
+    }
+
+    .order-summary .sizes h4 { 
+        text-align: left;
+        margin-bottom: 1rem;
+    }
+
+    .order-summary-page .left h2{ 
+        font-size: 17px;
+    }
+
+    .payment-wrapper .payment-expand button { 
+        font-size: 16px; 
+    }
+
+    .payment-wrapper .payment-expand button img {
+        width: 15px;
+    }
+}

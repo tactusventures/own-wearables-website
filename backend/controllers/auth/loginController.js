@@ -20,7 +20,8 @@ const loginController  = {
             error.details.forEach((err) => {
               validationErrors[err.context.key] = err.message;
             });
-            console.log(validationErrors); 
+            
+
             return res.status(422).json(validationErrors);
         }
 

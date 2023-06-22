@@ -632,9 +632,7 @@ text-align: center;;
 
 /* --------------------Mobile-Left_buttons----------------------- */
 
-.product__btns__mobile {
-    display: none;
-}
+
 
 .product2-left-mobile .product__btns__mobile {
     display: flex;
@@ -664,6 +662,8 @@ text-align: center;;
     margin-left: 15px;
 }
 
+
+
 .product2-left-mobile .product__btns__mobile .btn__buy {
     width: 49%;
     padding: 1rem;
@@ -679,6 +679,10 @@ text-align: center;;
 
 .product2-left-mobile .product__btns__mobile .btn__buy:hover {
     background-color: #FC6A03;
+}
+
+.product__btns__mobile { 
+    display: none !important;
 }
 
 
@@ -715,7 +719,9 @@ text-align: center;;
 
 
 @media  (max-width: 576px) {
-
+    .product__btns__mobile  {
+        display:  flex !important;
+    }
     .mobile-slider-image-wrapper { 
         display: block !important;
     }
@@ -761,10 +767,5 @@ text-align: center;;
         padding: 1rem 0;
         padding-left: 1rem;
     }
-
-    .product__btns__mobile {
-        display: block;
-    }
-
     
 }

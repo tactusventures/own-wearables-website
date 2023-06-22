@@ -4,10 +4,6 @@ import { addAddress, getAddresses, getOrder, getUser, updateDeliveryAddress } fr
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
-
-
-
-
 const AddressStep = ({product, orderId, setStep}) => {
     const [order, setOrder] = useState({}); 
     const [user, setUser] = useState({}); 
@@ -29,7 +25,7 @@ const AddressStep = ({product, orderId, setStep}) => {
             setOrder(orderData.data); 
         }
 
-        fetchOrder(); 
+        fetchOrder();
 
     }, []); 
 
@@ -47,7 +43,7 @@ const AddressStep = ({product, orderId, setStep}) => {
         try { 
             const address = await getAddresses(); 
             setAddresses(address.data.addresses); 
-            setSelectedAddress(order.deliveryAddress.addressId); 
+            setSelectedAddress(order.deliveryAddress? order.deliveryAddress.addressId:0); 
         }catch(e) { 
             console.log(e); 
         }
@@ -127,7 +123,6 @@ const AddressStep = ({product, orderId, setStep}) => {
             await updateDeliveryAddress({addressId: selectedAddress, orderId: id}); 
             setStep((prev) => prev+1);
         }catch(e) {
-            alert(e); 
             console.log(e);
         }
     }
@@ -195,7 +190,7 @@ const AddressStep = ({product, orderId, setStep}) => {
                                 ))
                             }
 
-                            <button className='btn btn-primary' onClick={e => updateAddress(e, selectedAddress)}>Deliver Here</button>                        
+                            <button className='btn btn-primary' onClick={e => updateAddress(e, selectedAddress)}>Deliver Here</button>
                         </>
 
                     }

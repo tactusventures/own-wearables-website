@@ -170,7 +170,7 @@ const productController   = {
 
     async allProducts(req, res, next){
         try{
-            let products = await Product.find(); 
+            let products = await Product.find();
             
             return res.status(200).json(products); 
 

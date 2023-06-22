@@ -2,28 +2,44 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import './capture.css';
+import { capturePayment } from '../../http';
 
 const CapturePayment = () => {
   const [loading, setLoading] = useState();
   const selector = useSelector(state => state.order);
 
   useEffect(() => {
-    const capture = () => {
+    const capture = async () => {
       const query = new URLSearchParams(window.location.search);
       const token = query.get('token');
 
       setLoading(true);
-      axios.post('/capture-payment', { orderId: token }).then((res) => {
+      // axios.post('/capture-payment', { orderId: token }).then((res) => {
 
-        setTimeout(() => {
-          setLoading(false);          
-        }, 2000); 
-      }).catch((e) => {
-        setTimeout(() => { 
-          setLoading(false);
-        }, 2000); 
+      //   setTimeout(() => {
+      //     setLoading(false);          
+      //   }, 2000); 
+      // }).catch((e) => {
+      //   setTimeout(() => { 
+      //     setLoading(false);
+      //   }, 2000); 
+      //   console.log(e); 
+      // });
+
+      alert(token); 
+      try  {
+        const res  = await capturePayment({orderId: token}); 
+           setTimeout(() => {
+              setLoading(false);          
+            }, 2000);
+      }catch(e){
         console.log(e); 
-      });
+        setTimeout(() => { 
+              setLoading(false);
+            }, 2000);
+            console.log(e); 
+      }
+
     }
 
     capture();
@@ -37,8 +53,6 @@ const CapturePayment = () => {
        :
 
         <>
-          
-
           <div className='order-success'>
             <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLBww6BsMA5hfUkVoo4ugfOEwywiKtiY3CrAkH9__jUJfsAE7f0CVIUTmWb9p7hwdwMV4&usqp=CAU'></img>
             <h2>Order Failed</h2>

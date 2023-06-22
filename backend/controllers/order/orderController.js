@@ -15,24 +15,24 @@ const orderController = {
             return next(error); 
         }
 
-        const {customerId, item, color, size, quantity,paymentMode} = req.body; 
+        const {item, color, size, quantity,paymentMode} = req.body; 
 
-        let phoneNo, address; 
+        // let phoneNo, address; 
 
-        try{    
-            const exists = await User.exists({_id: customerId});
+        // try{    
+        //     const exists = await User.exists({_id: customerId});
             
-            if(!exists){
-                return next(CustomErrorHandler.invalidUser("Invalid User")); 
-            }
+        //     if(!exists){
+        //         return next(CustomErrorHandler.invalidUser("Invalid User")); 
+        //     }
 
-            let user = await User.findOne({_id: customerId}); 
+        //     let user = await User.findOne({_id: customerId}); 
 
-            phoneNo = user.phoneNo; 
+        //     phoneNo = user.phoneNo; 
 
-        }catch(e){
-            return next(e); 
-        }
+        // }catch(e){
+        //     return next(e); 
+        // }
 
 
         let totalPrice;
@@ -52,19 +52,12 @@ const orderController = {
         }
         
        let order = new Order({
-            customerId ,
             item,
             color, 
             size,
             quantity,
             totalPrice,
             paymentMode,
-            deliveryAddress: {
-                   addressId: 0, 
-                   address:  address
-                }
-                    ,
-            phoneNo
        });
 
        try{
@@ -193,10 +186,12 @@ const orderController = {
         let order; 
 
         try{ 
+            let userInfo = await User.findOne({_id: _id}); 
+
             order = await Order.findOneAndUpdate({_id: req.body.orderId}, {deliveryAddress: {
                 addressId: addressId, 
                 address: deliveryAddress
-            }});
+            }, customerId: userInfo._id, phoneNo: userInfo.phoneNo});
 
             
             let userAddresses; 

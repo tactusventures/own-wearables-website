@@ -16,15 +16,16 @@ export const createOrder = (data) => api.post('/create-order', data);
 export const getOrder = (id) => api.get(`/order/get-order/${id}`);
 export const loadItem = (item) => api.get(`/product/get/${item}`); 
 export const login = (data) => api.post(`/login`, data);
-export const register = (data) => api.post('/register', data); 
+export const register = (data) => api.post('/register', data);
 export const getUser = (id) => api.get(`/get-user/${id}`); 
 export const logout = () => api.post(`/logout`);
-export const addAddress = (data) => api.post('/user/add-address', data); 
-export const getAddresses = ()  => api.get('/user/get-addresses'); 
+export const addAddress = (data) => api.post('/user/add-address', data);
+export const getAddresses = ()  => api.get('/user/get-addresses');
 export const updateDeliveryAddress = (data) => api.post('/order/update-address', data); 
 export const orderPlace = (data) => api.post('/order/place-order', data); 
-export const getUsersAddresses = () => api.get('user/get-addresses'); 
+export const getUsersAddresses = () => api.get('user/get-addresses');
 export const updateSizeAndColor = (data) => api.post('/order/update-color-and-size', data); 
+export const capturePayment = (data) => api.post('/capture-payment', data); 
 
 api.interceptors.response.use(
     config => {
@@ -52,8 +53,8 @@ api.interceptors.response.use(
                 console.log(err.message);
             }
         }
-        throw error;
-        
+       
+       throw error; 
     }
 );
 

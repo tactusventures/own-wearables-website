@@ -753,6 +753,11 @@
     justify-content: center;
     margin: 0 auto; 
     align-items: center;
+}
+
+.battery-info .top-block  h2{
+    color: #fff; 
+    font-size: 40px;;margin-left: 2rem; 
 
 }
 
