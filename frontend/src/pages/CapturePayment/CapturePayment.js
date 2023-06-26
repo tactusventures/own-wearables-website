@@ -14,17 +14,7 @@ const CapturePayment = () => {
       const token = query.get('token');
 
       setLoading(true);
-      // axios.post('/capture-payment', { orderId: token }).then((res) => {
-
-      //   setTimeout(() => {
-      //     setLoading(false);          
-      //   }, 2000); 
-      // }).catch((e) => {
-      //   setTimeout(() => { 
-      //     setLoading(false);
-      //   }, 2000); 
-      //   console.log(e); 
-      // });
+      
 
       alert(token); 
       try  {

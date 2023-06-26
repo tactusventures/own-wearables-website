@@ -1,0 +1,131 @@
+<div class="main-wrapper main-wrapper-1">
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <section class="section">
+            <div class="section-body">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>All Products</h4>
+                            </div>
+                            <div class="card-body">
+                                <% if(messages && messages.success) { %> 
+                                    <div class="alert alert-success alert-dismissible show fade">
+                                      <div class="alert-body">
+                                        <button class="close" data-dismiss="alert">
+                                          <span>&times;</span>
+                                        </button>
+                                        <%= messages.success %>
+                                      </div>  
+                                    </div>
+                                  <% } %>  
+    
+    
+                                  <% if(messages && messages.error) { %> 
+                                    <div class="alert alert-danger alert-dismissible show fade">
+                                      <div class="alert-body">
+                                        <button class="close" data-dismiss="alert">
+                                          <span>&times;</span>
+                                        </button>
+                                        <%= messages.error %>
+                                      </div>
+                                    </div>
+                                  <% } %>  
+                                <div class="table-responsive">
+                                    <table class="table table-striped" id="table-1">
+                                        <thead>
+                                            <tr>
+                                                <th class="">
+                                                    #
+                                                </th>
+                                                <th>Product</th>
+                                                <th>Color</th>
+                                                <th>Size</th>
+                                                <th>Quantity</th>
+                                                <th>Total Price</th>
+                                                <th>Payment Mode</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            <% orders.forEach((order, ind) => { %>
+                                                <td><%= ind+1 %></td>
+                                                <td><%= order.productId %> </td>
+                                                <td><%= order.color %> </td>
+                                                <td><%= order.size %></td>
+                                                <td><%= order.quantity %></td>
+                                                <td><%= order.totalPrice %></td>
+                                                <td>
+                                                    <div class="form-group mt-3">
+                                                        <select id="delivery_status" data-orderId="<%= order.id%>" class="custom-select">
+                                                            <option value="READY_TO_SHIP" <%= order.deliveryStatus === "READY_TO_SHIP"? "selected": "" %>  >READY_TO_SHIP</option>
+                                                            <option value="ORDER_RECEIVED" <%= order.deliveryStatus === "ORDER_RECEIVED"? "selected": "" %>  >ORDER_RECEIVED</option>
+                                                          <option value="SHIPPED" <%= order.deliveryStatus === "SHIPPED"? "selected": "" %>  >SHIPPED</option>
+                                                          <option value="DELIVERED" <%= order.deliveryStatus === "DELIVERED"? "selected": "" %> >DELIVERED</option>
+                                                        </select>
+                                                      </div>
+                                                </td>
+
+                                                <td>
+                                                    <button class="btn btn-danger">
+                                                        <i class="fas fa-trash"></i>
+                                                    </button>
+                                                </td>
+                                            <% }) %> 
+                                            
+                                            </tr>
+                                        </tbody>
+                                       
+                                    </table>
+                            </div>  
+
+                            <div class="card-footer text-right">
+                              <nav class="d-inline-block">
+                              </nav>
+                            </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </div>
+
+</div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="formModal"
+aria-hidden="true">
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="formModal">Add Color to the Product</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>  
+    <div class="modal-body">    
+      <form  method="post" action="/products/product/add-product" enctype="multipart/form-data">
+        <div class="form-group">
+          <label>Color</label>
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Colors" name="color" required>
+          </div>
+        </div>
+        <div class="form-group">
+            <label>Drag or Select Images</label>
+            <input type="file" class="form-control" name="images" multiple required>
+          </div>
+          <input type="hidden" class="prod-id" name="id" />
+        <button type="submit" class="btn btn-primary m-t-15 waves-effect">Add Color</button>
+      </form>
+    </div>
+  </div>
+</div>
+</div>

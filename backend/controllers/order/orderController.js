@@ -8,7 +8,7 @@ import Joi from "joi";
 
 const orderController = {
     async placeOrder(req, res, next){   
-        // return res.status(200).json({all: "ok"}); 
+      
         const {error}  = orderSchema.validate(req.body); 
 
         if(error){
@@ -16,23 +16,6 @@ const orderController = {
         }
 
         const {item, color, size, quantity,paymentMode} = req.body; 
-
-        // let phoneNo, address; 
-
-        // try{    
-        //     const exists = await User.exists({_id: customerId});
-            
-        //     if(!exists){
-        //         return next(CustomErrorHandler.invalidUser("Invalid User")); 
-        //     }
-
-        //     let user = await User.findOne({_id: customerId}); 
-
-        //     phoneNo = user.phoneNo; 
-
-        // }catch(e){
-        //     return next(e); 
-        // }
 
 
         let totalPrice;
@@ -52,8 +35,8 @@ const orderController = {
         }
         
        let order = new Order({
-            item,
-            color, 
+            productId: item,
+            color,  
             size,
             quantity,
             totalPrice,
@@ -66,34 +49,7 @@ const orderController = {
        }catch(e){
         return next(e);     
        }
-    }, 
-
-    async allOrders(req, res, next){
-        try{
-            let orders = await Order.find(); 
-            return res.status(200).json(orders);
-        }catch(e){
-            return next(e); 
-        }
-    }, 
-
-    async allDeliveredOrders(req, res, next){
-        try{
-            let orders = await Order.find({ isCancelled: false,isDelivered: true}); 
-            return res.status(200).json(orders); 
-        }catch(e){
-            return next(e); 
-        }
-    }, 
-
-    async allUnDeliveredOrders(req, res, next){
-        try{
-            let orders = await Order.find({isCancelled: false, isDelivered: false}); 
-            return res.status(200).json(orders); 
-        }catch(e){
-            return next(e);     
-        }
-    }, 
+    },     
 
     async cancelOrder(req, res, next){
         try{    

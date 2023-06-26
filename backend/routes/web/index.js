@@ -1,5 +1,7 @@
 import express from 'express'; 
-import { adminHomeController, adminMessageController, adminProductController, adminUserController } from '../../controllers';
+import { adminHomeController, adminMessageController, adminOrderController, adminProductController, adminUserController } from '../../controllers';
+
+
 
 
 
@@ -30,7 +32,12 @@ adminRouter.get('/users/view-user/:id', adminUserController.viewUser);
 
 // enquiries
 adminRouter.get('/messages/enquiries', adminMessageController.enquiries); 
-
 adminRouter.post('/messages/delete-message', adminMessageController.deleteMessage); 
+
+
+// orders 
+adminRouter.get('/order/get-all-orders', adminOrderController.getAllOrders); 
+adminRouter.post('/order/change-delivery-status', adminOrderController.changeDeliveryStatus); 
+
 
 export default adminRouter;

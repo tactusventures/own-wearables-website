@@ -11,3 +11,4 @@ export {default as adminHomeController} from './admin/homeController';
 export { default as adminProductController} from './admin/product/productController';
 export {default as adminUserController } from './admin/users/userController'; 
 export {default as adminMessageController} from './admin/messages/messageController'; 
+export {default as adminOrderController}  from './admin/order/orderController'; 

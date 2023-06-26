@@ -1,4 +1,4 @@
-import { bool, number } from 'joi';
+import { bool, number, string } from 'joi';
 import mongoose from 'mongoose'; 
 
 const orderSchema = new mongoose.Schema({
@@ -11,7 +11,7 @@ const orderSchema = new mongoose.Schema({
         default: "INITIATED"
     }
     , 
-    item: {
+    productId: {
         type: mongoose.Schema.Types.ObjectId, 
         required: true
     }, 
@@ -55,11 +55,16 @@ const orderSchema = new mongoose.Schema({
         required: false
     }, 
 
+    deliveryStatus: { 
+        type: String, 
+        default: "INITIATED"
+    }
+
+    , 
     isDelivered: {
         type: Boolean, 
         default: false
-    }, 
-
+    },
     isCancelled: {
         type: Boolean, 
         default: false

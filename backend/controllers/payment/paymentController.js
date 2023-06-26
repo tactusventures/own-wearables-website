@@ -235,8 +235,8 @@ const paymentController = {
       let url  = `https://api-m.sandbox.paypal.com/v2/checkout/orders/${orderId}/capture`;  
     
       let access_token = req.session.access_info.access_token;
-      const uniqueId = uuidv4(); 
-      
+      const uniqueId = uuidv4();
+      console.log(access_token); 
       const headers = {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${access_token}`,
@@ -246,26 +246,26 @@ const paymentController = {
       let data = {
         name: "Raj"
       };
-      console.log(data);
       axios.post(`${url}`,data, {headers}).then(async (resp) => { 
         let updatedPayment;
         try{ 
           updatedPayment = await Payment.findOneAndUpdate({paymentId: resp.data.id}, {paymentStatus: resp.data.status});
-
         }catch(e){
+          console.log("broken There")
           console.log(e); 
         }
  
 
         try { 
-          let result = await Order.updateOne({_id: orderId}, {status: "COMPLETED", isPaid: true}); 
+          let result = await Order.updateOne({_id: updatedPayment.referenceId}, {status: "COMPLETED", isPaid: true, deliveryStatus: "ORDER_RECEIVED"}); 
 
         }catch(e) { 
+          console.log('broken here'); 
             return next(e); 
         }
         return res.status(200).json(resp.data);
       }).catch((e) => {
-        console.log(e); 
+       console.log('breking on this point'); 
         return next(e); 
       }); 
     },

@@ -1,18 +1,36 @@
 import React, {useEffect, useState,useRef} from 'react'; 
 import axios from 'axios';
 import Loader from '../../components/Spinner/Spinner'; 
-import { createOrder } from '../../http';
-const PaymentStep = ({product, orderId, loading, setStep}) => {
+import { createOrder, getOrder, loadItem } from '../../http';
+
+
+
+const PaymentStep = ({orderId, loading, setStep}) => {
     let btnRef = useRef();
     const [isLoading, setIsLoading] = useState(false); 
+    const [order, setOrder] = useState({});
+    const [product, setProduct] = useState({}); 
 
-    useEffect(() => {
+    useEffect(()=> { 
+        async function loadOrder(){ 
+            const orderData = await getOrder(orderId); 
+            const productData = await loadItem(orderData.data.productId); 
+            console.log(productData.data); 
+            setProduct(productData.data); 
+            setOrder(orderData.data);
+        }
+
+        loadOrder(); 
+    }, []); 
+
+
+
+   
         const proceedToOrder = ()  => { 
             
             if(btnRef.current){ 
                 btnRef.current.addEventListener('click', async (e) => {
-                    setIsLoading(true); 
-                   
+                    setIsLoading(true);  
 
                     try {
                         let res =  await createOrder({orderId, customId: product._id, price: product.price});
@@ -29,13 +47,6 @@ const PaymentStep = ({product, orderId, loading, setStep}) => {
                 }); 
             }
         }
-
-        proceedToOrder(); 
-    }, [loading]); 
-
-    
-
-
 
     return (
         <div className="left">
@@ -108,8 +119,9 @@ const PaymentStep = ({product, orderId, loading, setStep}) => {
                         isLoading?<Loader />: 
                         <>
                             <span>Pay With Paypal</span>
+                            {console.log("from Here", product)}
 
-                            <button style={{cursor: "pointer"}} ref={btnRef}>
+                            <button style={{cursor: "pointer"}} ref={btnRef} onClick={e => proceedToOrder(product)}>
                                 <img src='https://cdn-icons-png.flaticon.com/512/174/174861.png' />                        
                                 Checkout with Paypal
                             </button>

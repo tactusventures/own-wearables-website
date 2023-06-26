@@ -224,13 +224,12 @@ const registerController = {
         *  
         * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  */
     
-        let addresses = user.addresses; 
+        let addresses = user.addresses;
 
-        addresses.push(req.body); 
-        const {firstName, lastName, houseOrRoomNo, buildingOrArea, landMark, cityOrVillage, state, pincode, country, phoneNo, markAs} = req.body; 
+        addresses.push(req.body);
 
         try{ 
-           let result = await User.updateOne({_id: _id}, {addresses: addresses}); 
+           let result = await User.updateOne({_id: _id}, {addresses: addresses});
             
             return res.status(200).json({result}); 
         }catch(e) { 
@@ -240,7 +239,7 @@ const registerController = {
     
 
     // get addresses 
-    async getAddresses(req, res, next){ 
+    async   getAddresses(req, res, next){ 
         const {_id} = req.user; 
        
         try{ 
@@ -249,11 +248,7 @@ const registerController = {
             if(!user){ 
                 return next(CustomErrorHandler.userNotFound("User doesn't exists")); 
             }
-
-
-
             let addresses = user.addresses; 
-            
 
             return res.status(200).json({addresses: addresses}); 
 

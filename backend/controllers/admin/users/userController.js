@@ -43,22 +43,6 @@ const userController = {
 
         return res.render('users/view-user', user); 
     }, 
-
-
-    async getAllAddresses(req, res) { 
-        const {_id} = req.user; 
-
-
-        try{ 
-
-            const user = await User.findOne({_id: _id}); 
-            return res.status(200).json(user.addresses); 
-
-        }catch(e){
-            return next(CustomErrorHandler.invalidUser("Invalid User")); 
-        }
-        
-    }
 }
 
 export default userController;

@@ -1,33 +1,59 @@
 import axios from 'axios';
 import React, { useEffect, useState, useSyncExternalStore } from 'react'; 
-import { getOrder, updateSizeAndColor } from '../../http';
+import { getOrder, loadItem, updateSizeAndColor } from '../../http';
 
-const SummaryStep = ({product, orderId, setStep, setPrice}) => {
-
+const SummaryStep = ({orderId, setStep, setPrice}) => {
     // user     
-    const [order, setOrder] = useState({}); 
+    const [order, setOrder] = useState({});
+    const [product, setProduct] = useState({});  
     const [user, setUser] = useState(); 
     const [orderLoading, setOrderLoading] = useState(true); 
     const [size, setSize] = useState(null); 
     const [activeColor, setActiveColor] = useState(null); 
-    console.log(product); 
-    
-    useEffect(()  => {
-        async function fetchOrder(){
-            try{ 
-                let orderData = await getOrder(orderId); 
+
+    // products loading
+    useEffect(() => { 
+        async function loadProduct() { 
+            try{
+                let res = await getOrder(orderId);
+                setOrder(res.data); 
+                setSize(res.data.size); 
+                setActiveColor(res.data.color); 
+
+                let {productId} = res.data; 
+                setPrice(res.data.totalPrice); 
+
+                let productData = await loadItem(productId);
+                setProduct(productData.data); 
                 setOrderLoading(false);
-               setOrder(orderData.data); 
-               setSize(orderData.data.size); 
-                setActiveColor(orderData.data.color); 
-                
-            }catch(e) 
-            {   
+            }catch(e){ 
+                setProduct({});    
+                console.log(e); 
                 setOrderLoading(false); 
             }
         }
 
-        fetchOrder();
+        loadProduct(); 
+    }, []);
+  
+    
+    useEffect(()  => {
+        // async function fetchOrder(){
+        //     try{ 
+        //         let orderData = await getOrder(orderId); 
+        //         setOrder(orderData.data); 
+        //         setSize(orderData.data.size); 
+        //         setActiveColor(orderData.data.color); 
+        //         setOrderLoading(false);
+                
+        //     }catch(e) 
+        //     {   
+        //         alert('This is the reason'); 
+        //         setOrderLoading(false);     
+        //     }
+        // }
+
+        // fetchOrder();
     }, []);
 
 
@@ -40,6 +66,9 @@ const SummaryStep = ({product, orderId, setStep, setPrice}) => {
             console.log(e); 
         }
     }
+
+
+     
 
     return (    
         <div className="left">
@@ -99,55 +128,57 @@ const SummaryStep = ({product, orderId, setStep, setPrice}) => {
 
                         <>
                             <div>
-                        <div className="img">
-                           <img src={`${product?.images[order.color][0]}`} />
-                        </div>
-                    </div>
+                                <div className="img">
+                                    {console.log(order.color)}
+                                    {/* {console.log('from the staetment', product.images)} */}
+                                <img src={`${product?.images[order.color][0]}`} />
 
-                    <div className="content">
-                        <h2>Own shoe</h2>
-                        <div className="colors">
-                            <h4>Colors</h4>
-                            <div className='color__wrapper'>
-                                {
-                                    product?.colors.map((clr) => (
-                                        <div className='color_box'>
-                                            <div className={`color__img ${clr === activeColor?'active': ''}`}
-                                                onClick={e => setActiveColor(clr)}
-                                            >
-                                              <img src={`${product?.images[clr][0]}`} />
-                                            </div>
-                                            <h5>{clr}</h5>
-                                        </div>
-                                    ))
-                                }   
+                                </div>
                             </div>
-                            
-                        </div>
 
-                        <div className="sizes">
-                            <h4>Sizes</h4>
+                            <div className="content">
+                                <h2>Own shoe</h2>
+                                <div className="colors">
+                                    <h4>Colors</h4>
+                                    <div className='color__wrapper'>
+                                        {
+                                            product?.colors.map((clr) => (
+                                                <div className='color_box'>
+                                                    <div className={`color__img ${clr === activeColor?'active': ''}`}
+                                                        onClick={e => setActiveColor(clr)}
+                                                    >
+                                                    <img src={`${product?.images[clr][0]}`} />
+                                                    </div>
+                                                    <h5>{clr}</h5>
+                                                </div>
+                                            ))
+                                        }   
+                                    </div>
+                                    
+                                </div>
 
-                            <div className='size-box-wrapper'>
-                                    {
-                                        product.sizes.map((s, ind) => (
-                                            <div key={ind} className={`size-box ${s == size?'active':''}`}
-                                             onClick={e => setSize(s)}
-                                            >
-                                                {s}
-                                            </div>
-                                        ))
-                                    }
+                                <div className="sizes">
+                                    <h4>Sizes</h4>
+
+                                    <div className='size-box-wrapper'>
+                                            {
+                                                product.sizes.map((s, ind) => (
+                                                    <div key={ind} className={`size-box ${s == size?'active':''}`}
+                                                    onClick={e => setSize(s)}
+                                                    >
+                                                        {s}
+                                                    </div>
+                                                ))  
+                                            }
+                                    </div>
+                                    
+                                </div>
+
+                                <div className='buy-button'>
+                                    <button className='btn btn-primary' onClick={e => updateColorAndSize(e, activeColor, size, orderId)}
+                                    >Continue To Checkout</button>
+                                </div>
                             </div>
-                            
-                        </div>
-
-                        <div className='buy-button'>
-                            <button className='btn btn-primary' onClick={e => updateColorAndSize(e, activeColor, size, orderId)}
-                            >Continue To Checkout</button>
-                        </div>
-                    </div>
-                        
                         </>
                     }
                 </div>

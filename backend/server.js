@@ -77,8 +77,3 @@ const PORT = APP_PORT || 3001;
 server.listen(PORT, () => {
     console.log(`server has been started on Port ${PORT}`); 
 });
-
-
-io.on('connection', (socket) => { ;
-    socket.emit('display-message', "Hello world"); 
-}); 

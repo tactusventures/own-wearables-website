@@ -5390,9 +5390,28 @@ if (addImageToColorBtn) {
         color = _btn$dataset2.color;
       var productId = document.querySelector('.modal-product-id');
       var productColor = document.querySelector('.modal-color-name');
-      console.log(productId, productColor);
       productId.value = id;
       productColor.value = color;
+    });
+  });
+}
+
+// change the delivery status
+
+var deliveryStatus = document.getElementById('delivery_status');
+console.log(deliveryStatus);
+if (deliveryStatus) {
+  deliveryStatus.addEventListener('change', function (e) {
+    var value = e.target.value;
+    var orderId = deliveryStatus.dataset.orderid;
+    console.log(orderId);
+    axios__WEBPACK_IMPORTED_MODULE_0___default().post('/order/change-delivery-status', {
+      orderId: orderId,
+      value: value
+    }).then(function (res) {
+      notyf__WEBPACK_IMPORTED_MODULE_1__.Notyf.success("Order Status Changed");
+    })["catch"](function (e) {
+      notyf__WEBPACK_IMPORTED_MODULE_1__.Notyf.error("Something went Wrong");
     });
   });
 }

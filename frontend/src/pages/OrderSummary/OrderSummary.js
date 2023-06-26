@@ -23,7 +23,7 @@ const OrderSummary = () => {
     const [step, setStep] = useState(1);    
     const [price, setPrice] = useState(); 
     
-
+    
      
     // step object
     const proceedStep = {
@@ -40,27 +40,6 @@ const OrderSummary = () => {
 
     
 
-
-
-
-    useEffect(() => { 
-        async function loadProduct() { 
-            try{
-                let res = await getOrder(id); 
-                setOrder(res.data); 
-                let {item} = res.data; 
-                setPrice(res.data.totalPrice); 
-
-                let product = await loadItem(item);
-                setProduct(product.data); 
-                setLoading(false);
-            }catch(e){ 
-                setProduct({}); 
-            } 
-        }
-
-        loadProduct(); 
-    }, []); 
 
 
     

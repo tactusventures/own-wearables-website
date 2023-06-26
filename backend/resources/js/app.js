@@ -126,3 +126,26 @@ if(addImageToColorBtn) {
         })
     })
 }
+
+
+
+// change the delivery status
+
+
+const deliveryStatus = document.getElementById('delivery_status'); 
+console.log(deliveryStatus); 
+if(deliveryStatus) {
+    deliveryStatus.addEventListener('change', (e) => { 
+
+        const value = e.target.value; 
+        const orderId = deliveryStatus.dataset.orderid; 
+        console.log(orderId)
+        axios.post('/order/change-delivery-status', {orderId: orderId, value: value }).then((res) => { 
+            notyf.success("Order Status Changed"); 
+            console.log('working...'); 
+        }).catch((e) => {
+            console.log('not working....'); 
+            notyf.error("Something went wrong");  
+        }); 
+    }); 
+}

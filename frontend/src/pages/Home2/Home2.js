@@ -3,6 +3,7 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from 'react-slick'; 
 import "./home2.css"; 
 
+
 const Home2 = () => {
     
     const settings = {
@@ -150,6 +151,10 @@ const Home2 = () => {
                 <div className="pointed__specifications">
                     <h2>Pointed Specifications</h2>
                 </div>
+
+
+                {/* app */}
+
             </div>
     )
 }

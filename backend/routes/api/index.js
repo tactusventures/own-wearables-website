@@ -15,8 +15,7 @@ router.get('/get-user/:id', auth,  registerController.getUser);
 router.get('/refresh', registerController.refresh);
 router.post('/logout', auth,  loginController.logout); 
 router.post('/user/add-address', auth , registerController.addAddress)
-router.get('/user/get-addresses', auth, registerController.getAddresses); 
-router.get('/user/get-addresses', auth, userController.getAllAddresses); 
+router.get('/user/get-addresses', auth, registerController.getAddresses);  
 
 // oAuth2
 router.get('/auth/google', passport.authenticate('google', {scope: ['email', 'profile']})); 
@@ -25,26 +24,22 @@ function(req, res) {
   // Successful authentication, redirect home.
   res.redirect('/');
 });
-  
 
 // product
 router.post('/create-product', productController.storeProduct);
 router.post('/product/add-color', productController.addColor);
 router.get('/prdocuts/all',productController.allProducts);
-router.get('/product/get/:id', auth,   productController.getSingleProduct); 
+router.get('/product/get/:id',productController.getSingleProduct);
 
 
 // order
 router.post('/order/place-order',orderController.placeOrder);
-router.get('/orders/all', orderController.allOrders);
-router.get('/orders/delivered/all', orderController.allDeliveredOrders);
-router.get('/orders/un-delivered/all', orderController.allUnDeliveredOrders);
-router.post('/orders/cancel-order', orderController.cancelOrder);
-router.get('/order/all-cancelled-orders', orderController.cancelledOrders); 
+router.post('/orders/cancel-order', auth, orderController.cancelOrder);
+router.get('/order/all-cancelled-orders', auth , orderController.cancelledOrders);
 router.get('/order/get-order/:orderId', auth, orderController.getSingleOrder); 
-router.post('/order/increment-quantity', orderController.incrementQuantity); 
-router.post('/order/update-address',auth, orderController.updateOrderAddress); 
-router.post('/order/update-color-and-size', auth, orderController.updateSizeAndColor); 
+router.post('/order/increment-quantity', orderController.incrementQuantity);
+router.post('/order/update-address',auth, orderController.updateOrderAddress);
+router.post('/order/update-color-and-size', auth, orderController.updateSizeAndColor);
 
 // payment paypal
 router.post('/generate-credentials', paymentController.createCredentials);

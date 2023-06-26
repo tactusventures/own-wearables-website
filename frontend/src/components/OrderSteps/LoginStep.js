@@ -38,6 +38,7 @@ const LoginStep = ({product, order, setStep}) => {
     async function loginUser(e, formData){ 
        try{ 
             let res = await login(formData);
+            console.log(res.data); 
             dispatch(setUser(res.data));
             setStep((step) => step + 1); 
        }catch(err){

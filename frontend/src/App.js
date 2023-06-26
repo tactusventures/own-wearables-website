@@ -17,7 +17,6 @@ import Protected from './components/AuthRoutes/Protected';
 import { PersistGate } from 'redux-persist/integration/react';
 import Product2 from './pages/Product2/Product2';
 import Home2 from './pages/Home2/Home2';
- 
 
 
 function App() {
