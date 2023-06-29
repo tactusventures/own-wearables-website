@@ -47,9 +47,9 @@ const orderController = {
         let result = await order.save();
         return res.status(200).json(result); 
        }catch(e){
-        return next(e);     
+         return next(e);     
        }
-    },     
+    },
 
     async cancelOrder(req, res, next){
         try{    
@@ -66,7 +66,7 @@ const orderController = {
 
             // update the data
             const result = await Order.updateOne({_id: req.body.orderId}, {
-                isCancelled: true
+                $set: {isCancelled: true}
             }); 
 
             return res.status(200).json(result); 
@@ -102,7 +102,7 @@ const orderController = {
                 return next(CustomErrorHandler.invalidUser("Invalid User")); 
             }
             let product = await Product.findOne({_id: order.item}); 
-            await  Order.updateOne({_id: orderId}, {quantity: order.quantity + 1, totalPrice: order.totalPrice + product.price }); 
+            await  Order.updateOne({_id: orderId}, {$set: {quantity: order.quantity + 1, totalPrice: order.totalPrice + product.price}}); 
             return res.status(200).json({success: true}); 
         }catch(e) { 
 
@@ -127,15 +127,26 @@ const orderController = {
         }
 
         let user; 
-        let deliveryAddress;
+        let deliveryAddress = { 
+
+        };
 
         try {
             user = await User.findOne({_id: _id}); 
 
             let address = user.addresses[addressId]; 
-            deliveryAddress = `${address.houseOrRoomNo} ${address.buildingOrArea}, ${address.landmark}, ${address.cityOrVillage}, ${address.pincode}, ${address.state} ${address.country}`; 
+            let addressLine = `${address.houseOrRoomNo} ${address.buildingOrArea}, ${address.landmark}, ${address.cityOrVillage}, ${address.pincode}, ${address.state} ${address.country}`; 
+
+            
+            deliveryAddress['full_name'] = `${address.firstName} ${address.lastName}`; 
+            deliveryAddress['phone_no'] = `${address.phoneNo}`;
+            deliveryAddress['address_line'] = `${addressLine}`;
+            deliveryAddress['city'] = `${address.cityOrVillage}`;
+            deliveryAddress['pincode'] = address.pincode;
+            deliveryAddress['country'] = address.country;
 
         }catch(e) { 
+            console.log('problem is here'); 
             return next(e); 
         }
 
@@ -144,10 +155,10 @@ const orderController = {
         try{ 
             let userInfo = await User.findOne({_id: _id}); 
 
-            order = await Order.findOneAndUpdate({_id: req.body.orderId}, {deliveryAddress: {
-                addressId: addressId, 
+            order = await Order.findOneAndUpdate({_id: req.body.orderId}, {$set: {deliveryAddress: {
+                addressId: addressId,
                 address: deliveryAddress
-            }, customerId: userInfo._id, phoneNo: userInfo.phoneNo});
+            }, customerId: userInfo._id}});
 
             
             let userAddresses; 
@@ -183,7 +194,7 @@ const orderController = {
 
 
         try {   
-            const order = await Order.findOneAndUpdate({_id: req.body.orderId}, {size: req.body.size, color: req.body.color}); 
+            const order = await Order.findOneAndUpdate({_id: req.body.orderId}, {$set: {size: req.body.size, color: req.body.color}}); 
 
             return res.status(200).json({success: true}); 
         }catch(e){

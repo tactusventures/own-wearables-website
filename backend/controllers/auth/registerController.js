@@ -170,7 +170,7 @@ const registerController = {
 
 
         // update the refresh token  
-        await Refresh.updateOne({_id: user._id}, {token:  newRefreshToken}); 
+        await Refresh.updateOne({_id: user._id}, {$set: {token:  newRefreshToken}}); 
 
         // store the token in cookie
         res.cookie("refreshTtoken", newRefreshToken, {
@@ -229,7 +229,7 @@ const registerController = {
         addresses.push(req.body);
 
         try{ 
-           let result = await User.updateOne({_id: _id}, {addresses: addresses});
+           let result = await User.updateOne({_id: _id}, {$set: {addresses: addresses}});
             
             return res.status(200).json({result}); 
         }catch(e) { 

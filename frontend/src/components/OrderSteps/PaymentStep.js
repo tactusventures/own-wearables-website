@@ -6,7 +6,7 @@ import { createOrder, getOrder, loadItem } from '../../http';
 
 
 const PaymentStep = ({orderId, loading, setStep}) => {
-    let btnRef = useRef();
+    // let btnRef = useRef();
     const [isLoading, setIsLoading] = useState(false); 
     const [order, setOrder] = useState({});
     const [product, setProduct] = useState({}); 
@@ -26,26 +26,22 @@ const PaymentStep = ({orderId, loading, setStep}) => {
 
 
    
-        const proceedToOrder = ()  => { 
-            
-            if(btnRef.current){ 
-                btnRef.current.addEventListener('click', async (e) => {
-                    setIsLoading(true);  
+        const proceedToOrder = async ()  => { 
 
-                    try {
-                        let res =  await createOrder({orderId, customId: product._id, price: product.price});
-                        console.log(res); 
-                        // let orderId = res.data.id; 
-                        setIsLoading(false); 
-                        window.location = res.data.links[1].href; 
+            setIsLoading(true);  
 
-                    }catch(e){ 
+            try {
+                let res =  await createOrder({orderId, price: product.price});
+                console.log(res); 
+                // let orderId = res.data.id; 
+                setIsLoading(false); 
+                window.location = res.data.links[1].href; 
 
-                        console.log(e); 
-                    }
+            }catch(e){ 
 
-                }); 
+                console.log(e); 
             }
+
         }
 
     return (
@@ -121,7 +117,7 @@ const PaymentStep = ({orderId, loading, setStep}) => {
                             <span>Pay With Paypal</span>
                             {console.log("from Here", product)}
 
-                            <button style={{cursor: "pointer"}} ref={btnRef} onClick={e => proceedToOrder(product)}>
+                            <button style={{cursor: "pointer"}} onClick={e => proceedToOrder(product)}>
                                 <img src='https://cdn-icons-png.flaticon.com/512/174/174861.png' />                        
                                 Checkout with Paypal
                             </button>

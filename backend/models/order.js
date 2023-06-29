@@ -39,6 +39,12 @@ const orderSchema = new mongoose.Schema({
         default: false
     }
     , 
+    paymentId: { 
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'Payment',
+        required: false
+    }
+    , 
     paymentMode: {
         type: String, 
         required: true, 
@@ -48,18 +54,12 @@ const orderSchema = new mongoose.Schema({
         type: Object,  
         of: String, 
         required: false
-    }, 
-
-    phoneNo : {
-        type: String, 
-        required: false
-    }, 
+    },  
 
     deliveryStatus: { 
         type: String, 
         default: "INITIATED"
     }
-
     , 
     isDelivered: {
         type: Boolean, 

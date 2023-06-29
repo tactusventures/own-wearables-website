@@ -10,6 +10,9 @@ const  adminRouter = express.Router();
 
 
 adminRouter.get('/', adminHomeController.home); 
+// pdf 
+
+// adminRouter.get('/pdf', adminHomeController.getPdf); 
 
 // products
 
@@ -38,6 +41,9 @@ adminRouter.post('/messages/delete-message', adminMessageController.deleteMessag
 // orders 
 adminRouter.get('/order/get-all-orders', adminOrderController.getAllOrders); 
 adminRouter.post('/order/change-delivery-status', adminOrderController.changeDeliveryStatus); 
+
+
+
 
 
 export default adminRouter;

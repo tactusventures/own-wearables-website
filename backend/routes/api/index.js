@@ -31,23 +31,23 @@ router.post('/product/add-color', productController.addColor);
 router.get('/prdocuts/all',productController.allProducts);
 router.get('/product/get/:id',productController.getSingleProduct);
 
-
 // order
 router.post('/order/place-order',orderController.placeOrder);
-router.post('/orders/cancel-order', auth, orderController.cancelOrder);
-router.get('/order/all-cancelled-orders', auth , orderController.cancelledOrders);
-router.get('/order/get-order/:orderId', auth, orderController.getSingleOrder); 
-router.post('/order/increment-quantity', orderController.incrementQuantity);
 router.post('/order/update-address',auth, orderController.updateOrderAddress);
 router.post('/order/update-color-and-size', auth, orderController.updateSizeAndColor);
+
+
+router.post('/orders/cancel-order', auth, orderController.cancelOrder);
+router.get('/order/all-cancelled-orders', auth , orderController.cancelledOrders);
+router.get('/order/get-order/:orderId', auth, orderController.getSingleOrder);
+router.post('/order/increment-quantity', orderController.incrementQuantity);
 
 // payment paypal
 router.post('/generate-credentials', paymentController.createCredentials);
 router.post('/create-order', auth , paymentController.createOrder);
-router.post('/capture-payment', auth,paymentController.capturePayment);
-router.get('/get-payment-details', auth , paymentController.getPaymentDetails); 
-
-
+router.post('/capture-payment', auth,paymentController.capturePayment); 
+router.get('/get-payment-details/:paymentId',  paymentController.getPaymentDetails); 
+router.post('/payment/refund', paymentController.refundPayment); 
 
 // submit contact form 
 router.post("/send-message", contactController.sendMessage);

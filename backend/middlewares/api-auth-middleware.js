@@ -7,7 +7,7 @@ const auth = async (req, res, next) => {
     try {
         
         const {accessToken} = req.cookies;  
-
+        
                  
         if(!accessToken){ 
             throw new Error(); 

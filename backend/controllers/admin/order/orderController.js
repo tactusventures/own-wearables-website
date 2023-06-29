@@ -22,7 +22,7 @@ const orderController =  {
 
 
         try{ 
-            let  order = await Order.updateOne({_id: orderId}, {deliveryStatus: value});
+            let  order = await Order.updateOne({_id: orderId}, {$set: {deliveryStatus: value}});
             return res.status(200).json({success: true, message: "status changed successfully"}); 
         }catch(e){ 
             return res.status(500).json({success: false, message: "Something went wrong"}); 

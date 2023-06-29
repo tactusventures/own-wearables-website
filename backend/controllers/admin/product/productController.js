@@ -155,11 +155,12 @@ const productController = {
         const {id} = req.body; 
 
         try {
-            await Product.updateOne({id: id}, {isDeleted: true}); 
+            await Product.updateOne({id: id}, {$set: {isDeleted: true}}); 
             return res.status(200).json({all: "ok"}); 
         }catch(e) {         
             return res.status(500).json({all: "ok"}); 
         }
+
     }, 
 
     async addColorToProduct(req, res) {
@@ -199,7 +200,7 @@ const productController = {
             
 
                 try { 
-                    let result = await Product.updateOne({id: id}, {colors: colorsArr, images: images}); 
+                    let result = await Product.updateOne({id: id}, {$set: {colors: colorsArr, images: images}}); 
                     req.flash('success', "Color Added SuccessFully"); 
                     return res.redirect('back'); 
                 }catch(e) { 
@@ -248,7 +249,7 @@ const productController = {
         }
 
         try { 
-           await Product.updateOne({_id: id}, {productName, price, colors, sizes, description, images: newImages});  
+           await Product.updateOne({_id: id}, {$set: {productName, price, colors, sizes, description, images: newImages}});  
         }catch(e){
             res.flash('error', "Something went Wrong"); 
             return res.redirect('back'); 
@@ -282,7 +283,7 @@ const productController = {
 
 
         try {
-            await Product.updateOne({_id: id}, {images: images}); 
+            await Product.updateOne({_id: id}, {$set: {images: images}}); 
                 let pathToDelete = path.join(__dirname,  '../../../public'); 
                 deleteFiles([image], pathToDelete); 
             return res.status(200).json({success: true});        
@@ -325,7 +326,7 @@ const productController = {
             
             images[req.body.color] = colorImages; 
             try {
-                await Product.updateOne({_id: req.body.id}, {images: images}); 
+                await Product.updateOne({_id: req.body.id}, {$set: {images: images}}); 
             }catch(e){
                 deleteFiles(filePaths, pathToDelete); 
                 req.flash('error', "something went wrong"); 

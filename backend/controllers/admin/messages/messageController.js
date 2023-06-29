@@ -21,7 +21,7 @@ const messageController =  {
 
     async deleteMessage(req, res) {
         try {
-            let result =  await Contact.updateOne({_id: req.body.id}, {isDeleted: true});  
+            let result =  await Contact.updateOne({_id: req.body.id}, {$set: {isDeleted: true}});  
             return res.status(200).json({success: true, message: "Updated Succesfully"});
         } catch(e) {
             return res.status(500).json({success: false, message: "something went wrong"}); 

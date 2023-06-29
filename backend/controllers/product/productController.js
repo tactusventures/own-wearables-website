@@ -158,7 +158,7 @@ const productController   = {
                 totalQty.totalQty = parseInt(totalQty.totalQty) + parseInt(qty); 
             
                 // Saving the extra added colors, color's images and quantity in to the database
-                let result = await Product.findOneAndUpdate({_id: id}, {colors: [...product.colors, color.toLowerCase()], images : previousImages, quantity: totalQty});
+                let result = await Product.findOneAndUpdate({_id: id}, {$set: {colors: [...product.colors, color.toLowerCase()], images : previousImages, quantity: totalQty}});
                 return res.status(200).json(result);
             }catch(e){
                 deleteFiles(filePaths, next);  

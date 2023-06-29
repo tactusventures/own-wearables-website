@@ -22,4 +22,5 @@ async function generateToken(){
 }
 
 
+
 export default generateToken; 

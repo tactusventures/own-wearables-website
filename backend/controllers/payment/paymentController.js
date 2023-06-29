@@ -1,4 +1,4 @@
-import { generateAccessToken } from "../../services/payment/paypal";
+
 import axios from "axios";
 import { v4 as uuidv4 } from 'uuid';
 import paypalOrder from "../../validation/paypalOrder";
@@ -8,6 +8,9 @@ import Order from '../../models/order';
 import CustomErrorHandler from '../../services/customErrorHandler'; 
 import generateToken from "../../utils/generateToken";
 import { PAYPAL_CLIENT_ID, PAYPAL_SECRET_KEY } from "../../config";
+import createInvoice from "../../services/admin/pdfService";
+import path from "path";
+import Joi from "joi";
 
 
 
@@ -97,101 +100,123 @@ const paymentController = {
         access_info_session["expires_in"] = tken.expires_in;
         access_info_session["token_generation_time"] = new Date(); 
       }
-
-
         
       
-      let {orderId, customId, price} = req.body;
+      let {orderId, price} = req.body;
 
-      req.session.orderId = orderId; 
 
-      let access_token = req.session.access_info.access_token; 
+      // getting order Id
+      let order; 
+      try{  
+         order = await Order.findOne({id: req.body.orderId}); 
+        if(!order){
+          return next(CustomErrorHandler.recordNotFound("Order not found")); 
+        }
 
-      const uniqueId = uuidv4(); 
-      
+      }catch(e){
+        return next(e); 
+      }
+
+      req.session.orderId = orderId;
+
+      let access_token = req.session.access_info.access_token;
+
         const headers = {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${access_token}`,
-            'PayPal-Request-Id':uniqueId
+            'PayPal-Request-Id': orderId
         };  
+
+        // pricing breakdown
+        let deliveryFee = '50'; 
+
           
+     
+
+
+        // 
         const data = {
-            intent: 'CAPTURE',
-            purchase_units: [
-              {
-                reference_id: `${orderId}`,
-                custom_id: `${customId}`, 
-                amount: {
-                  currency_code: 'USD',
-                  value: `${price + 50}`
-                }, 
-                shipping: { 
-                  name: {
-                    full_name: 'John Doe'
+          intent: 'CAPTURE',
+          purchase_units: [
+            
+            {
+              reference_id: orderId,
+              amount: {
+                currency_code: 'USD',
+                value: `${order.totalPrice}`,
+                breakdown: {
+                  item_total: { 
+                    currency_code: 'USD',
+                    value: `${price}`,
                   },
-                  address: {
-                    address_line_1: '123 Main St',
-                    admin_area_2: 'San Jose',
-                    admin_area_1: 'CA',
-                    postal_code: '95131',
-                    country_code: 'US'
-                  }
-                }
-              }
-            ],  
-            payment_source: {
-              paypal: {
-                experience_context: {
-                  payment_method_preference: 'IMMEDIATE_PAYMENT_REQUIRED',
-                  payment_method_selected: 'PAYPAL',
-                  brand_name: 'Own Wearables',
-                  locale: 'en-US',
-                  landing_page: 'LOGIN',
-                  shipping_preference: 'SET_PROVIDED_ADDRESS',
-                  user_action: 'PAY_NOW',
-                  return_url: 'http://localhost:3000/order/capture-payment',
-                  cancel_url: 'http://localhost:3000/product'
-                }
-              }
-            }
+                },
+              },
+              items: [
+                {
+                  name: 'Own Shoe',
+                  unit_amount: {
+                    currency_code: 'USD',
+                    value: `${order.totalPrice}`,
+                  },
+                  quantity: '1',
+                },
+              ],
+              shipping: {
+                name: {
+                  full_name: `${order.deliveryAddress.address.full_name}`,
+                },
+                address: {
+                  address_line_1: `${order.deliveryAddress.address.address_line}`,
+                  admin_area_2: `${order.deliveryAddress.address.cityOrVillage}`,
+                  postal_code: `${order.deliveryAddress.address.pincode}`,
+                  country_code: 'US',
+                },
+              },
+            },
+          ],
+          application_context: {
+            brand_name: 'Own Wearables',
+            locale: 'en-US',
+            shipping_preference: 'SET_PROVIDED_ADDRESS',
+            user_action: 'PAY_NOW',
+            return_url: 'http://localhost:3000/order/capture-payment',
+            cancel_url: 'http://localhost:3000/product',
+          },
         };
-
-
-        // getting customer Id
-    
-        try{  
-          let order = await Order.findOne({id: req.body.orderId}); 
-          if(!order){
-            return next(CustomErrorHandler.recordNotFound("Order not found")); 
-          }
-
-          customerId = customerId;  
-        }catch(e){
-          return next(e); 
-        }
-
+        
 
         axios.post('https://api-m.sandbox.paypal.com/v2/checkout/orders', data, { headers })
         .then( async (response) => {
-            let payment = new Payment({
+
+              let payment = new Payment({
               paymentId: response.data.id, 
               paymentStatus: response.data.status,
               referenceId: req.body.orderId, 
               customerId
             }); 
 
-            try{
-              let result = await payment.save(); 
-            }catch(e){
-              return next(e);
-            }
+            let result; 
+             try{
+               result = await payment.save(); 
+               
+              }catch(e){
+                return next(e);
+              }
+
+              try {
+                console.log(orderId); 
+                await Order.updateOne({_id: orderId},{ $set: { status: "PAYMENT_INITIALIZED", paymentId: result._id } }); 
+
+              }catch(e){  
+                console.log(e); 
+                return next(e); 
+              }
             return res.status(200).json(response.data);
         })
         .catch(error => { 
-          // return res.status(500).json(error.data); 
-           return next(error);  
+          return next(error);  
         }); 
-    }, 
+    },
 
     async capturePayment(req, res, next){
 
@@ -236,59 +261,203 @@ const paymentController = {
     
       let access_token = req.session.access_info.access_token;
       const uniqueId = uuidv4();
-      console.log(access_token); 
+     
       const headers = {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${access_token}`,
         'Paypal-Request-Id': `${uniqueId}`
       };
 
-      let data = {
-        name: "Raj"
-      };
-      axios.post(`${url}`,data, {headers}).then(async (resp) => { 
-        let updatedPayment;
-        try{ 
-          updatedPayment = await Payment.findOneAndUpdate({paymentId: resp.data.id}, {paymentStatus: resp.data.status});
-        }catch(e){
-          console.log("broken There")
-          console.log(e); 
-        }
- 
+      
 
+      let data = {
+        brand_name: 'Own Wearables',
+      };
+
+      axios.post(`${url}`,data, {headers}).then(async (resp) => { 
+       let updatedPayment;
+        try{ 
+          updatedPayment = await Payment.findOneAndUpdate({paymentId: resp.data.id}, {$set: {paymentStatus: resp.data.status}});
+        }catch(e){
+          return next(e); 
+        }
+
+        let updatedOrder; 
         try { 
-          let result = await Order.updateOne({_id: updatedPayment.referenceId}, {status: "COMPLETED", isPaid: true, deliveryStatus: "ORDER_RECEIVED"}); 
+          updatedOrder = await Order.updateOne({_id: updatedPayment.referenceId}, {$set: {status: "COMPLETED", isPaid: true, deliveryStatus: "ORDER_RECEIVED"}}); 
 
         }catch(e) { 
-          console.log('broken here'); 
-            return next(e); 
+          return next(e); 
         }
+
+        console.log(resp.data.purchase_units[0].payments.captures[0].amount.value); 
+
+   
+         // generate the pdf
+         const invoice = { 
+          orderId: resp.data.purchase_units[0].reference_id,
+          shipping: {
+              name: resp.data.purchase_units[0].shipping.name.full_name,
+              address: resp.data.purchase_units[0].shipping.address.address_line_1,
+              city: resp.data.purchase_units[0].shipping.city,
+              state: resp.data.purchase_units[0].shipping.state,
+              country: 'US',
+              postal_code: resp.data.purchase_units[0].shipping.address.pincode,
+          },
+          items: [
+              { 
+                  item: "OWn Shoe"  ,
+                  description: '-',
+                  quantity: updatedOrder.quantity,
+                  amount: resp.data.purchase_units[0].payments.captures[0].amount.value * 100,
+              }
+          ],
+          subtotal: resp.data.purchase_units[0].payments.captures[0].amount.value * 100,
+          paid: resp.data.purchase_units[0].payments.captures[0].amount.value * 100,
+          invoice_nr: resp.data.id,
+      };
+
+        
+        let pdfPath = path.join(__dirname + `../../../public/invoices/${invoice.invoice_nr}.pdf`); 
+        let filePath = createInvoice(invoice, pdfPath);
+
+
         return res.status(200).json(resp.data);
       }).catch((e) => {
-       console.log('breking on this point'); 
+        console.log(e); 
         return next(e); 
       }); 
     },
 
-    getPaymentDetails(req, res, next){
+   async getPaymentDetails(req, res, next){
 
-      let url = "https://api.sandbox.paypal.com/v2/checkout/orders/79116895VM345634A"; 
+      console.log('hello, i am here....'); 
+      const {paymentId} = req.params; 
+      let url = `https://api.sandbox.paypal.com/v2/checkout/orders/${paymentId}`; 
+
+
+      let access_info = req.session.access_info;
+
+
+    
+      if(!access_info){
+        // generate 
+        let tken =  await generateToken(); 
+        if (!req.session.access_info) {
+          req.session.access_info = {}; 
+        }
+      
+        let access_info_session = req.session.access_info; 
+        
+        access_info_session["access_token"] = tken.access_token;
+        access_info_session["token_type"] = tken.token_type;
+        access_info_session["app_id"] = tken.app_id;
+        access_info_session["expires_in"] = tken.expires_in;
+        access_info_session["token_generation_time"] = new Date();  
+      }
+
+
       let access_token = req.session.access_info.access_token; 
       
       const headers = {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${access_token}`,
-      }; 
+        'Authorization': `Bearer ${access_token}`
+      };
 
 
         axios.get(`${url}`,{ headers })
         .then(response => {
-           
-          return res.status(200).json(response.data); 
+
+          // generate the pdf
+          const invoice = { 
+            orderId: response.data.purchase_units[0].reference_id,
+            shipping: {
+                name: response.data.purchase_units[0].shipping.name.full_name,
+                address: response.data.purchase_units[0].shipping.address.address_line_1,
+                city: response.data.purchase_units[0].shipping.city,
+                state: response.data.purchase_units[0].shipping.state,
+                country: 'US',
+                postal_code: response.data.purchase_units[0].shipping.address.pincode,
+            },
+            items: [
+                {
+                    item: response.data.purchase_units[0].items[0].name   ,
+                    description: 'Toner Cartridge',
+                    quantity: 1,
+                    amount: response.data.purchase_units[0].items[0].unit_amount.value * 100,
+                }
+            ],
+            subtotal: response.data.purchase_units[0].amount.value,
+            paid: response.data.purchase_units[0].amount.value,
+            invoice_nr: response.data.id,
+        };
+
+          
+          let pdfPath = path.join(__dirname + "../../../public/invoices/invoice.pdf"); 
+          let filePath = createInvoice(invoice, pdfPath);
+          console.log(filePath);
+
+          return res.status(200).json(response.data);
         })
         .catch(error => {
-           return next(error); 
+           return next(error);
         });
+    }, 
+
+    // refund 
+    async refundPayment(req, res, next){ 
+      let object = Joi.object({
+        paymentId: Joi.string().required()
+      });
+
+      const {error} = object.validate(req.body); 
+
+      if(error) { 
+        return next(error); 
+      }
+      
+      const {paymentId} = req.body;
+      let url  = `https://api-m.sandbox.paypal.com/v2/payments/captures/${paymentId}/refund`; 
+
+
+      let access_info = req.session.access_info;    
+
+
+      // if not access token generate one
+
+      if(!access_info){
+        // generate 
+        let tken =  await generateToken(); 
+        if (!req.session.access_info) {
+          req.session.access_info = {}; 
+        }
+      
+        let access_info_session = req.session.access_info; 
+        
+        access_info_session["access_token"] = tken.access_token;
+        access_info_session["token_type"] = tken.token_type;
+        access_info_session["app_id"] = tken.app_id;
+        access_info_session["expires_in"] = tken.expires_in;
+        access_info_session["token_generation_time"] = new Date();  
+      }
+
+
+      let access_token = req.session.access_info.access_token; 
+      
+      const headers = {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${access_token}`
+      };
+
+
+      // calling the refund api
+
+      axios.post(`${url}`,{}, { headers }).then((response) => { 
+          return res.status(200).json(response); 
+      }).catch((e) => { 
+          console.log(e);  
+          return next(e); 
+      }); 
     }
 }
 
