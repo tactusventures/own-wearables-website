@@ -10,9 +10,8 @@ import generateToken from "../../utils/generateToken";
 import { PAYPAL_CLIENT_ID, PAYPAL_SECRET_KEY } from "../../config";
 import createInvoice from "../../services/admin/pdfService";
 import path from "path";
-import Joi from "joi";
-
-
+import Joi, { date } from "joi";  
+import PaymentService from "../../services/payment/paymentService";
 
 const paymentController = {
     async createCredentials(req, res, next){
@@ -275,7 +274,7 @@ const paymentController = {
       };
 
       axios.post(`${url}`,data, {headers}).then(async (resp) => { 
-       let updatedPayment;
+       let updatedPayment;  
         try{ 
           updatedPayment = await Payment.findOneAndUpdate({paymentId: resp.data.id}, {$set: {paymentStatus: resp.data.status}});
         }catch(e){
@@ -284,7 +283,7 @@ const paymentController = {
 
         let updatedOrder; 
         try { 
-          updatedOrder = await Order.updateOne({_id: updatedPayment.referenceId}, {$set: {status: "COMPLETED", isPaid: true, deliveryStatus: "ORDER_RECEIVED"}}); 
+          updatedOrder = await Order.updateOne({_id: updatedPayment.referenceId}, {$set: {status: "COMPLETED", isActive: true}}); 
 
         }catch(e) { 
           return next(e); 
@@ -324,8 +323,7 @@ const paymentController = {
 
         return res.status(200).json(resp.data);
       }).catch((e) => {
-        console.log(e); 
-        return next(e); 
+          return next(e); 
       }); 
     },
 
@@ -353,7 +351,7 @@ const paymentController = {
         access_info_session["token_type"] = tken.token_type;
         access_info_session["app_id"] = tken.app_id;
         access_info_session["expires_in"] = tken.expires_in;
-        access_info_session["token_generation_time"] = new Date();  
+        access_info_session["token_generation_time"] = new Date();
       }
 
 
@@ -402,7 +400,7 @@ const paymentController = {
         .catch(error => {
            return next(error);
         });
-    }, 
+    },
 
     // refund 
     async refundPayment(req, res, next){ 
@@ -410,55 +408,86 @@ const paymentController = {
         paymentId: Joi.string().required()
       });
 
-      const {error} = object.validate(req.body); 
+      let {error} = object.validate(req.body); 
 
       if(error) { 
         return next(error); 
       }
+
+
+      
       
       const {paymentId} = req.body;
-      let url  = `https://api-m.sandbox.paypal.com/v2/payments/captures/${paymentId}/refund`; 
 
-
-      let access_info = req.session.access_info;    
-
-
-      // if not access token generate one
-
-      if(!access_info){
-        // generate 
-        let tken =  await generateToken(); 
-        if (!req.session.access_info) {
-          req.session.access_info = {}; 
-        }
-      
-        let access_info_session = req.session.access_info; 
-        
-        access_info_session["access_token"] = tken.access_token;
-        access_info_session["token_type"] = tken.token_type;
-        access_info_session["app_id"] = tken.app_id;
-        access_info_session["expires_in"] = tken.expires_in;
-        access_info_session["token_generation_time"] = new Date();  
+      let resData = await PaymentService.refundPayment(paymentId, req); 
+    
+      if(resData['error'])
+      {
+        return next(resData['error']);
       }
 
 
-      let access_token = req.session.access_info.access_token; 
+
+      return res.status(200).json({success: true, data: resData.data}); 
+      // console.log(paymentId); 
+      // let url  = `https://api-m.sandbox.paypal.com/v2/payments/captures/${paymentId}/refund`; 
       
-      const headers = {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${access_token}`
-      };
+      // let access_info = req.session.access_info;
+      
+
+      // // if not access token generate ones
+
+      // if(!access_info){
+      //   // generate
+      //   let tken =  await generateToken(); 
+      //   if (!req.session.access_info) {
+      //     req.session.access_info = {}; 
+      //   }
+      
+      //   let access_info_session = req.session.access_info; 
+        
+      //   access_info_session["access_token"] = tken.access_token;
+      //   access_info_session["token_type"] = tken.token_type;
+      //   access_info_session["app_id"] = tken.app_id;
+      //   access_info_session["expires_in"] = tken.expires_in;
+      //   access_info_session["token_generation_time"] = new Date();
+      // }
 
 
-      // calling the refund api
+      // let access_token = req.session.access_info.access_token; 
+      
+      // const headers = {
+      //   'Content-Type': 'application/json',
+      //   'Authorization': `Bearer ${access_token}`
+      // };
 
-      axios.post(`${url}`,{}, { headers }).then((response) => { 
-          return res.status(200).json(response); 
-      }).catch((e) => { 
-          console.log(e);  
-          return next(e); 
-      }); 
+
+      // // calling the refund api
+    
+      // let data  = { 
+      //   amount: {
+      //     currency_code: "USD",
+      //     value: "300.00"   // Replace with the actual full   
+      //   }, 
+
+      //   note_to_paymer: "DefectiveProduct", 
+      //   payment_instruction: {           
+      //   }
+      // }
+
+      // axios.post(`${url}`,data , { headers }).then((response) => { 
+
+      //     return res.status(200).json({
+      //       success: true, 
+      //       data:  response.data
+      //     }); 
+
+      // }).catch((e) => { 
+      //   console.log(e);  
+      //   return res.status(500).json(e); 
+      //     return next(e); 
+      // }); 
     }
 }
 
-export default paymentController;
+export default paymentController; 

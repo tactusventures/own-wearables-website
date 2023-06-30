@@ -14,20 +14,20 @@ const orderController =  {
         }
     }, 
 
-    async changeDeliveryStatus(req, res){ 
+    // async changeDeliveryStatus(req, res){ 
 
 
        
-        const {value, orderId} = req.body; 
+    //     const {value, orderId} = req.body; 
 
 
-        try{ 
-            let  order = await Order.updateOne({_id: orderId}, {$set: {deliveryStatus: value}});
-            return res.status(200).json({success: true, message: "status changed successfully"}); 
-        }catch(e){ 
-            return res.status(500).json({success: false, message: "Something went wrong"}); 
-        }
-    }
+    //     try{ 
+    //         let  order = await Order.updateOne({_id: orderId}, {$set: {deliveryStatus: value}});
+    //         return res.status(200).json({success: true, message: "status changed successfully"}); 
+    //     }catch(e){ 
+    //         return res.status(500).json({success: false, message: "Something went wrong"}); 
+    //     }
+    // }
 }
 
 export default orderController;

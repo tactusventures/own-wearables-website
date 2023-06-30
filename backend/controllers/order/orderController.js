@@ -66,8 +66,8 @@ const orderController = {
 
             // update the data
             const result = await Order.updateOne({_id: req.body.orderId}, {
-                $set: {isCancelled: true}
-            }); 
+                $set: {status: "CANCELLED", isActive: false}
+            });
 
             return res.status(200).json(result); 
         }catch(e){
@@ -77,7 +77,7 @@ const orderController = {
 
     async cancelledOrders(req, res, next){
         try{
-            let cancelledOrders = await Order.find({isCancelled: true}); 
+            let cancelledOrders = await Order.find({status: "CANCELLED"}); 
             return res.status(200).json(cancelledOrders); 
         }catch(e){
             return next(e); 
@@ -128,7 +128,6 @@ const orderController = {
 
         let user; 
         let deliveryAddress = { 
-
         };
 
         try {

@@ -45,7 +45,7 @@ router.post('/order/increment-quantity', orderController.incrementQuantity);
 // payment paypal
 router.post('/generate-credentials', paymentController.createCredentials);
 router.post('/create-order', auth , paymentController.createOrder);
-router.post('/capture-payment', auth,paymentController.capturePayment); 
+router.post('/capture-payment', auth,paymentController.capturePayment);
 router.get('/get-payment-details/:paymentId',  paymentController.getPaymentDetails); 
 router.post('/payment/refund', paymentController.refundPayment); 
 

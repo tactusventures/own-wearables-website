@@ -14,6 +14,16 @@ const orderSchema = new mongoose.Schema({
     productId: {
         type: mongoose.Schema.Types.ObjectId, 
         required: true
+    }
+    , 
+    paymentId: { 
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'Payment',
+        default: null
+    },
+    isActive: { 
+        type: Boolean, 
+        default: false
     }, 
     color: {
         type: String, 
@@ -32,44 +42,18 @@ const orderSchema = new mongoose.Schema({
     totalPrice: {
         type: Number, 
         required: true
-    }, 
- 
-    isPaid: {
-        type: String, 
-        default: false
-    }
-    , 
-    paymentId: { 
-        type: mongoose.Schema.Types.ObjectId, 
-        ref: 'Payment',
-        required: false
     }
     , 
     paymentMode: {
         type: String, 
         required: true, 
     }, 
-
+    
     deliveryAddress: {
         type: Object,  
         of: String, 
-        required: false
-    },  
-
-    deliveryStatus: { 
-        type: String, 
-        default: "INITIATED"
+        default: null
     }
-    , 
-    isDelivered: {
-        type: Boolean, 
-        default: false
-    },
-    isCancelled: {
-        type: Boolean, 
-        default: false
-    }
-}); 
+});
 
 export default mongoose.model('Order', orderSchema);
-
