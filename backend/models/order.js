@@ -1,5 +1,8 @@
 import { bool, number, string } from 'joi';
 import mongoose from 'mongoose'; 
+import { orderInitiated } from '../config';
+
+
 
 const orderSchema = new mongoose.Schema({
     customerId: {
@@ -8,7 +11,7 @@ const orderSchema = new mongoose.Schema({
     }, 
     status: {
         type: String, 
-        default: "INITIATED"
+        default: orderInitiated
     }
     , 
     productId: {

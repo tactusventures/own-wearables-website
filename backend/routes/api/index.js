@@ -14,6 +14,8 @@ router.post('/login', loginController.login);
 router.get('/get-user/:id', auth,  registerController.getUser);
 router.get('/refresh', registerController.refresh);
 router.post('/logout', auth,  loginController.logout); 
+
+// add the user address
 router.post('/user/add-address', auth , registerController.addAddress)
 router.get('/user/get-addresses', auth, registerController.getAddresses);  
 
@@ -25,11 +27,11 @@ function(req, res) {
   res.redirect('/');
 });
 
-// product
+// product 
 router.post('/create-product', productController.storeProduct);
 router.post('/product/add-color', productController.addColor);
 router.get('/prdocuts/all',productController.allProducts);
-router.get('/product/get/:id',productController.getSingleProduct);
+router.get('/product/get/:id', auth ,productController.getSingleProduct);
 
 // order
 router.post('/order/place-order',orderController.placeOrder);
@@ -40,16 +42,16 @@ router.post('/order/update-color-and-size', auth, orderController.updateSizeAndC
 router.post('/orders/cancel-order', auth, orderController.cancelOrder);
 router.get('/order/all-cancelled-orders', auth , orderController.cancelledOrders);
 router.get('/order/get-order/:orderId', auth, orderController.getSingleOrder);
-router.post('/order/increment-quantity', orderController.incrementQuantity);
+router.post('/order/increment-quantity', auth, orderController.incrementQuantity);
 
 // payment paypal
-router.post('/generate-credentials', paymentController.createCredentials);
+// router.post('/generate-credentials',  paymentController.createCredentials);
 router.post('/create-order', auth , paymentController.createOrder);
 router.post('/capture-payment', auth,paymentController.capturePayment);
-router.get('/get-payment-details/:paymentId',  paymentController.getPaymentDetails); 
-router.post('/payment/refund', paymentController.refundPayment); 
+router.get('/get-payment-details/:paymentId', auth,  paymentController.getPaymentDetails); 
+router.post('/payment/refund',auth,  paymentController.refundPayment);
 
-// submit contact form 
+// submit contact form
 router.post("/send-message", contactController.sendMessage);
 
 export default router;

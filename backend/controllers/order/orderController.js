@@ -4,6 +4,7 @@ import Product from "../../models/product";
 import CustomErrorHandler from "../../services/customErrorHandler";
 import User from "../../models/user";
 import Joi from "joi";
+import { cancelled } from "../../config";
 
 
 const orderController = {
@@ -66,7 +67,7 @@ const orderController = {
 
             // update the data
             const result = await Order.updateOne({_id: req.body.orderId}, {
-                $set: {status: "CANCELLED", isActive: false}
+                $set: {status: cancelled, isActive: false}
             });
 
             return res.status(200).json(result); 
@@ -77,7 +78,7 @@ const orderController = {
 
     async cancelledOrders(req, res, next){
         try{
-            let cancelledOrders = await Order.find({status: "CANCELLED"}); 
+            let cancelledOrders = await Order.find({isActive: false, status: cancelled}); 
             return res.status(200).json(cancelledOrders); 
         }catch(e){
             return next(e); 

@@ -7,7 +7,7 @@ import Payment from "../../models/payment";
 import Order from '../../models/order';
 import CustomErrorHandler from '../../services/customErrorHandler'; 
 import generateToken from "../../utils/generateToken";
-import { PAYPAL_CLIENT_ID, PAYPAL_SECRET_KEY } from "../../config";
+import { PAYPAL_CLIENT_ID, PAYPAL_SECRET_KEY, orderPaymentInitialized, orderPlaced } from "../../config";
 import createInvoice from "../../services/admin/pdfService";
 import path from "path";
 import Joi, { date } from "joi";  
@@ -204,7 +204,7 @@ const paymentController = {
 
               try {
                 console.log(orderId); 
-                await Order.updateOne({_id: orderId},{ $set: { status: "PAYMENT_INITIALIZED", paymentId: result._id } }); 
+                await Order.updateOne({_id: orderId},{ $set: { status: orderPaymentInitialized, paymentId: result._id } }); 
 
               }catch(e){  
                 console.log(e); 
@@ -283,8 +283,7 @@ const paymentController = {
 
         let updatedOrder; 
         try { 
-          updatedOrder = await Order.updateOne({_id: updatedPayment.referenceId}, {$set: {status: "COMPLETED", isActive: true}}); 
-
+          updatedOrder = await Order.updateOne({_id: updatedPayment.referenceId}, {$set: {status: orderPlaced, isActive: true}});
         }catch(e) { 
           return next(e); 
         }
@@ -305,7 +304,7 @@ const paymentController = {
           },
           items: [
               { 
-                  item: "OWn Shoe"  ,
+                  item: "OWn Shoe",
                   description: '-',
                   quantity: updatedOrder.quantity,
                   amount: resp.data.purchase_units[0].payments.captures[0].amount.value * 100,
