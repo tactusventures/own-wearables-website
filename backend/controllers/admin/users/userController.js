@@ -8,15 +8,15 @@ const userController = {
         let page = req.query.page || 1; 
         let users = [];     
         let count =0; 
-        try { 
-            count = await User.countDocuments(); 
-
-        }catch(e) { 
-            req.flash("error", "Something went wrong"); 
-            return res.redirect('back'); 
+        try {
+            count = await User.countDocuments();
+        }catch(e) {
+            req.flash("error", "Something went wrong");
+            return res.redirect('back');
         }
 
-        let totalPages = Math.ceil(count/perPage); 
+        let totalPages = Math.ceil(count/perPage);
+        
 
         
         try {
@@ -33,15 +33,16 @@ const userController = {
 
     async viewUser(req, res) { 
         const {id} = req.params; 
+       
         let user; 
         try {
-             user = await User.findOne({_id: id}); 
+            user = await User.findOne({_id: id}); 
         }catch(e) { 
             user = {}; 
             req.flash('error', "Something went wrong"); 
         }
 
-        return res.render('users/view-user', user); 
+        return res.render('users/view-user', {user}); 
     }, 
 }
 

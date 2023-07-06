@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^0.27.2",
+    "bcrypt": "^5.1.0",
     "bcryptjs": "2.4.3",
     "connect-mongo": "4.6.0",
     "cookie-parser": "1.4.6",
@@ -33,6 +34,7 @@
     "notyf": "3.10.0",
     "passport": "0.6.0",
     "passport-google-oauth2": "0.2.0",
+    "passport-local": "^1.0.0",
     "paypal-rest-sdk": "1.8.1",
     "pdfkit": "^0.13.0",
     "pdfmake": "^0.2.7",

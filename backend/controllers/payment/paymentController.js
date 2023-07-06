@@ -62,6 +62,7 @@ const paymentController = {
 
       let {_id: customerId} = req.user; 
 
+      
 
       let access_info = req.session.access_info; 
 
@@ -88,6 +89,7 @@ const paymentController = {
       const expiresAt = new Date().getTime() + (expires_in * 1000); 
       const isExpired = expiresAt < new Date().getTime(); 
 
+
       if(isExpired){
         let tken =  await generateToken(); 
 
@@ -99,6 +101,8 @@ const paymentController = {
         access_info_session["expires_in"] = tken.expires_in;
         access_info_session["token_generation_time"] = new Date(); 
       }
+
+
         
       
       let {orderId, price} = req.body;
@@ -184,8 +188,12 @@ const paymentController = {
         };
         
 
+
+
         axios.post('https://api-m.sandbox.paypal.com/v2/checkout/orders', data, { headers })
         .then( async (response) => {
+
+              console.log("inside the response block"); 
 
               let payment = new Payment({
               paymentId: response.data.id, 
@@ -276,9 +284,10 @@ const paymentController = {
       axios.post(`${url}`,data, {headers}).then(async (resp) => { 
        let updatedPayment;  
         try{ 
-          updatedPayment = await Payment.findOneAndUpdate({paymentId: resp.data.id}, {$set: {paymentStatus: resp.data.status}});
+          updatedPayment = await Payment.findOneAndUpdate({paymentId: resp.data.id}, {$set: {paymentStatus: resp.data.status, captureId: resp.data.purchase_units[0].payments.captures[0].id
+          }});
         }catch(e){
-          return next(e); 
+          return next(e);
         }
 
         let updatedOrder; 
@@ -402,91 +411,37 @@ const paymentController = {
     },
 
     // refund 
-    async refundPayment(req, res, next){ 
+    async refundPayment(req, res, next) { 
+
       let object = Joi.object({
         paymentId: Joi.string().required()
       });
 
-      let {error} = object.validate(req.body); 
+      let {error} = object.validate(req.body);
 
       if(error) { 
-        return next(error); 
-      }
-
-
-      
+        return next(error);
+      }   
       
       const {paymentId} = req.body;
+      let paymentData; 
+      try { 
+          paymentData  = await Payment.find({paymentId: paymentId}); 
+      }catch(e)  
+      {
+        return next(e);
+      }
 
-      let resData = await PaymentService.refundPayment(paymentId, req); 
+      let resData = await PaymentService.refundPayment(paymentData.captureId, req);
     
       if(resData['error'])
       {
         return next(resData['error']);
       }
 
+      return res.status(200).json({success: true, data: resData.data});
 
-
-      return res.status(200).json({success: true, data: resData.data}); 
-      // console.log(paymentId); 
-      // let url  = `https://api-m.sandbox.paypal.com/v2/payments/captures/${paymentId}/refund`; 
-      
-      // let access_info = req.session.access_info;
-      
-
-      // // if not access token generate ones
-
-      // if(!access_info){
-      //   // generate
-      //   let tken =  await generateToken(); 
-      //   if (!req.session.access_info) {
-      //     req.session.access_info = {}; 
-      //   }
-      
-      //   let access_info_session = req.session.access_info; 
-        
-      //   access_info_session["access_token"] = tken.access_token;
-      //   access_info_session["token_type"] = tken.token_type;
-      //   access_info_session["app_id"] = tken.app_id;
-      //   access_info_session["expires_in"] = tken.expires_in;
-      //   access_info_session["token_generation_time"] = new Date();
-      // }
-
-
-      // let access_token = req.session.access_info.access_token; 
-      
-      // const headers = {
-      //   'Content-Type': 'application/json',
-      //   'Authorization': `Bearer ${access_token}`
-      // };
-
-
-      // // calling the refund api
-    
-      // let data  = { 
-      //   amount: {
-      //     currency_code: "USD",
-      //     value: "300.00"   // Replace with the actual full   
-      //   }, 
-
-      //   note_to_paymer: "DefectiveProduct", 
-      //   payment_instruction: {           
-      //   }
-      // }
-
-      // axios.post(`${url}`,data , { headers }).then((response) => { 
-
-      //     return res.status(200).json({
-      //       success: true, 
-      //       data:  response.data
-      //     }); 
-
-      // }).catch((e) => { 
-      //   console.log(e);  
-      //   return res.status(500).json(e); 
-      //     return next(e); 
-      // }); 
     }
 }
 
-export default paymentController; 
+export default paymentController;

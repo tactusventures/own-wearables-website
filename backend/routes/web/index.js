@@ -1,18 +1,22 @@
 import express from 'express'; 
-import { adminHomeController, adminMessageController, adminOrderController, adminProductController, adminUserController } from '../../controllers';
-
-
+import { adminHomeController, adminMessageController, adminOrderController, adminProductController, adminUserController, adminAuthController } from '../../controllers';
+import webAuth from '../../middlewares/admin/auth';
+import guest from '../../middlewares/admin/guest';
 
 
 
 
 const  adminRouter = express.Router();
 
+ 
 
-adminRouter.get('/', adminHomeController.home); 
-// pdf 
+adminRouter.get('/', webAuth,  adminHomeController.home); 
 
-// adminRouter.get('/pdf', adminHomeController.getPdf); 
+// auth 
+adminRouter.get('/login',guest, adminAuthController.login);
+adminRouter.post('/auth/login', guest, adminAuthController.postLogin);
+
+adminRouter.get('/auth/logout', webAuth, adminAuthController.logout); 
 
 // products
 
@@ -27,7 +31,7 @@ adminRouter.post('/products/edit-product', adminProductController.updateProduct)
 
 adminRouter.post('/products/delete-product-image', adminProductController.deleteProductImage); 
 adminRouter.post('/products/add-color-image', adminProductController.addImageToProduct); 
-
+      
 
 // users
 adminRouter.get('/users/all-users', adminUserController.allUsers); 
@@ -41,9 +45,6 @@ adminRouter.post('/messages/delete-message', adminMessageController.deleteMessag
 // orders 
 adminRouter.get('/order/get-all-orders', adminOrderController.getAllOrders); 
 // adminRouter.post('/order/change-delivery-status', adminOrderController.changeDeliveryStatus); 
-
-
-
 
 
 export default adminRouter;

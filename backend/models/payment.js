@@ -26,9 +26,13 @@ const paymentSchema =  new mongoose.Schema({
 
     payerAccountId: {
         type: String, 
-    }
+    }, 
 
+    captureId: { 
+        type: String, 
+        default: null
+    }
 }); 
 
 
-export default mongoose.model('Payment', paymentSchema); 
+export default mongoose.model('Payment', paymentSchema);

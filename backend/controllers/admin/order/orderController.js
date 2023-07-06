@@ -3,31 +3,37 @@ import Order from "../../../models/order";
 
 
 const orderController =  { 
-    async getAllOrders(req, res){ 
+    async getAllOrders(req, res, next){ 
         let orders; 
-        try{ 
-            let allOrders = await Order.find({status: "COMPLETED"}); 
+        let perPage; 
+        let page = req.query.page ||  1; 
+        let count =0;
 
-            return res.render('order/allOrders', {orders: allOrders});  
+
+        try {
+            count = await Order.countDocuments();
+        }catch(e) {
+            req.flash("error", "Something went wrong");
+            return res.redirect('back');
+        }
+
+        console.log(count); 
+        let totalPages = Math.ceil(count/perPage);
+
+
+        try{ 
+            perPage = 1;
+            
+            let allOrders = await Order.find().skip((page * perPage) - perPage).limit(perPage).sort({createdAt: -1}); 
+
+            
+            return res.render('order/allOrders', {orders: allOrders, totalPages, page});
         }catch(e){
             return next(e); 
         }
     }, 
 
-    // async changeDeliveryStatus(req, res){ 
-
-
-       
-    //     const {value, orderId} = req.body; 
-
-
-    //     try{ 
-    //         let  order = await Order.updateOne({_id: orderId}, {$set: {deliveryStatus: value}});
-    //         return res.status(200).json({success: true, message: "status changed successfully"}); 
-    //     }catch(e){ 
-    //         return res.status(500).json({success: false, message: "Something went wrong"}); 
-    //     }
-    // }
+    
 }
 
 export default orderController;

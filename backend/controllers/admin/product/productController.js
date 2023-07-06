@@ -300,7 +300,6 @@ const productController = {
 
             if(err) { 
                 req.flash('error', "something went wrong");  
-
                 deleteFiles(filePaths, pathToDelete); 
                 return res.redirect('back'); 
             }
@@ -333,7 +332,7 @@ const productController = {
                 return res.redirect('back');
             }
             req.flash('success', "Images added Successfully"); 
-            return res.redirect('back'); 
+            return res.redirect('back');
         });     
     }
 }

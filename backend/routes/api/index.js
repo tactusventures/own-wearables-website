@@ -27,6 +27,7 @@ function(req, res) {
   res.redirect('/');
 });
 
+
 // product 
 router.post('/create-product', productController.storeProduct);
 router.post('/product/add-color', productController.addColor);
@@ -46,12 +47,12 @@ router.post('/order/increment-quantity', auth, orderController.incrementQuantity
 
 // payment paypal
 // router.post('/generate-credentials',  paymentController.createCredentials);
-router.post('/create-order', auth , paymentController.createOrder);
-router.post('/capture-payment', auth,paymentController.capturePayment);
-router.get('/get-payment-details/:paymentId', auth,  paymentController.getPaymentDetails); 
-router.post('/payment/refund',auth,  paymentController.refundPayment);
+router.post('/payment/create-order', auth , paymentController.createOrder);
+router.post('/payment/capture-payment', auth,paymentController.capturePayment);
+router.get('/payment/get-payment-details/:paymentId', auth,  paymentController.getPaymentDetails); 
+router.post('/payment/payment/refund',auth,  paymentController.refundPayment);
 
 // submit contact form
-router.post("/send-message", contactController.sendMessage);
+router.post("/contact/send-message", contactController.sendMessage);
 
 export default router;

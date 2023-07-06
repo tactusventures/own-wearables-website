@@ -12,3 +12,4 @@ export { default as adminProductController} from './admin/product/productControl
 export {default as adminUserController } from './admin/users/userController'; 
 export {default as adminMessageController} from './admin/messages/messageController'; 
 export {default as adminOrderController}  from './admin/order/orderController'; 
+export { default as adminAuthController}  from './admin/auth/adminAuthController'; 
