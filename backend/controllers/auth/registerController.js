@@ -160,6 +160,15 @@ const registerController = {
                 return res.status(404).json({message: "No user"}); 
             }
 
+
+            if(user.isDisabled){ 
+                return next(CustomErrorHandler.invalidUser("Your Account has been Disabled")); 
+            }
+
+            if(user.isDeleted){ 
+                return next(CustomErrorHandler.invalidUser("Your Account has been deleted")); 
+            }
+            
         }catch(e){
             return next(e); 
         }

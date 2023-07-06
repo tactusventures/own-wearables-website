@@ -134,6 +134,16 @@ const orderController = {
         try {
             user = await User.findOne({_id: _id}); 
 
+            if(user.isDeleted){ 
+                return next(CustomErrorHandler.invalidUser("Your Account has been deleted")); 
+            }
+
+
+            if(user.isDisabled){ 
+                return next(CustomErrorHandler.invalidUser("Your Account Has Been Disabled")); 
+            }
+
+            
             let address = user.addresses[addressId]; 
             let addressLine = `${address.houseOrRoomNo} ${address.buildingOrArea}, ${address.landmark}, ${address.cityOrVillage}, ${address.pincode}, ${address.state} ${address.country}`; 
 

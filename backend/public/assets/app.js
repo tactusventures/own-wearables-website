@@ -5409,9 +5409,100 @@ if (deliveryStatus) {
       orderId: orderId,
       value: value
     }).then(function (res) {
-      notyf__WEBPACK_IMPORTED_MODULE_1__.Notyf.success("Order Status Changed");
+      notyf.success("Order Status Changed");
+      console.log('working...');
     })["catch"](function (e) {
-      notyf__WEBPACK_IMPORTED_MODULE_1__.Notyf.error("Something went Wrong");
+      console.log('not working....');
+      notyf.error("Something went wrong");
+    });
+  });
+}
+
+// delete the user
+
+var allUsers = document.querySelectorAll('.delete__user');
+if (allUsers) {
+  Array.from(allUsers).forEach(function (user) {
+    user.addEventListener('click', function (e) {
+      var userId = user.dataset.userid;
+      axios__WEBPACK_IMPORTED_MODULE_0___default().post('/users/delete-user', {
+        userId: userId
+      }).then(function (res) {
+        notyf.success("User Deleted Successfully");
+        setTimeout(function () {
+          window.location.href = "/users/all-users";
+        }, 1000);
+      })["catch"](function (e) {
+        console.log(e);
+        notyf.error("Something went wrong");
+      });
+    });
+  });
+}
+
+// disable the user 
+
+var disableBtns = document.querySelectorAll('.disable__user');
+if (disableBtns) {
+  Array.from(disableBtns).forEach(function (btn) {
+    btn.addEventListener('click', function (e) {
+      var userId = btn.dataset.userid;
+      axios__WEBPACK_IMPORTED_MODULE_0___default().post('/users/disable-user', {
+        userId: userId
+      }).then(function (res) {
+        console.log(res.data.message);
+        notyf.success("User Disabled Successfully");
+        setTimeout(function () {
+          window.location.href = "/users/all-users";
+        }, 1000);
+      })["catch"](function (e) {
+        notyf.error("Something went wrong");
+      });
+    });
+  });
+}
+
+// restore  the user 
+var resotreBtn = document.querySelectorAll('.restore_deleted_users');
+if (resotreBtn) {
+  Array.from(resotreBtn).forEach(function (btn) {
+    btn.addEventListener('click', function (e) {
+      var userId = btn.dataset.userid;
+      axios__WEBPACK_IMPORTED_MODULE_0___default().post('/users/restore-user', {
+        userId: userId
+      }).then(function (res) {
+        notyf.success("User Disabled Successfully");
+        setTimeout(function () {
+          window.location.href = "/users/all-deleted-users";
+        }, 1000);
+      })["catch"](function (e) {
+        console.log(e);
+        notyf.error("Something went wrong");
+      });
+    });
+  });
+}
+
+// unblock user 
+
+var unblockBtn = document.querySelectorAll('.unblock_user');
+if (unblockBtn) {
+  Array.from(unblockBtn).forEach(function (btn) {
+    btn.addEventListener('click', function (e) {
+      var userId = btn.dataset.userid;
+      console.log(userId);
+      alert('asdf');
+      axios__WEBPACK_IMPORTED_MODULE_0___default().post('/users/unblock-user', {
+        userId: userId
+      }).then(function (res) {
+        notyf.success("User Disabled Successfully");
+        setTimeout(function () {
+          window.location.href = "/users/all-disabled-users";
+        }, 1000);
+      })["catch"](function (e) {
+        console.log(e);
+        notyf.error("Something went wrong");
+      });
     });
   });
 }

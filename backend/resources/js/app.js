@@ -149,3 +149,102 @@ if(deliveryStatus) {
         }); 
     }); 
 }
+
+
+// delete the user
+
+const allUsers = document.querySelectorAll('.delete__user'); 
+
+if(allUsers){ 
+    Array.from(allUsers).forEach((user) => { 
+        user.addEventListener('click', (e) => { 
+            let userId = user.dataset.userid; 
+            
+            axios.post('/users/delete-user', {userId}).then((res) =>  {
+                notyf.success("User Deleted Successfully"); 
+                setTimeout(() => {
+                    window.location.href = "/users/all-users"; 
+                }, 1000); 
+            }).catch((e) => { 
+                console.log(e); 
+                notyf.error("Something went wrong"); 
+            });
+        });
+    });
+}
+
+
+
+// disable the user 
+
+const disableBtns = document.querySelectorAll('.disable__user'); 
+ 
+if(disableBtns){
+    Array.from(disableBtns).forEach((btn)  => {
+        btn.addEventListener('click', (e) => { 
+            
+            let userId = btn.dataset.userid; 
+            
+            axios.post('/users/disable-user', {userId}).then((res) =>  {
+
+                console.log(res.data.message); 
+                notyf.success("User Disabled Successfully"); 
+                setTimeout(() => {
+                    window.location.href = "/users/all-users"; 
+                }, 1000); 
+            }).catch((e) => { 
+                notyf.error("Something went wrong"); 
+            });
+        });
+    })
+}
+
+
+// restore  the user 
+const resotreBtn = document.querySelectorAll('.restore_deleted_users'); 
+
+if(resotreBtn) { 
+    Array.from(resotreBtn).forEach((btn) => { 
+        btn.addEventListener('click', (e) => {
+            let userId = btn.dataset.userid; 
+
+            axios.post('/users/restore-user', {userId}).then((res) =>  {
+                
+                notyf.success("User Disabled Successfully"); 
+                setTimeout(() => {
+                    window.location.href = "/users/all-deleted-users"; 
+                }, 1000); 
+            }).catch((e) => { 
+                console.log(e); 
+                notyf.error("Something went wrong"); 
+            });
+
+        });
+    }); 
+}
+
+
+// unblock user 
+
+const unblockBtn = document.querySelectorAll('.unblock_user');
+
+
+if(unblockBtn) {
+    Array.from(unblockBtn).forEach((btn) => { 
+       btn.addEventListener('click', (e) => { 
+            let userId = btn.dataset.userid; 
+            console.log(userId); 
+            alert('asdf'); 
+            axios.post('/users/unblock-user', {userId}).then((res) =>  {
+
+                notyf.success("User Disabled Successfully");
+                setTimeout(() => {
+                    window.location.href = "/users/all-disabled-users";
+                }, 1000);
+            }).catch((e) => {
+                console.log(e); 
+                notyf.error("Something went wrong"); 
+            });
+       });
+    }); 
+}

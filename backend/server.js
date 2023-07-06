@@ -10,10 +10,14 @@ import passport from 'passport';
 import initPassport from './config/passport';
 import cors from 'cors';
 import adminRouter from './routes/web';
+import { guestRouter } from './routes/web';
 import expressEjsLayouts from 'express-ejs-layouts';
 import flash from 'express-flash'; 
 import http from 'http';
 import init from './services/admin/passportService';
+import adminWebAuth from './middlewares/admin/auth';
+import guest from './middlewares/admin/guest';
+
 
 
 // const MongoDbStore = require('connect-mongo'); 
@@ -80,6 +84,8 @@ app.use((req, res, next) => {
     next(); 
 });
 
+
+
 app.use(setNoCacheHeaders); 
 
 app.use(express.json());
@@ -88,10 +94,14 @@ app.use(express.static(__dirname + '/public'));
 app.set('view engine', 'ejs');
 app.use(expressEjsLayouts);
 app.set("layout", 'layouts/layout'); 
+
+
+
+
+
 app.use('/api', router);
-app.use(adminRouter);
-
-
+app.use('/auth', guest, guestRouter);
+app.use('/',adminWebAuth,adminRouter);
 
 app.use(errorHandler);
 

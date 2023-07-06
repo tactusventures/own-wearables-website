@@ -74,56 +74,68 @@
                       </div>
 
 
-                      <div class="section-title">Address</div>
-                    
-                    <div class="row">
+                      <div class="section-title" style="font-size: 25px">Addresses </div>
 
-                        <div class="col-md-3 col-6 b-r">
-                          <strong>House/Room No</strong>
-                          <br>
-                          <p class="text-muted"><%= user.houseNoOrRoomNo %> </p>
-                        </div>
-                        <div class="col-md-3 col-6 b-r">
-                          <strong>Building / Area</strong>
-                          <br>
-                          <p class="text-muted"><%= user.buildingNoOrArea %></p>
-                        </div>
+                        <% if(user.addresses.length === 0){ %> 
+                            <h4 class="section-title">No Addreses Aded by user Yet</h4>
+                        <% } else { %> 
 
-                        <div class="col-md-3 col-6 b-r">
-                            <strong>Landmark</strong>
-                            <br>
-                            <p class="text-muted"><%= user.landmark %></p>
-                          </div>
-
-
-                          <div class="col-md-3 col-6 b-r">
-                            <strong>City / Village</strong>
-                            <br>
-                            <p class="text-muted"><%= user.cityOrVillage %></p>
-                          </div>
-
-                          <div class="col-md-3 col-6 b-r">
-                            <strong>State</strong>
-                            <br>
-                            <p class="text-muted"><%= user.state %></p>
-                          </div>
-
-
-                          <div class="col-md-3 col-6 b-r">
-                            <strong>pincode</strong>
-                            <br>
-                            <p class="text-muted"><%= user.pincode %></p>
-                          </div>
-
-                          <div class="col-md-3 col-6 b-r">
-                            <strong>Country</strong>
-                            <br>
-                            <p class="text-muted"><%= user.country %></p>
-                          </div>
-
-                          
                         
-                      </div>
+                      <% user.addresses.forEach((address) => { %> 
+                        <div class="mt-3 mb-2">
+                          <h5 class="mb-4 mt-1" style="color: #111;font-size: 17px"><%=  address?.markAs?.toUpperCase() %> </h6>
+                          <div class="row">
+    
+                            <div class="col-md-3 col-6 b-r">
+                              <strong style="color: #111">House/Room No</strong>
+                              <br>
+                              <p class="text-muted"><%= address.houseOrRoomNo %> </p>
+                            </div>
+                            <div class="col-md-3 col-6 b-r">
+                              <strong style="color: #111">Building / Area</strong>
+                              <br>
+                              <p class="text-muted"><%= address.buildingOrArea %></p>
+                            </div>
+    
+                            <div class="col-md-3 col-6 b-r">
+                                <strong style="color: #111">Landmark</strong>
+                                <br>
+                                <p class="text-muted"><%= address.landmark %></p>
+                              </div>
+    
+    
+                              <div class="col-md-3 col-6 b-r">
+                                <strong style="color: #111">City / Village</strong>
+                                <br>
+                                <p class="text-muted"><%= address.cityOrVillage %></p>
+                              </div>
+    
+                              <div class="col-md-3 col-6 b-r">
+                                <strong style="color: #111">State</strong>
+                                <br>
+                                <p class="text-muted"><%= address.state %></p>
+                              </div>
+    
+    
+                              <div class="col-md-3 col-6 b-r">
+                                <strong style="color: #111">pincode</strong>
+                                <br>
+                                <p class="text-muted"><%= address.pincode %></p>
+                              </div>
+    
+                              <div class="col-md-3 col-6 b-r">
+                                <strong style="color: #111">Country</strong>
+                                <br>
+                                <p class="text-muted"><%= address.country %></p>
+                              </div>
+    
+                              
+                            
+                          </div>
+                        </div>
+                      <% }) } %> 
+
+
                     
                   </div>
                 </div>

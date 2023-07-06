@@ -4,8 +4,8 @@ import passport from "passport";
 const adminAuthController   = { 
     login(req, res){ 
         return res.render('auth/login', {layout: false}); 
-    }, 
-
+    },
+    
     async postLogin(req, res, next){ 
 
         const schema = Joi.object({
@@ -34,7 +34,7 @@ const adminAuthController   = {
             }
             if(!user) {
                 req.flash('error', info.message )
-                return res.redirect('/login')
+                return res.redirect('/auth/login');
             }
             req.logIn(user, (err) => {
                 if(err) {
@@ -46,7 +46,7 @@ const adminAuthController   = {
                 return res.redirect('/'); 
             })
         })(req, res, next)
-    }, 
+    },
 
     logout(req, res){ 
        req.logout((err)  => { 

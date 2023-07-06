@@ -35,8 +35,18 @@ const loginController  = {
             if(!user){
                 return next(CustomErrorHandler.wrongCredentials("Invalid Credentials")); 
             }
-            
 
+
+            // check weather user account is valid
+            if(user.isDisabled){ 
+                return next(CustomErrorHandler.invalidUser("Your Account has been Disabled")); 
+            }
+
+            // check weather user is deleted or not 
+            if(user.isDeleted) { 
+                return next(CustomErrorHandler.invalidUser('Your Account has been deleted')); 
+            }
+            
             // comparing the password with hash
             const match = await bcrypt.compare(password, user.password);   
 
@@ -47,7 +57,7 @@ const loginController  = {
 
             const access_token = JwtService.sign({_id: user._id}); 
             const refresh_token =  JwtService.sign({_id: user._id}, '1y', REFRESH_SECRET); 
-
+                
                // store refresh token in db
               await Refresh.create({
                 userId: user._id, 

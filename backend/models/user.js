@@ -21,7 +21,19 @@ const userSchema   = new mongoose.Schema({
     phoneNo: { type: String, required: true},
     gender: { type: String, required: false},
     password: { type: String, required: true},    
-    addresses: [addressSchema] 
+    addresses:  { 
+        type:  [addressSchema] , 
+        default: []
+    }, 
+    isDeleted: { 
+        type: Boolean, 
+        default: false
+    }, 
+
+    isDisabled: { 
+        type: Boolean, 
+        default: false
+    }
 }, {timestamps: true}); 
 
 
