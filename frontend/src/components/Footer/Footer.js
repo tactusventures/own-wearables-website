@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import "./footer.css";
 
 const Footer = () => {
@@ -27,10 +28,13 @@ const Footer = () => {
                     </div>
 
                     <div className='copyright'>
-                        <a href='#'>Privacy Policy</a>
+                        <Link to='/pages/terms-of-use'>Terms Of Use</Link>
                         {/* &dot; */}
                         <i class="fa-solid fa-circle" ></i>
-                        <a href='#'>Terms & Condition</a>
+                        <Link to='/pages/data-protection'>Data Protection</Link>
+
+                        <i class="fa-solid fa-circle" ></i>
+                        <Link to="/pages/return-policy">Return Plicy</Link>
                     </div>
                     <div className='copyright_text'>
                         <p>© 2023 Imagine Marketing Limited. All Rights Reserved.</p>

@@ -6,7 +6,7 @@ const userController = {
    async allUsers(req, res) { 
         let perPage = 10; 
         let page = req.query.page || 1; 
-        let users = [];     
+        let users = [];
         let count =0; 
         try {
             count = await User.countDocuments();

@@ -1,0 +1,29 @@
+.terms-of-use {
+    
+}
+
+.terms-of-use .container {
+    width: 70%;
+    margin-top: 2rem;
+    margin-bottom: 10rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.terms-of-use .container h1 {
+    font-size: 60px;
+    padding: 2rem;
+}
+
+.terms-of-use .container p {
+    line-height: 2rem;
+    padding-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.terms-of-use .container h2 {
+    font-size: 30px;
+    padding-bottom: 1rem;
+    margin-top: 2rem;
+}

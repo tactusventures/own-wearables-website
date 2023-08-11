@@ -17,6 +17,9 @@ import Protected from './components/AuthRoutes/Protected';
 import { PersistGate } from 'redux-persist/integration/react';
 import Product2 from './pages/Product2/Product2';
 import Home2 from './pages/Home2/Home2';
+import TermsOfUse from './pages/TermsOfUse/TermsOfUse';
+import Return from './pages/Return/Return';
+import DataProtection from './pages/DataProtection/DataProtection';
 
 
 function App() {
@@ -60,6 +63,11 @@ function App() {
                   <Route path='/order/order-summary/:id' element={<OrderSummary />} />
                   <Route path='/order/payment-details' element={<PaymentDetails  />} />
                   <Route path='/order/capture-payment' element={<CapturePayment />} />
+
+
+                  <Route path='/pages/terms-of-use'  element={<TermsOfUse />} />
+                  <Route path='/pages/return-policy'  element={<Return />} />
+                  <Route path='/pages/data-protection'  element={<DataProtection />} />
               </Routes>   
 
               <Footer />

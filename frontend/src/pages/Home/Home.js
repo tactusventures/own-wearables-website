@@ -28,63 +28,63 @@ const Home = () => {
 
 
       useEffect(() => { 
-        const intro = introRef.current;
-        const video = intro.querySelector('#video');
-        const text = intro.querySelector('#h1');
+        // const intro = introRef.current;
+        // const video = intro.querySelector('#video');
+        // const text = intro.querySelector('#h1');
         
         const controller = new ScrollMagic.Controller();
 
-        let scene = new ScrollMagic.Scene({
-            duration: 4000,
-            triggerElement: intro,
-            triggerHook: 0
-          }).addIndicators()
-          .setPin(intro)
-          .addTo(controller);
+        // let scene = new ScrollMagic.Scene({
+        //     duration: 4000,
+        //     triggerElement: intro,
+        //     triggerHook: 0
+        //   }).addIndicators()
+        //   .setPin(intro)
+        //   .addTo(controller);
 
-        // Register ScrollTrigger plugin
-        gsap.registerPlugin(ScrollTrigger);
+        // // Register ScrollTrigger plugin
+        // gsap.registerPlugin(ScrollTrigger);
     
         // Text Animation
-        const textAnim = gsap.fromTo(text, { opacity: 1 }, { opacity: 0, scrollTrigger: { trigger: intro, start: 'top center', end: 'bottom center', scrub: true } });
+        // const textAnim = gsap.fromTo(text, { opacity: 1 }, { opacity: 0, scrollTrigger: { trigger: intro, start: 'top center', end: 'bottom center', scrub: true } });
           
 
-        let scene2 = new ScrollMagic.Scene({
-            duration: 2000,
-            triggerElement: intro,
-            triggerHook: 0
-          })
-            .setTween(textAnim)
-            .addTo(controller);
+        // let scene2 = new ScrollMagic.Scene({
+        //     duration: 2000,
+        //     triggerElement: intro,
+        //     triggerHook: 0
+        //   })
+        //     .setTween(textAnim)
+        //     .addTo(controller);
 
         // Video Animation
-        let accelamount = 0.1;
-        let scrollpos = 0;
-        let delay = 0;
+        // let accelamount = 0.1;
+        // let scrollpos = 0;
+        // let delay = 0;
           
-        const updateScrollPos = () => {
-        //   scrollpos = ScrollTrigger.scrollPos() / 1000;
-           scrollpos = ScrollTrigger.scrollPos() / 1000;
-            delay += (scrollpos - delay) * accelamount;
-            video.currentTime = delay * 1.5;
-        };
+        // const updateScrollPos = () => {
+        // //   scrollpos = ScrollTrigger.scrollPos() / 1000;
+        //    scrollpos = ScrollTrigger.scrollPos() / 1000;
+        //     delay += (scrollpos - delay) * accelamount;
+        //     video.currentTime = delay * 1.5;
+        // };
 
-        scene.on("update", e => {
-            scrollpos = e.scrollPos / 1000;
-          });
+        // scene.on("update", e => {
+        //     scrollpos = e.scrollPos / 1000;
+        //   });
     
-        setInterval(() => {
-          delay += (scrollpos - delay) * accelamount;
-          video.currentTime = delay * 1.5;
-        }, 33.3);
+        // setInterval(() => {
+        //   delay += (scrollpos - delay) * accelamount;
+        //   video.currentTime = delay * 1.5;
+        // }, 33.3);
         
         // Listen for scroll events
-        ScrollTrigger.addEventListener('scroll', updateScrollPos);
+        // ScrollTrigger.addEventListener('scroll', updateScrollPos);
 
-        return () => {
-          // Clean up event listener
-          ScrollTrigger.removeEventListener('scroll', updateScrollPos);
-        };
+        // return () => {
+        //   // Clean up event listener
+        //   ScrollTrigger.removeEventListener('scroll', updateScrollPos);
+        // };
       }, []); 
 
 
@@ -93,12 +93,12 @@ const Home = () => {
       
         <div className='page-home'>
 
-          <div class="intro" ref={introRef}>
-            <h1 id='h1'>The New Dev Ed Pro</h1>
+          {/* <div class="intro" ref={introRef}> */}
+            {/* <h1 id='h1'>The New Dev Ed Pro</h1> */}
             {/* <video id='video' src="/images/vid1.mp4"></video> */}
             {/* <video id='video' src="/images/airpods_pro_gen2.webm"></video> */}
-            <video id='video' src="/images/video.mp4"></video>
-            </div>
+            {/* <video id='video' src="/images/video.mp4"></video> */}
+        {/* </div> */}
             <div className='hero'>
                 <div className='head-content'>
                     <h2>World's First AI Enabled Shoe</h2>

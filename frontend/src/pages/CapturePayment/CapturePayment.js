@@ -16,7 +16,6 @@ const CapturePayment = () => {
       setLoading(true);
       
 
-      alert(token); 
       try  {
         const res  = await capturePayment({orderId: token}); 
            setTimeout(() => {
@@ -44,9 +43,10 @@ const CapturePayment = () => {
 
         <>
           <div className='order-success'>
-            <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLBww6BsMA5hfUkVoo4ugfOEwywiKtiY3CrAkH9__jUJfsAE7f0CVIUTmWb9p7hwdwMV4&usqp=CAU'></img>
-            <h2>Order Failed</h2>
-            <p>It seems your order has been failed due to some error. If any money has been deducted from your bank, it will be refunded in the next 24 hours. Please try again.</p>
+            <img src='https://icon-library.com/images/checkmark-icon-transparent/checkmark-icon-transparent-10.jpg'></img>
+            <h2>Order Placed</h2>
+            <p>
+Lorem ipsum, dolor sit amet consectetur adipisicing elit. Id consequatur dolore inventore voluptates dolorum maxime omnis quidem magnam veritatis non?Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
             <button className='go-ba-btn'>Go Back</button>
           </div>
 

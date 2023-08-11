@@ -1,0 +1,29 @@
+.return-and-sale {
+    
+}
+
+.return-and-sale .container {
+    width: 70%;
+    margin-top: 2rem;
+    margin-bottom: 10rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.return-and-sale .container h1 {
+    font-size: 60px;
+    padding: 2rem;
+}
+
+.return-and-sale .container p {
+    line-height: 2rem;
+    padding-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.return-and-sale .container h2 {
+    font-size: 30px;
+    padding-bottom: 1rem;
+    margin-top: 2rem;
+}
