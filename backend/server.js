@@ -30,7 +30,7 @@ mongoose.connect(MONGO_URL).then(() => {
 }); 
 
 let corsOptions = {
-    origin: 'http://localhost:3000',
+    origin: "http://127.0.0.1:5500",
     methods: ["GET", "POST"],
     credentials: true,
 }
@@ -42,7 +42,7 @@ app.use(cookieParser());
 const server = http.createServer(app); 
 const io = require('socket.io')(server, {
     cors: {
-        origin: "http://localhost:3000",
+        origin: "http://127.0.0.1:5500/",
         methods: ["GET", "POST"]
     }
 }); 

@@ -14,6 +14,7 @@ router.post('/login', loginController.login);
 router.get('/get-user/:id', auth,  registerController.getUser);
 router.get('/refresh', registerController.refresh);
 router.post('/logout', auth,  loginController.logout); 
+// router.post('/ferget-password', loginController.forgetPassword); 
 
 // add the user address
 router.post('/user/add-address', auth , registerController.addAddress)
@@ -52,7 +53,11 @@ router.post('/payment/capture-payment', auth,paymentController.capturePayment);
 router.get('/payment/get-payment-details/:paymentId', auth,  paymentController.getPaymentDetails); 
 router.post('/payment/payment/refund',auth,  paymentController.refundPayment);
 
+
 // submit contact form
 router.post("/contact/send-message", contactController.sendMessage);
+
+
+router.post('/booking-enquiry', contactController.preBookEntry); 
 
 export default router;
